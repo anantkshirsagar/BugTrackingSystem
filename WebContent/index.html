@@ -1,11 +1,10 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 	<head>
 		<meta charset="utf-8">
 		<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 		<meta http-equiv="x-ua-compatible" content="ie=edge">
-		<title>Bug Tracking System</title>
-		
+		<title>Bug Tracking System | Admin Login</title>
 		<!-- Font Awesome -->
 		<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css">
 		<!-- Bootstrap core CSS -->
@@ -13,23 +12,68 @@
 		<!-- Material Design Bootstrap -->
 		<link href="ext-js/MDB/css/mdb.min.css" rel="stylesheet">
 		<!-- Your custom styles (optional) -->
-		<link href="ext-js/MDB/css/style.css" rel="stylesheet">
+		<link href="ext-js/MDB/css/style.css" rel="stylesheet">			
+		<style type="text/css">
+			html, body, header, .view {
+				height: 100%;
+			}
+			
+			@media (max-width: 740px) {
+				html, body, header, .view {
+					height: 1000px;
+				}
+			}
+			
+			@media (min-width: 800px) and (max-width: 850px) {
+				html, body, header, .view {
+					height: 650px;
+				}
+			}
+			
+			@media (min-width: 800px) and (max-width: 850px) {
+				.navbar:not(.top-nav-collapse) {
+					background: #1C2331!important;
+				}
+			}
+			.custom {border-radius: 30px;}
+			.customColor{
+				background: linear-gradient(to top left, #000099 0%, #339933 100%);
+			}
+		</style>
 	</head>
-	
 	<body>
-		<div class="container">
-			<div class="card">
-				<div class="card-header">
-					Featured
+		<div class="container-fluid view full-page-intro" style="background-image: url('images/bg-images/admin-bg.jpg'); background-repeat: no-repeat; background-size: cover;">
+			<div class="mask rgba-black-light d-flex justify-content-center align-items-center">
+				<div class="container">
+					<div class="row wow fadeIn">
+						<div class="col-md-12 mb-4 white-text text-center text-md-left">
+							<center>
+								<div class="row">
+									<div class="col-md-3">
+									</div>
+									<div class="col-md-6">
+										<hr class="hr-light">
+									</div>
+								</div>
+								<h1 class="display-4 font-weight-bold">Bug Tracking System</h1>
+								<div class="row">
+									<div class="col-md-3">
+									</div>
+									<div class="col-md-6">
+										<hr class="hr-light">
+									</div>
+								</div>
+								<button type="submit" onclick="goToLoginPage()" class="btn btn-light custom">Manager Login</button>
+								<button type="submit" onclick="goToSignUpPage()" class="btn btn-light custom">Admin Login</button>
+								<button type="submit" onclick="goToResultPage()" class="btn btn-light custom">Developer Login</button>
+								<button type="submit" onclick="goToResultPage()" class="btn btn-light custom">Tester Login</button>
+							</center>
+						</div>
+					</div>
 				</div>
-				<div class="card-body">
-					<h5 class="card-title">Special title treatment</h5>
-	    			<p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
-	    			<a href="#!" class="btn btn-primary">Go somewhere</a>
-	  			</div>
 			</div>
 		</div>
-		
+
 		<!-- External JS Path  -->
 		<script type="text/javascript" src="ext-js/MDB/js/jquery-3.3.1.min.js"></script>
 		<!-- Bootstrap tooltips -->
@@ -38,5 +82,12 @@
 		<script type="text/javascript" src="ext-js/MDB/js/bootstrap.min.js"></script>
 		<!-- MDB core JavaScript -->
 		<script type="text/javascript" src="ext-js/MDB/js/mdb.js"></script>
+
+		<!-- Initializations -->
+		<script type="text/javascript">
+			// Animations initialization
+			new WOW().init();
+		</script>
+        <script src="scripts/jump-page-scripts.js"></script>
 	</body>
 </html>
