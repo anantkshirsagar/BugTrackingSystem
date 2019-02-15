@@ -1,0 +1,69 @@
+<!--
+	Code Art Solutions
+	Project Name: Photo-Competition
+	-->
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+		<meta http-equiv="x-ua-compatible" content="ie=edge">
+		<title>Bug Tracking System | Admin Login</title>
+		<!-- Font Awesome -->
+		<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css">
+		<!-- Bootstrap core CSS -->
+		<link href="ext-js/MDB/css/bootstrap.min.css" rel="stylesheet">
+		<!-- Material Design Bootstrap -->
+		<link href="ext-js/MDB/css/mdb.min.css" rel="stylesheet">
+		<!-- Your custom styles (optional) -->
+		<link href="ext-js/MDB/css/style.css" rel="stylesheet">
+		<style type="text/css">
+		
+		</style>
+	</head>
+	<body style="background-image: url('images/developer-2.jpg'); background-repeat: no-repeat; background-size: cover;">
+		<br>
+		<div class="container">
+			<br>
+			<div class="row">
+				<div class="col-md-7">
+				</div>
+				<div class="col-md-5">
+					<div class="card cardGradient">
+						<div class="card-body">
+							<center> <b class="fontStyle"><h4>Developer Sign Up</h4></b> </center>
+						</div>
+					</div>
+					<form name="bugForm" class="text-center border border-light p-5" action="jsp-pages/store-login-details.jsp">
+						<input type="text" id="devloperFullName" name="devloperFullName" placeholder="FullName" onchange="nameValidation()" class="form-control" required>
+						<br>
+						<input type="email" id="developerEmailId" placeholder="E-mail" name="developerEmailId" onchange="emailValidation()" class="form-control mb-4" required>
+						<input type="password" id="developerPassword" placeholder="Password" name="developerPassword" class="form-control" required>
+						<br>
+						<input type="password" id="developerConfirmPassword" placeholder="Confirm Password" name="developerConfirmPassword" onchange="passwordValidation()" class="form-control" required>
+						<br>
+						<input type="text" id="developerPhoneNo" placeholder="Phone No" maxlength="10" name="developerPhoneNo" onchange="phoneNumberValidation()" class="form-control" required>
+						<div class="row">
+							<div class="col-md-6">
+								<button class="btn btn-info my-4 btn-block custom" type="submit">Sign Up</button>
+							</div>
+							<div class="col-md-6">                                
+								<button class="btn btn-info my-4 btn-block custom" type="reset">Clear</button>
+							</div>
+						</div>
+					</form>
+				</div>
+			</div>
+		</div>
+		<!-- External JS Path  -->
+		<script type="text/javascript" src="ext-js/MDB/js/jquery-3.3.1.min.js"></script>
+		<!-- Bootstrap tooltips -->
+		<script type="text/javascript" src="ext-js/MDB/js/popper.min.js"></script>
+		<!-- Bootstrap core JavaScript -->
+		<script type="text/javascript" src="ext-js/MDB/js/bootstrap.min.js"></script>
+		<!-- MDB core JavaScript -->
+		<script type="text/javascript" src="ext-js/MDB/js/mdb.js"></script>
+		<!-- Custom Scripts -->
+		<script src="scripts/sign-up-validations.js"> </script>
+	</body>
+</html>
