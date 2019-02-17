@@ -67,13 +67,62 @@
 								<button type="submit" onclick="goToSignUpPage()" class="btn btn-light custom">Admin Login</button>
 								<button type="submit" onclick="goToResultPage()" class="btn btn-light custom">Developer Login</button>
 								<button type="submit" onclick="goToResultPage()" class="btn btn-light custom">Tester Login</button>
+								<button type="button" onclick="userAction1()" class="btn btn-light custom">fetch result</button>
+								<button type="button" onclick="userAction2()" class="btn btn-light custom">Add</button>
 							</center>
 						</div>
 					</div>
 				</div>
 			</div>
 		</div>
-
+		<script type="text/javascript">
+			function userAction1() {
+			    var xhttp = new XMLHttpRequest();
+			    xhttp.onreadystatechange = function() {
+			         if (this.readyState == 4 && this.status == 200) {
+			        	 var response = JSON.parse(xhttp.responseText);
+			         }
+			    }
+			    xhttp.open("GET", "rest/testJersey/fetch", true);
+	            xhttp.send();
+			}
+			
+			function userAction2() {
+				var jsonObj={"devnagariText":"MYTEXT"};
+				/* var xmlhttp = new XMLHttpRequest();   // new HttpRequest instance 
+				xmlhttp.open("GET", "rest/testJersey/add");
+				xmlhttp.setRequestHeader('Content-Type', 'application/json; charset=utf8');
+				xmlhttp.setRequestHeader('Accept', 'application/json');
+				xmlhttp.onreadystatechange = function () {
+				    if (xmlhttp.readyState === 4 && xmlhttp.status === 200) {
+				        var json = JSON.parse(xmlhttp.responseText);
+				    }
+				} 
+				var data = JSON.stringify(jsonObj);
+				xmlhttp.send(data); */
+				$.ajax({
+					headers: {
+						 'Accept': 'application/json',
+						 'Content-Type': 'application/json'
+						 },
+				    url : 'rest/testJersey/add',
+				    datatype:'json',
+				    type: "post", 
+				    data: JSON.stringify(jsonObj),
+				    dataType: 'json',
+				    success:function(data){
+				    }
+				})  
+			    /* var xhttp = new XMLHttpRequest();
+			    xhttp.onreadystatechange = function() {
+			         if (this.readyState == 4 && this.status == 200) {
+			        	 var response = JSON.parse(xhttp.responseText);
+			         }
+			    }
+			    xhttp.open("POST", "rest/testJersey/add/"+jsonObj, true);
+	            xhttp.send(); */
+			}
+		</script>
 		<!-- External JS Path  -->
 		<script type="text/javascript" src="ext-js/MDB/js/jquery-3.3.1.min.js"></script>
 		<!-- Bootstrap tooltips -->
@@ -88,6 +137,6 @@
 			// Animations initialization
 			new WOW().init();
 		</script>
-        <script src="scripts/jump-page-scripts.js"></script>
+        <!-- <script src="scripts/jump-page-scripts.js"></script> -->
 	</body>
 </html>

@@ -19,7 +19,7 @@ public class JPACall extends HttpServlet {
 		
 		String name = request.getParameter("myname");
 		StoreDevnagari store = new StoreDevnagari(name);
-		StoreDevnagari.storeDevnagariData();
+		StoreDevnagari.storeDevnagariData(name);
 		StoreDevnagari.fetchList();
 		PrintWriter out = response.getWriter();
 		out.println("Successful.StoreDevnagari");
