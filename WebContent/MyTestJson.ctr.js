@@ -8,7 +8,7 @@ app.controller('myJsonCtr', function($scope, $http) {
 
 	$scope.url = "EndpointServlet";
 	$scope.parameter = JSON.stringify($scope.studentObj);
-	console.log($scope.parameter);
+//	console.log($scope.parameter);
 
 	/*
 	 * $http.get({ method : "GET", url : $scope.servletName
@@ -16,7 +16,7 @@ app.controller('myJsonCtr', function($scope, $http) {
 	 * $scope.statuscode = response.status; $scope.statustext =
 	 * response.statusText; });
 	 */
-	var config = 'contenttype';
+	/*var config = 'contenttype';
 	$http.post($scope.url, $scope.parameter, config).then(function(response) {
 
 		// This function handles success
@@ -25,5 +25,17 @@ app.controller('myJsonCtr', function($scope, $http) {
 
 		// this function handles error
 
+	});*/
+	
+	
+	$scope.jsonObj={"devnagariText":"MYTEXT"};
+	$scope.restURL = "rest/testJersey/add";
+	$scope.data = JSON.stringify($scope.studentObj);
+	var config = 'contenttype';
+	
+	$http.get($scope.restURL, $scope.data, config).then(function(response) {
+	}, function(response) {
 	});
+	
+	
 });
