@@ -9,6 +9,8 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
 
+import com.google.gson.JsonObject;
+
 @Path("testJersey")
 
 public class TestJersey {
@@ -21,14 +23,23 @@ public class TestJersey {
 		return devnagariEntity;
 	}
 
-	@PUT
+	@GET
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Produces(MediaType.APPLICATION_JSON)
 	@Path("add")
-	public DevnagariEntity addDevnagriEntity(DevnagariEntity jsonObj, @Context HttpServletResponse serverResponse) {
+	public void addDevnagriEntity(String jsonObj) {
 		StoreDevnagari storeDevnagari = new StoreDevnagari();
-		System.out.println(jsonObj);
+		System.out.println(" =>" + jsonObj);
 		// String devnagariEntity = storeDevnagari.storeDevnagariData(jsonObj);
-		return jsonObj;
+//		return jsonObj;
 	}
+
+	// public DevnagariEntity addDevnagriEntity(DevnagariEntity jsonObj, @Context
+	// HttpServletResponse serverResponse) {
+	// StoreDevnagari storeDevnagari = new StoreDevnagari();
+	// System.out.println(jsonObj);
+	// // String devnagariEntity = storeDevnagari.storeDevnagariData(jsonObj);
+	// return jsonObj;
+	// }
+
 }
