@@ -28,13 +28,14 @@ app.controller('myJsonCtr', function($scope, $http) {
 	});*/
 	
 	
-	$scope.jsonObj={"devnagariText":"MYTEXT"};
+	jsonObj={"devnagariText":"MYTEXT"};
 	$scope.restURL = "rest/testJersey/add";
 	$scope.data = JSON.stringify($scope.studentObj);
 	var config = 'contenttype';
 	
-	$http.get($scope.restURL, $scope.data, config).then(function(response) {
+	$http.get($scope.restURL, jsonObj, config).then(function(response) {
 	}, function(response) {
+		console.log(response.id);
 	});
 	
 	
