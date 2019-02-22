@@ -6,8 +6,7 @@ import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 
-import com.ner.entities.CategoryEntity;
-import com.ner.utils.DBConstants;
+import com.bts.utils.DBConstants;
 
 public class ConnectionService {
 	private EntityManagerFactory managerFactory;
@@ -31,7 +30,8 @@ public class ConnectionService {
 	}
 
 	public List<Object> fetchData(String query, Class<Object> className) {
-		List<Object> categoryList = entityManager.createQuery(query, className)
+		@SuppressWarnings("unchecked")
+		List<Object> categoryList = getEntityManager().createNativeQuery(query, className)
 				.getResultList();
 		if(categoryList != null){
 			return categoryList;
@@ -44,8 +44,8 @@ public class ConnectionService {
 	}
 	
 	public Object find(Class<Object> className, int id) {
-		CategoryEntity categoryEntity = (CategoryEntity)entityManager.find(className, id);
-		return categoryEntity;
+		Object object = entityManager.find(className, id);
+		return object;
 	}
 
 	public void commitAndCloseTransaction() {
