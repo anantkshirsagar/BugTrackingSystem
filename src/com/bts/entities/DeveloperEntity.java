@@ -2,11 +2,9 @@ package com.bts.entities;
 
 import javax.persistence.Entity;
 import javax.persistence.Table;
-import javax.xml.bind.annotation.XmlRootElement;
 
 @Entity
 @Table
-@XmlRootElement
 public class DeveloperEntity extends BaseEntity {
 	private String fullName;
 	private String email;

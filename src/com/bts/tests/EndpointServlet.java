@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.stream.Collectors;
 
+import javax.jws.WebService;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
@@ -33,20 +34,23 @@ public class EndpointServlet extends HttpServlet {
 		DeveloperEntity developerEntity1 = gson.fromJson(jsonObj, DeveloperEntity.class);
 		EntityManagerFactory emfactory = Persistence.createEntityManagerFactory("BugTrackingSystem");
 		EntityManager entitymanager = emfactory.createEntityManager();
-		/*
-		 * entitymanager.getTransaction().begin();
-		 * entitymanager.persist(developerEntity1);
-		 * entitymanager.getTransaction().commit(); entitymanager.close();
-		 * emfactory.close();
-		 */
 
-		DeveloperEntity developerEntity2 = entitymanager.find(DeveloperEntity.class, 22);
+		entitymanager.getTransaction().begin();
+		entitymanager.persist(developerEntity1);
+//		entitymanager.getTransaction().commit();
+		
+//		entitymanager.getTransaction().begin();
+		DeveloperEntity developerEntity2 = entitymanager.find(DeveloperEntity.class, 1);
+		entitymanager.getTransaction().commit();
 		System.out.println(" ID = " + developerEntity2.getId());
 		System.out.println(" TEXT = " + developerEntity2.getType());
-		response.setContentType("application/json");// set content to json
+		response.setContentType("application/json");
+		entitymanager.close();
+		emfactory.close();
 		PrintWriter out = response.getWriter();
 		out.write(gson.toJson(developerEntity2));
-		//out.flush();
+		// out.flush();
+
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
