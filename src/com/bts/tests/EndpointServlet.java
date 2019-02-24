@@ -15,6 +15,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.bts.entities.DeveloperEntity;
+import com.bts.entities.TypeWrapper;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
@@ -31,8 +32,10 @@ public class EndpointServlet extends HttpServlet {
 		String jsonObj = request.getReader().lines().collect(Collectors.joining());
 		GsonBuilder builder = new GsonBuilder();
 		Gson gson = builder.create();
-		DeveloperEntity developerEntity1 = gson.fromJson(jsonObj, DeveloperEntity.class);
-		EntityManagerFactory emfactory = Persistence.createEntityManagerFactory("BugTrackingSystem");
+		TypeWrapper typeWrapper = gson.fromJson(jsonObj, TypeWrapper.class);
+		System.out.println(typeWrapper.getType());
+		System.out.println(typeWrapper.getDeveloperEntity().getFullName());
+		/*EntityManagerFactory emfactory = Persistence.createEntityManagerFactory("BugTrackingSystem");
 		EntityManager entitymanager = emfactory.createEntityManager();
 
 		entitymanager.getTransaction().begin();
@@ -43,14 +46,13 @@ public class EndpointServlet extends HttpServlet {
 		DeveloperEntity developerEntity2 = entitymanager.find(DeveloperEntity.class, 1);
 		entitymanager.getTransaction().commit();
 		System.out.println(" ID = " + developerEntity2.getId());
-		System.out.println(" TEXT = " + developerEntity2.getType());
 		response.setContentType("application/json");
 		entitymanager.close();
 		emfactory.close();
 		PrintWriter out = response.getWriter();
 		out.write(gson.toJson(developerEntity2));
 		// out.flush();
-
+*/
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)

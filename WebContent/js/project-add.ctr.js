@@ -3,15 +3,13 @@ app.controller('developerListCtr', function($scope, $http) {
 
 	$scope.url = "EndpointServlet";
 	var config = 'contenttype';
+	$scope.type = 'PROJECT_ADD';
 	$scope.obj = {
-		fullName : 'Anant',
-		email : 'anant@gmail.com',
-		phoneNo : '8888',
-		isApproved : false
+		
 	};
-	$scope.type = 'DEVELOPER_LIST';
+	
 	$scope.typeWrapper = {
-		developerEntity : $scope.obj,
+		projectEntity : $scope.obj,
 		type : $scope.type
 	};
 

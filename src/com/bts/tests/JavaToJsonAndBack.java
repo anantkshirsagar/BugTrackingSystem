@@ -7,6 +7,9 @@ import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 
+import com.bts.entities.DeveloperEntity;
+import com.bts.entities.TesterEntity;
+import com.bts.services.ConnectionService;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
@@ -36,10 +39,20 @@ public class JavaToJsonAndBack {
 		EntityManagerFactory emfactory = Persistence.createEntityManagerFactory("BugTrackingSystem");
 		EntityManager entitymanager = emfactory.createEntityManager();
 		entitymanager.getTransaction().begin();
-		DevnagariEntity devnagariEntity = gson.fromJson("{'devnagariText':'ABC'}", DevnagariEntity.class);
+		DeveloperEntity devnagariEntity = gson.fromJson("{'name':'ABC'}", DeveloperEntity.class);
 		entitymanager.persist(devnagariEntity);
 		entitymanager.getTransaction().commit();
 		entitymanager.close();
 		emfactory.close();
+		
+		ConnectionService connectionService = new ConnectionService("BugTrackingSystem");
+		List<TesterEntity> testerEntity = new ArrayList<>();
+		//testerEntity.setEmail("yashpshah.shah@gmail.com");
+		testerEntity = connectionService.getEntityManager().createQuery("SELECT t FROM TesterEntity t WHERE t.email='yashpshah.shah@gmail.com'").getResultList();
+		for (TesterEntity testerEntity2 : testerEntity) {
+			System.out.println(testerEntity2.getEmail());
+		}
+		
+		//System.out.println(testerEntity.getEmail());
 	}
 }

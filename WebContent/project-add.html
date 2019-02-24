@@ -11,7 +11,7 @@
 		<link href="ext-js/MDB/css/style.css" rel="stylesheet">			
 		<script src="angular-js-lib/angular.min.js"> </script>	
 	</head>
-	<body ng-app="btsApp" ng-controller="developerListCtr">
+	<body ng-app="btsApp" ng-controller="projectAddCtr">
 		<nav class="navbar navbar-expand-lg navbar-dark info-color">
 		    <a class="navbar-brand" href="#">Admin</a>
 		    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -41,31 +41,47 @@
 		    </div>
 		</nav>
 		<div class="container">
-			<br><h2><b><center>Developer List</center></b></h2><br>
-			<table id="tablePreview" class="table table-hover table-bordered">
-				<thead>
-					<tr class="card-header blue lighten-3">
-						<th>ID</th>
-						<th>Name</th>
-						<th>Assigned Project</th>
-						<th>Edit</th>
-					</tr>
-				</thead>
-				<tbody>
-					<tr>
-						<td>1</td>
-						<td>Anant</td>
-						<td>NCR</td>
-						<td>icon</td>
-					</tr>
-					<tr>
-						<td>2</td>
-						<td>Joshi</td>
-						<td>PROERP</td>
-						<td>icon</td>
-					</tr>
-				</tbody>
-			</table>
+			<br><h2><b><center>Project Add</center></b></h2><br>
+			<div class="row">
+				<div class="col-md-6">
+					<div class="md-form">
+						<input type="text" id="projectName" ng-model="documentEntity.projectName" class="form-control">
+						<label for="projectName">Project Name</label>
+					</div>
+				</div>
+			</div>
+			<div class="md-form">
+				<textarea type="text" id="description" class="md-textarea form-control" rows="5"></textarea>
+				<label for="description ">Project Description</label>
+			</div>
+			<div class="row">
+				<div class="col-md-6">
+					<select ng-model="manager" ng-options="x for x in manager" class="browser-default custom-select">
+						<option value="1">One</option>
+						<option value="2">Two</option>
+						<option value="3">Three</option>
+					</select>
+				</div>
+			</div>
+			<br>
+			<div class="row">
+				<div class="col-md-6">
+					<select ng-model="manager" ng-options="x for x in manager" class="browser-default custom-select">
+						<option selected ng-disabled="true">Select Manager</option>
+						<option value="1">One</option>
+						<option value="2">Two</option>
+						<option value="3">Three</option>
+					</select>
+				</div>
+				<div class="col-md-6">
+					<select ng-model="manager" ng-options="x for x in manager" class="browser-default custom-select">
+						<option selected>Open this select menu</option>
+						<option value="1">One</option>
+						<option value="2">Two</option>
+						<option value="3">Three</option>
+					</select>
+				</div>
+			</div>
 		</div>
 		<script type="text/javascript" src="ext-js/MDB/js/jquery-3.3.1.min.js"></script>
 		<script type="text/javascript" src="ext-js/MDB/js/popper.min.js"></script>
@@ -73,6 +89,8 @@
 		<script type="text/javascript" src="ext-js/MDB/js/mdb.js"></script>
 		<script src="js/developer-list.ctr.js"> </script>	
 		<script type="text/javascript">
+			// Animations initialization
+			new WOW().init();
 		</script>
 	</body>
 </html>
