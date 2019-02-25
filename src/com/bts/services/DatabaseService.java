@@ -1,6 +1,7 @@
 package com.bts.services;
 
 import com.bts.entities.Employee;
+import com.bts.entities.ProjectEntity;
 import com.bts.entities.TesterEntity;
 
 public class DatabaseService {
@@ -25,5 +26,25 @@ public class DatabaseService {
 				.setParameter("email", employee.getEmail()).getSingleResult();
 		connectionService.commitAndCloseTransaction();
 		return employee;
+	}
+	
+	public void saveProject(ProjectEntity projectEntity) {
+		ConnectionService connectionService = new ConnectionService();
+		connectionService.beginTransaction();
+		connectionService.save(projectEntity);
+		connectionService.commitAndCloseTransaction();
+	}
+	
+	public ProjectEntity getProjectEntityByProjectName(String projectName) {
+		ProjectEntity projectEntity = new ProjectEntity();
+		ConnectionService connectionService = new ConnectionService();
+		connectionService.beginTransaction();
+		String query = "SELECT t FROM ProjectEntity t WHERE t.projectName=:projectName";
+		projectEntity.setProjectName(projectName);
+		projectEntity = (ProjectEntity) connectionService.getEntityManager()
+				.createQuery(query)
+				.setParameter("email", projectEntity.getProjectName()).getSingleResult();
+		connectionService.commitAndCloseTransaction();
+		return projectEntity;
 	}
 }

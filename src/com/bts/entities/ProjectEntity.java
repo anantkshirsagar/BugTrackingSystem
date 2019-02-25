@@ -5,6 +5,8 @@ import java.util.List;
 
 import javax.persistence.Entity;
 import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 
 @Entity
 @Table
@@ -12,8 +14,10 @@ public class ProjectEntity extends BaseEntity {
 	private String projectName;
 	private String description;
 	private boolean status;
-	//private Date startDate;
-	//private Date endDate;
+	@Temporal(TemporalType.DATE)
+	private Date startDate;
+	@Temporal(TemporalType.DATE)
+	private Date endDate;
 	private String feature;
 	private String subFeature;
 	private String reason;
@@ -44,7 +48,7 @@ public class ProjectEntity extends BaseEntity {
 		this.status = status;
 	}
 
-	/*public Date getStartDate() {
+	public Date getStartDate() {
 		return startDate;
 	}
 
@@ -58,7 +62,7 @@ public class ProjectEntity extends BaseEntity {
 
 	public void setEndDate(Date endDate) {
 		this.endDate = endDate;
-	}*/
+	}
 
 	public String getFeature() {
 		return feature;
