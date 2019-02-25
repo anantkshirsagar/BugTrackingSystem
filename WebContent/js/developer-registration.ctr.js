@@ -8,7 +8,8 @@ app.controller('developerRegistrationCtr', function($scope, $http) {
 		fullName : '',
 		email : '',
 		phoneNo : null,
-		password : ''
+		password : '',
+		isApproved : true
 	};
 
 	$scope.addDeveloper = function() {

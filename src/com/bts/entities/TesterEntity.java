@@ -5,7 +5,7 @@ import javax.persistence.Table;
 
 @Entity
 @Table
-public class TesterEntity extends BaseEntity{
+public class TesterEntity extends Employee{
 	private String fullName;
 	private String email;
 	private long phoneNo;

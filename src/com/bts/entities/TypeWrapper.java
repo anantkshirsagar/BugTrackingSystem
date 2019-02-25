@@ -1,17 +1,20 @@
 package com.bts.entities;
 
+import com.bts.utils.Type;
+
 public class TypeWrapper {
-	private String type;
+//	private String type;
+	private Type type;
 	private String email;
 
 	private DeveloperEntity developerEntity;
 	private TesterEntity testerEntity;
 
-	public String getType() {
+	public Type getType() {
 		return type;
 	}
 
-	public void setType(String type) {
+	public void setType(Type type) {
 		this.type = type;
 	}
 

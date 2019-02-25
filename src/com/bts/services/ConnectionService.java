@@ -29,6 +29,7 @@ public class ConnectionService {
 		getEntityManager().persist(object);
 	}
 
+	//Here we have used nativeQuery.
 	public List<Object> fetchData(String query, Class<Object> className) {
 		@SuppressWarnings("unchecked")
 		List<Object> categoryList = getEntityManager().createNativeQuery(query, className)
