@@ -34,40 +34,74 @@ public class RegistrationServlet extends HttpServlet {
 		String jsonObj = request.getReader().lines().collect(Collectors.joining());
 		GsonBuilder builder = new GsonBuilder();
 		Gson gson = builder.create();
-		ConnectionService connectionService = new ConnectionService("BugTrackingSystem");
+		ConnectionService connectionService = new ConnectionService();
 		TypeWrapper typeWrapper = gson.fromJson(jsonObj, TypeWrapper.class);
+		PrintWriter out = response.getWriter();
 
-		if (typeWrapper.getType().equals("DEVELOPER_REGISTRATION")) {
+		switch (typeWrapper.getType()) {
+		case "DEVELOPER_REGISTRATION":
 			DeveloperEntity developerEntity = typeWrapper.getDeveloperEntity();
 			connectionService.beginTransaction();
 			connectionService.save(developerEntity);
 			connectionService.commitAndCloseTransaction();
-			PrintWriter out = response.getWriter();
 			out.write(gson.toJson(developerEntity));
-		}
-
-		if (typeWrapper.getType().equals("TESTER_REGISTRATION")) {
+			break;
+		case "TESTER_REGISTRATION":
 			TesterEntity testerEntity = typeWrapper.getTesterEntity();
 			connectionService.beginTransaction();
 			connectionService.save(testerEntity);
 			connectionService.commitAndCloseTransaction();
-			PrintWriter out = response.getWriter();
 			out.write(gson.toJson(testerEntity));
+			break;
+		case "TESTER_LOGIN":
+			TesterEntity testerLogin = new TesterEntity();
+			testerLogin.setEmail(typeWrapper.getEmail());
+			testerLogin = (TesterEntity) connectionService.getEntityManager()
+					.createQuery("SELECT t FROM TesterEntity t WHERE t.email=:email")
+					.setParameter("email", testerLogin.getEmail()).getSingleResult();
+			out.write(gson.toJson(testerLogin));
+			break;
+		case "DEVELOPER_LOGIN":
+			DeveloperEntity developerLogin = new DeveloperEntity();
+			developerLogin.setEmail(typeWrapper.getEmail());
+			developerLogin = (DeveloperEntity) connectionService.getEntityManager()
+					.createQuery("SELECT t FROM DeveloperEntity t WHERE t.email=:email")
+					.setParameter("email", developerLogin.getEmail()).getSingleResult();
+			out.write(gson.toJson(developerLogin));
+			break;
 		}
 
-		if (typeWrapper.getType().equals("TESTER_LOGIN")) {
-			TesterEntity testerEntity = new TesterEntity();
-			testerEntity.setEmail(typeWrapper.getEmail());
-			// testerEntity = (TesterEntity)
-			// connectionService.getEntityManager().createQuery("SELECT t.password FROM
-			// TesterEntity t WHERE
-			// t.email='"+testerEntity.getEmail()+"'").getSingleResult();
-			testerEntity = (TesterEntity) connectionService.getEntityManager()
-					.createQuery("SELECT t FROM TesterEntity t WHERE t.email=:email")
-					.setParameter("email", testerEntity.getEmail()).getSingleResult();
-			PrintWriter out = response.getWriter();
-			out.write(gson.toJson(testerEntity));
-		}
+		/*
+		 * if (typeWrapper.getType().equals("DEVELOPER_REGISTRATION")) { DeveloperEntity
+		 * developerEntity = typeWrapper.getDeveloperEntity();
+		 * connectionService.beginTransaction();
+		 * connectionService.save(developerEntity);
+		 * connectionService.commitAndCloseTransaction(); PrintWriter out =
+		 * response.getWriter(); out.write(gson.toJson(developerEntity)); }
+		 * 
+		 * if (typeWrapper.getType().equals("TESTER_REGISTRATION")) { TesterEntity
+		 * testerEntity = typeWrapper.getTesterEntity();
+		 * connectionService.beginTransaction(); connectionService.save(testerEntity);
+		 * connectionService.commitAndCloseTransaction(); PrintWriter out =
+		 * response.getWriter(); out.write(gson.toJson(testerEntity)); }
+		 * 
+		 * if (typeWrapper.getType().equals("TESTER_LOGIN")) { TesterEntity testerEntity
+		 * = new TesterEntity(); testerEntity.setEmail(typeWrapper.getEmail());
+		 * testerEntity = (TesterEntity) connectionService.getEntityManager()
+		 * .createQuery("SELECT t FROM TesterEntity t WHERE t.email=:email")
+		 * .setParameter("email", testerEntity.getEmail()).getSingleResult();
+		 * PrintWriter out = response.getWriter(); out.write(gson.toJson(testerEntity));
+		 * }
+		 * 
+		 * if (typeWrapper.getType().equals("DEVELOPER_LOGIN")) { DeveloperEntity
+		 * developerEntity = new DeveloperEntity();
+		 * developerEntity.setEmail(typeWrapper.getEmail()); developerEntity =
+		 * (DeveloperEntity) connectionService.getEntityManager()
+		 * .createQuery("SELECT t FROM DeveloperEntity t WHERE t.email=:email")
+		 * .setParameter("email", developerEntity.getEmail()).getSingleResult();
+		 * PrintWriter out = response.getWriter();
+		 * out.write(gson.toJson(developerEntity)); }
+		 */
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
