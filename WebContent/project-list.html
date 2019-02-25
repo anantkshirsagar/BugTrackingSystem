@@ -11,7 +11,7 @@
 		<link href="ext-js/MDB/css/style.css" rel="stylesheet">			
 		<script src="angular-js-lib/angular.min.js"> </script>	
 	</head>
-	<body>
+	<body ng-app="btsApp" ng-controller="projectListCtr">
 		<nav class="navbar navbar-expand-lg navbar-dark info-color">
 		    <a class="navbar-brand" href="#">Admin</a>
 		    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -54,21 +54,11 @@
 					</tr>
 				</thead>
 				<tbody>
-					<tr>
-						<td>1</td>
-						<td>XYZ</td>
-						<td>20 feb</td>
-						<td>25 feb</td>
-						<th>Pending</th>
-						<th>Icon</th>
-					</tr>
-					<tr>
-						<td>2</td>
-						<td>ABC</td>
-						<td>20 feb</td>
-						<td>25 feb</td>
-						<th>Completed</th>
-						<th>Icon</th>
+					<tr ng-repeat="record in list">
+						<td>{{record.id}}</td>
+						<td>{{record.projectName}}</td>
+						<td>{{record.description}}</td>
+						<td>icon</td>
 					</tr>
 				</tbody>
 			</table>
@@ -77,6 +67,7 @@
 		<script type="text/javascript" src="ext-js/MDB/js/popper.min.js"></script>
 		<script type="text/javascript" src="ext-js/MDB/js/bootstrap.min.js"></script>
 		<script type="text/javascript" src="ext-js/MDB/js/mdb.js"></script>
+		<script src="js/project-list.ctr.js"> </script>	
 		<script type="text/javascript">
 		</script>
 	</body>

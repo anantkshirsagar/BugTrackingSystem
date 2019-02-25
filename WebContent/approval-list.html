@@ -11,7 +11,7 @@
 		<link href="ext-js/MDB/css/style.css" rel="stylesheet">			
 		<script src="angular-js-lib/angular.min.js"> </script>	
 	</head>
-	<body>
+	<body ng-app="btsApp" ng-controller="approvalListCtr">
 		<nav class="navbar navbar-expand-lg navbar-dark info-color">
 		    <a class="navbar-brand" href="#">Admin</a>
 		    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -52,16 +52,10 @@
 					</tr>
 				</thead>
 				<tbody>
-					<tr>
-						<td>1</td>
-						<td>Anant</td>
-						<td>Developer</td>
-						<td>icon</td>
-					</tr>
-					<tr>
-						<td>2</td>
-						<td>Joshi</td>
-						<td>Tester</td>
+					<tr ng-repeat="record in list">
+						<td>{{record.id}}</td>
+						<td>{{record.fullName}}</td>
+						<td>NCR</td>
 						<td>icon</td>
 					</tr>
 				</tbody>
@@ -71,6 +65,7 @@
 		<script type="text/javascript" src="ext-js/MDB/js/popper.min.js"></script>
 		<script type="text/javascript" src="ext-js/MDB/js/bootstrap.min.js"></script>
 		<script type="text/javascript" src="ext-js/MDB/js/mdb.js"></script>
+		<script src="js/approval-list.ctr.js"> </script>	
 		<script type="text/javascript">
 		</script>
 	</body>

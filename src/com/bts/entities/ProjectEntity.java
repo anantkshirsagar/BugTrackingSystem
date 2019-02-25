@@ -12,8 +12,8 @@ public class ProjectEntity extends BaseEntity {
 	private String projectName;
 	private String description;
 	private boolean status;
-	private Date startDate;
-	private Date endDate;
+	//private Date startDate;
+	//private Date endDate;
 	private String feature;
 	private String subFeature;
 	private String reason;
@@ -44,7 +44,7 @@ public class ProjectEntity extends BaseEntity {
 		this.status = status;
 	}
 
-	public Date getStartDate() {
+	/*public Date getStartDate() {
 		return startDate;
 	}
 
@@ -58,7 +58,7 @@ public class ProjectEntity extends BaseEntity {
 
 	public void setEndDate(Date endDate) {
 		this.endDate = endDate;
-	}
+	}*/
 
 	public String getFeature() {
 		return feature;

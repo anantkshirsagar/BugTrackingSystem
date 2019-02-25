@@ -14,7 +14,7 @@
 
 		<properties>
 			<property name="javax.persistence.jdbc.url"
-				value="jdbc:mysql://localhost:3309/bug_reporting_system?createDatabaseIfNotExist=true&amp;autoReconnect=true&amp;useUnicode=yes&amp;characterEncoding=UTF-8&amp;cachePrepStmts=true&amp;prepStmtCacheSize=250&amp;prepStmtCacheSqlLimit=2048&amp;useServerPrepStmts=true&amp;useSSL=false" />
+				value="jdbc:mysql://localhost:3306/bug_reporting_system?createDatabaseIfNotExist=true&amp;autoReconnect=true&amp;useUnicode=yes&amp;characterEncoding=UTF-8&amp;cachePrepStmts=true&amp;prepStmtCacheSize=250&amp;prepStmtCacheSqlLimit=2048&amp;useServerPrepStmts=true&amp;useSSL=false" />
 
 			<property name="javax.persistence.jdbc.user" value="root" />
 			<property name="javax.persistence.jdbc.password"
