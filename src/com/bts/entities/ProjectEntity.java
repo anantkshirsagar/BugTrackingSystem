@@ -22,6 +22,7 @@ public class ProjectEntity extends BaseEntity {
 	private String subFeature;
 	private String reason;
 	private String remark;
+	private boolean isCurrentProject;
 	private List<Bug> bugList;
 
 	public String getProjectName() {
@@ -102,5 +103,13 @@ public class ProjectEntity extends BaseEntity {
 
 	public void setBugList(List<Bug> bugList) {
 		this.bugList = bugList;
+	}
+
+	public boolean isCurrentProject() {
+		return isCurrentProject;
+	}
+
+	public void setCurrentProject(boolean isCurrentProject) {
+		this.isCurrentProject = isCurrentProject;
 	}
 }

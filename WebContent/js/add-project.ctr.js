@@ -14,6 +14,7 @@ app.controller('addProjectCtr', function($scope, $http) {
 		$http.post($scope.url, $scope.documentEntity, config).then(
 				function(response) {
 					console.log(response.data);
+					
 				}, function(response) {
 
 				});
