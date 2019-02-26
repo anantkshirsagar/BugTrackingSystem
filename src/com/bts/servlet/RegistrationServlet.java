@@ -34,11 +34,14 @@ public class RegistrationServlet extends HttpServlet {
 		Gson gson = builder.create();
 		TypeWrapper typeWrapper = gson.fromJson(jsonObj, TypeWrapper.class);
 		PrintWriter out = response.getWriter();
-		
+
 		switch (typeWrapper.getType()) {
 		case DEVELOPER_REGISTRATION:
 			DeveloperEntity developerEntity = typeWrapper.getDeveloperEntity();
-			new DatabaseService().registerEmployee(developerEntity);
+			if (developerEntity.getId() > 0)
+				new DatabaseService().editEmployee(developerEntity);
+			else
+				new DatabaseService().registerEmployee(developerEntity);
 			out.write(gson.toJson(developerEntity));
 			break;
 		case TESTER_REGISTRATION:

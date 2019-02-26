@@ -42,12 +42,12 @@ public class AdminServlet extends HttpServlet {
 		switch (typeWrapper.getType()) {
 		case DEVELOPER_LIST:
 			List<DeveloperEntity> developerList = connectionService.getEntityManager()
-					.createQuery("SELECT d FROM DeveloperEntity d WHERE d.isapproved=1").getResultList();
+					.createQuery("SELECT d FROM DeveloperEntity d").getResultList();
 			out.write(gson.toJson(developerList));
 			break;
 		case TESTER_LIST:
 			List<TesterEntity> testerList = connectionService.getEntityManager()
-					.createQuery("SELECT t FROM TesterEntity t t.isapproved=1").getResultList();
+					.createQuery("SELECT t FROM TesterEntity t t.isApproved=1").getResultList();
 			out.write(gson.toJson(testerList));
 			break;
 		case PROJECT_LIST:
@@ -58,15 +58,17 @@ public class AdminServlet extends HttpServlet {
 		case APPROVAL_LIST:
 			List<Employee> approvalList = new ArrayList<>();
 			List<Employee> developers = connectionService.getEntityManager()
-					.createQuery("SELECT d FROM DeveloperEntity d WHERE d.isApproved=false").getResultList();
+					.createQuery("SELECT d FROM DeveloperEntity d WHERE d.isApproved=0").getResultList();
 			List<Employee> testers = connectionService.getEntityManager()
-					.createQuery("SELECT t FROM TesterEntity t WHERE t.isApproved=false").getResultList();
+					.createQuery("SELECT t FROM TesterEntity t WHERE t.isApproved=0").getResultList();
 			approvalList.addAll(developers);
 			approvalList.addAll(testers);
-			out.write(gson.toJson(approvalList));
+			//out.write(gson.toJson(approvalList));
+			for (Employee employee : approvalList) {
+				System.out.println(employee.getEmail());
+			}
 			break;
 		}
-
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
