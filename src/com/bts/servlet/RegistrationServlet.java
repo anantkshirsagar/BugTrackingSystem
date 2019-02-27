@@ -57,7 +57,7 @@ public class RegistrationServlet extends HttpServlet {
 			break;
 		case DEVELOPER_LOGIN:
 			Employee developerLogin = new DeveloperEntity();
-			testerLogin = new DatabaseService().getEmployeeLoginByEmail(developerLogin, typeWrapper.getEmail(),
+			developerLogin = new DatabaseService().getEmployeeLoginByEmail(developerLogin, typeWrapper.getEmail(),
 					DBConstants.DEVELOPER_ENTITY);
 			out.write(gson.toJson(developerLogin));
 			break;

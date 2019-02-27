@@ -11,6 +11,7 @@ public class DeveloperEntity extends Employee {
 	private long phoneNo;
 	private String password;
 	private boolean isApproved;
+	private String department;
 
 	public String getFullName() {
 		return fullName;
@@ -50,5 +51,13 @@ public class DeveloperEntity extends Employee {
 
 	public void setPassword(String password) {
 		this.password = password;
+	}
+
+	public String getDepartment() {
+		return department;
+	}
+
+	public void setDepartment(String department) {
+		this.department = department;
 	}
 }

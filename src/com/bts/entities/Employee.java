@@ -23,4 +23,9 @@ public abstract class Employee extends BaseEntity {
 	public abstract void setPassword(String password);
 
 	public abstract String getPassword();
+	
+	public abstract void setDepartment(String type);
+	
+	public abstract String getDepartment();
+	
 }

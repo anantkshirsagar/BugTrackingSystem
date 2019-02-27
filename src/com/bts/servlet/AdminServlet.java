@@ -42,12 +42,12 @@ public class AdminServlet extends HttpServlet {
 		switch (typeWrapper.getType()) {
 		case DEVELOPER_LIST:
 			List<DeveloperEntity> developerList = connectionService.getEntityManager()
-					.createQuery("SELECT d FROM DeveloperEntity d").getResultList();
+					.createQuery("SELECT d FROM DeveloperEntity d WHERE d.isApproved=1").getResultList();
 			out.write(gson.toJson(developerList));
 			break;
 		case TESTER_LIST:
 			List<TesterEntity> testerList = connectionService.getEntityManager()
-					.createQuery("SELECT t FROM TesterEntity t t.isApproved=1").getResultList();
+					.createQuery("SELECT t FROM TesterEntity t WHERE t.isApproved=1").getResultList();
 			out.write(gson.toJson(testerList));
 			break;
 		case PROJECT_LIST:
@@ -63,10 +63,7 @@ public class AdminServlet extends HttpServlet {
 					.createQuery("SELECT t FROM TesterEntity t WHERE t.isApproved=0").getResultList();
 			approvalList.addAll(developers);
 			approvalList.addAll(testers);
-			//out.write(gson.toJson(approvalList));
-			for (Employee employee : approvalList) {
-				System.out.println(employee.getEmail());
-			}
+			out.write(gson.toJson(approvalList));
 			break;
 		}
 	}

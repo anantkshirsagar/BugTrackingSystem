@@ -23,7 +23,7 @@ public class DatabaseService {
 		connectionService.beginTransaction();
 		String query = "SELECT t FROM " + entityType + " t WHERE t.email=:email";
 		employee.setEmail(email);
-		employee = (TesterEntity) connectionService.getEntityManager().createQuery(query)
+		employee = (Employee) connectionService.getEntityManager().createQuery(query)
 				.setParameter("email", employee.getEmail()).getSingleResult();
 		connectionService.commitAndCloseTransaction();
 		return employee;
