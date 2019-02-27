@@ -10,6 +10,10 @@ app.controller('addProjectCtr', function($scope, $http) {
 		subFeature : ''
 	};
 
+	$scope.goToHomePage = function(){
+		location.href = "index.html";
+	}
+	
 	$scope.addProject = function() {
 		$http.post($scope.url, $scope.documentEntity, config).then(
 				function(response) {

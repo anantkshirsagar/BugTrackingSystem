@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+		<meta http-equiv="x-ua-compatible" content="ie=edge">
+		<title>Bug Tracking System</title>
+		<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css">
+		<link href="ext-js/MDB/css/bootstrap.min.css" rel="stylesheet">
+		<link href="ext-js/MDB/css/mdb.min.css" rel="stylesheet">
+		<link href="ext-js/MDB/css/style.css" rel="stylesheet">			
+		<script src="angular-js-lib/angular.min.js"> </script>	
+		<style type="text/css">
+		body{
+			background-color:#ede7f6 ;
+		}
+		.custom {
+			border-radius: 50px;
+		}
+		.dialogBackgroundColor {
+			background : #fff3e0;
+		}
+		.headerColor {
+			background : #4285F4;
+		}
+		</style>
+	</head>
+	<body ng-app="btsApp" ng-controller="addBugsCtr">
+		<nav class="navbar navbar-expand-lg navbar-dark primary-color">
+			<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#basicExampleNav"
+				aria-controls="basicExampleNav" aria-expanded="false" aria-label="Toggle navigation">
+			<span class="navbar-toggler-icon"></span>
+			</button>
+			<div class="collapse navbar-collapse" id="basicExampleNav">
+				<ul class="navbar-nav mr-auto">
+					<li class="nav-item">
+						<a class="nav-link" href="tester-home.html">Home</a>
+					</li>
+					<li class="nav-item">
+						<a class="nav-link" href="add-bugs.html">Add Bug</a>
+					</li>
+					<li class="nav-item">
+						<a class="nav-link" href="#">Page 2</a>
+					</li>
+					<li class="nav-item">
+						<a class="nav-link" href="#">Page 3</a>
+					</li>	
+					<li class="nav-item">
+						<a class="nav-link" href="#">Page 4</a>
+					</li>						
+				</ul>
+				<ul class="nav navbar-nav nav-flex-icons ml-auto">
+					<li class="nav-item">
+						<a class="nav-link" href="#">
+							<span class="clearfix d-none d-sm-inline-block">Logout</span>
+						</a>
+					</li>
+				</ul>
+			</div>
+		</nav>
+		<br>
+		<br>
+		<div class="container">
+			<div class="card">
+				<h5 class="card-header text-center headerColor" style="color: white;">Current Project Details</h5>
+				<div class="card-body">
+					<table id="tablePreview" class="table table-hover table-bordered">
+						<thead style="background:#e3f2fd;">
+							<th>Project Name</th>
+							<th>Description</th>
+							<th>Start Date</th>
+							<th>Status</th>
+						</thead>
+						
+						<tbody>
+							<td>Project Name</td>
+							<td>Description</td>
+							<td>29 March 2019</td>
+							<td>Status</td>
+						</tbody>
+					</table>
+				</div>
+			</div>
+			
+			<br> 
+			<div class="card">
+				<h5 class="card-header text-center headerColor" style="color: white;">Add Bugs</h5>
+				<div class="card-body">
+					<table id="tablePreview" class="table table-hover">
+						<thead>
+							<button type="button" class="btn btn-sm btn-primary" ng-click="clearDetails()" data-toggle="modal" data-target="#bugDialog">Add New Bug</button>
+						</thead>
+					</table>
+					
+					<table id="tablePreview" class="table table-hover table-bordered">
+						<thead style="background:#e3f2fd;">
+							<th>Bug Id</th>
+							<th>Bug Description</th>
+							<th>Type of Testing</th>
+							<th>Status</th>
+						</thead>
+						
+						<tbody>
+							<td>Bug Id</td>
+							<td>Bug Description</td>
+							<td>Type of Testing</td>
+							<td>Status</td>
+						</tbody>
+					</table>
+				</div>
+			</div>
+			
+			<div class="modal fade" id="bugDialog" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+				aria-hidden="true">
+				<div class="modal-dialog modal-lg" role="document">
+					<div class="modal-content">
+						<div class="modal-header headerColor">
+							<h5 class="modal-title" id="exampleModalLabel" style="color: white;">Add Bug</h5>
+							<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+							<span aria-hidden="true">&times;</span>
+							</button>
+						</div>
+						<div class="modal-body">
+							<label for="typeOfTesting">Type of testing</label>
+							<input type="text" id="typeOfTesting" ng-model="bug.typeOfTesting" class="form-control">
+							<br>
+							
+							<label for="typeOfTesting">Bug description</label>
+							<input type="text" id="typeOfTesting" ng-model="bug.bugDescription" class="form-control">
+							<br>
+							
+							<label for="typeOfTestingScrenario">Type of testing scenario</label>
+							<textarea type="text" id="typeOfTestingScrenario" ng-model="bug.typeOfTestingScrenario" class="form-control"></textarea>
+							<br>
+							
+							<label for="input">Input</label>
+							<input type="text" id="input" ng-model="bug.input" class="form-control">
+							<br>
+							
+							<label for="expectedResult">Expected result</label>
+							<input type="text" id="expectedResult" ng-model="bug.expectedResult" class="form-control">
+							<br>
+							
+							<label for="actualResult">Actual Result</label>
+							<input type="text" id="actualResult" ng-model="bug.actualResult" class="form-control">
+							<br>
+							
+							<label for="">Severity</label>
+							<select class="browser-default custom-select" ng-model="bug.severity">
+								<option ng-repeat="severityOption in severityList">{{severityOption}}</option>
+							</select>
+							<br><br>
+							
+							<label for="">Priority</label>
+							<select class="browser-default custom-select" ng-model="bug.priority">
+								<option ng-repeat="priorityOption in priority">{{priorityOption}}</option>
+							</select>
+							<br><br>
+						</div>
+						<div class="modal-footer">
+							<button type="button" class="btn btn-sm btn-primary" data-dismiss="modal">Close</button>
+							<button type="button" class="btn btn-sm btn-primary">Save & Submit</button>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		
+		<script type="text/javascript" src="ext-js/MDB/js/jquery-3.3.1.min.js"></script>
+		<script type="text/javascript" src="ext-js/MDB/js/popper.min.js"></script>
+		<script type="text/javascript" src="ext-js/MDB/js/bootstrap.min.js"></script>
+		<script type="text/javascript" src="ext-js/MDB/js/mdb.js"></script>
+		<script src="js/tester-add-bugs.ctr.js"> </script>	
+	</body>
+</html>
