@@ -4,6 +4,7 @@ import com.bts.utils.DBConstants;
 
 public class Bug {
 	private long id;
+	private String bugDescription;
 	private String typeOfTesting;
 	private String typeOfTestingScrenario;
 	private String action;
@@ -20,6 +21,14 @@ public class Bug {
 
 	public void setId(long id) {
 		this.id = id;
+	}
+
+	public String getBugDescription() {
+		return bugDescription;
+	}
+
+	public void setBugDescription(String bugDescription) {
+		this.bugDescription = bugDescription;
 	}
 
 	public String getTypeOfTesting() {
