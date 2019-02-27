@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 	<head>
 		<meta charset="utf-8">
 		<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -11,7 +11,7 @@
 		<link href="ext-js/MDB/css/style.css" rel="stylesheet">			
 		<script src="angular-js-lib/angular.min.js"> </script>	
 	</head>
-	<body>
+	<body ng-app="btsApp" ng-controller="projectListCtr">
 		<nav class="navbar navbar-expand-lg navbar-dark info-color">
 		    <a class="navbar-brand" href="admin-home.html">Admin</a>
 		    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -40,15 +40,44 @@
 	            </div>
 		    </div>
 		</nav>
-		<!-- External JS Path  -->
+		<div class="container">
+			<br><h2><b>Feedback Form</b></h2><br>
+			<div class="row">
+				<div class="col-md-6">
+					<label for="exampleForm2">first Name</label>
+					<input type="text" id="exampleForm2" class="form-control">
+				</div>
+				<div class="col-md-6">
+					<label for="exampleForm2">last Name</label>
+					<input type="text" id="exampleForm2" class="form-control">
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-md-6">
+					<label for="exampleForm2">email</label>
+					<input type="text" id="exampleForm2" class="form-control">
+				</div>
+				<div class="col-md-6">
+					<label for="exampleForm2">mobile</label>
+					<input type="text" id="exampleForm2" class="form-control">
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-md-8">
+					<div class="form-group">
+						<label for="exampleFormControlTextarea1">Feedback</label>
+						<textarea class="form-control rounded-0" id="exampleFormControlTextarea1" rows="10"></textarea>
+					</div>
+				</div>
+			</div>
+			<button type="button" class="btn btn-dark btn-lg">Submit</button>
+		</div>
+		
 		<script type="text/javascript" src="ext-js/MDB/js/jquery-3.3.1.min.js"></script>
-		<!-- Bootstrap tooltips -->
 		<script type="text/javascript" src="ext-js/MDB/js/popper.min.js"></script>
-		<!-- Bootstrap core JavaScript -->
 		<script type="text/javascript" src="ext-js/MDB/js/bootstrap.min.js"></script>
-		<!-- MDB core JavaScript -->
 		<script type="text/javascript" src="ext-js/MDB/js/mdb.js"></script>
-		<!-- Custom Scripts -->
-		<script src="scripts/sign-up-validations.js"> </script>
+		<script type="text/javascript">
+		</script>
 	</body>
 </html>

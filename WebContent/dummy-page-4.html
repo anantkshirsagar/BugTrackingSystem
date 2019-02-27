@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 	<head>
 		<meta charset="utf-8">
 		<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -11,7 +11,7 @@
 		<link href="ext-js/MDB/css/style.css" rel="stylesheet">			
 		<script src="angular-js-lib/angular.min.js"> </script>	
 	</head>
-	<body>
+	<body ng-app="btsApp" ng-controller="dummyCtr">
 		<nav class="navbar navbar-expand-lg navbar-dark info-color">
 		    <a class="navbar-brand" href="admin-home.html">Admin</a>
 		    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -40,15 +40,70 @@
 	            </div>
 		    </div>
 		</nav>
-		<!-- External JS Path  -->
+		<div class="container">
+			<br><h2><b><center>User Detail Form</center></b></h2><br>
+			<form name="btsForm">
+				<div class="row">
+					<div class="col-md-4">
+						<label for="fname">Name</label>
+						<input type="text" id="fname" ng-model="fname" ng-required="true" class="form-control">
+					</div>
+					<div class="col-md-4">
+						<label for="email">E-mail</label>
+						<input type="email" id="email" ng-model="email" ng-required="true" class="form-control">
+					</div>
+					<div class="col-md-4">
+						<label for="mobile">Mobile</label>
+						<input type="number" id="mobile" ng-model="mobile" ng-minlength="10" ng-maxlength="10" ng-required="true" class="form-control">
+					</div>
+				</div>
+				<br>
+				<div class="row">
+					<div class="col-md-9">
+						<div class="form-group">
+							<label for="feedback">Address</label>
+							<textarea class="form-control rounded-0" ng-model="feedback" ng-required="true" id="feedback" rows="3"></textarea>
+						</div>
+					</div>
+					<div class="col-md-3">
+						<label for="exampleFormControlTextarea1">Gender</label>
+						<div class="row">
+							<div class="col-md-6">
+								<div class="custom-control custom-radio">
+									<input type="radio" class="custom-control-input" id="approve" ng-model="employeeEntity.isApproved" value="true">
+									<label class="custom-control-label" for="approve">Male</label>
+								</div>
+							</div>
+							<div class="col-md-6">
+								<div class="custom-control custom-radio">
+									<input type="radio" class="custom-control-input" id="reject" ng-model="employeeEntity.isApproved" value="false">
+									<label class="custom-control-label" for="reject">Female</label>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>	
+				<div class="row">
+					<div class="col-md-6">
+						<label for="exampleForm2">languages</label>
+						<input type="text" id="exampleForm2" class="form-control">
+					</div>
+					<div class="col-md-6">
+						<label for="exampleForm2">hobbies</label>
+						<input type="text" id="exampleForm2" class="form-control">
+					</div>
+				</div>
+				<br>
+				<button type="button" class="btn btn-dark btn-lg btn-block" ng-disabled="btsForm.$invalid">Submit</button>
+			</form>
+		</div>
+		
 		<script type="text/javascript" src="ext-js/MDB/js/jquery-3.3.1.min.js"></script>
-		<!-- Bootstrap tooltips -->
 		<script type="text/javascript" src="ext-js/MDB/js/popper.min.js"></script>
-		<!-- Bootstrap core JavaScript -->
 		<script type="text/javascript" src="ext-js/MDB/js/bootstrap.min.js"></script>
-		<!-- MDB core JavaScript -->
 		<script type="text/javascript" src="ext-js/MDB/js/mdb.js"></script>
-		<!-- Custom Scripts -->
-		<script src="scripts/sign-up-validations.js"> </script>
+		<script src="js/dummy-page-2.ctr.js"></script>
+		<script type="text/javascript">
+		</script>
 	</body>
 </html>
