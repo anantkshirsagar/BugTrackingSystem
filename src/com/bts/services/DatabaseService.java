@@ -7,6 +7,8 @@ import javax.persistence.Query;
 import com.bts.entities.DeveloperEntity;
 import com.bts.entities.Employee;
 import com.bts.entities.ProjectEntity;
+import com.bts.entities.TesterEntity;
+import com.bts.utils.DBConstants;
 
 public class DatabaseService {
 
@@ -65,6 +67,41 @@ public class DatabaseService {
 		entity.setApproved(developerEntity.isApproved());
 		connectionService.commitAndCloseTransaction();
 		return developerEntity;
+	}
 
+	@SuppressWarnings("unchecked")
+	public List<DeveloperEntity> fetchDeveloperList(){
+		List<DeveloperEntity> developerList = null;
+		ConnectionService connectionService = new ConnectionService();
+		connectionService.beginTransaction();
+		String query = "SELECT developerEntity FROM DeveloperEntity developerEntity";
+		developerList = connectionService
+				.fetchData(query, DBConstants.DEVELOPER_ENTITY_CLASS);
+		connectionService.commitAndCloseTransaction();		
+		return developerList;
+	}
+	
+	@SuppressWarnings("unchecked")
+	public List<TesterEntity> fetchTesterList(){
+		List<TesterEntity> testerList = null;
+		ConnectionService connectionService = new ConnectionService();
+		connectionService.beginTransaction();
+		String query = "SELECT testerEntity FROM TesterEntity testerEntity";
+		testerList = connectionService
+				.fetchData(query, DBConstants.TESTER_ENTITY_CLASS);
+		connectionService.commitAndCloseTransaction();		
+		return testerList;
+	}
+	
+	@SuppressWarnings("unchecked")
+	public List<ProjectEntity> fetchProjectList(){
+		List<ProjectEntity> projectList = null;
+		ConnectionService connectionService = new ConnectionService();
+		connectionService.beginTransaction();
+		String query = "SELECT projectEntity FROM ProjectEntity projectEntity";
+		projectList = connectionService
+				.fetchData(query, DBConstants.PROJECT_ENTITY_CLASS);
+		connectionService.commitAndCloseTransaction();		
+		return projectList;
 	}
 }
