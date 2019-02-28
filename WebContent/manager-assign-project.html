@@ -10,20 +10,44 @@
 		<link href="ext-js/MDB/css/mdb.min.css" rel="stylesheet">
 		<link href="ext-js/MDB/css/style.css" rel="stylesheet">			
 		<script src="angular-js-lib/angular.min.js"> </script>	
+		
+		<style type="text/css">
+			html, body, header, .view {
+				height: 100%;
+			}
+			
+			@media (max-width: 740px) {
+				html, body, header, .view {
+					height: 1000px;
+				}
+			}
+			
+			@media (min-width: 800px) and (max-width: 850px) {
+				html, body, header, .view {
+					height: 650px;
+				}
+			}
+			
+			@media (min-width: 800px) and (max-width: 850px) {
+				.navbar:not(.top-nav-collapse) {
+					background: #1C2331!important;
+				}
+			}
+		</style>
 	</head>
-	<body>
+	<body ng-app="btsApp" ng-controller="managerAssignProjectCtr">
 		<nav class="navbar navbar-expand-lg navbar-dark info-color">
-		    <a class="navbar-brand" href="admin-home.html">Admin</a>
+		    <a class="navbar-brand" href="manager-home.html">Manager</a>
 		    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
 		        <span class="navbar-toggler-icon"></span>
 		    </button>
 		    <div class="collapse navbar-collapse" id="navbarSupportedContent">
 		        <ul class="navbar-nav mr-auto">
-		            <li class="nav-item">
-		               <a class="nav-link waves-effect waves-light" href="admin-home.html">Home </a>
+		            <li class="nav-item active">
+		               <a class="nav-link waves-effect waves-light" href="manager-home.html">Home </a>
 		            </li>
 		            <li class="nav-item">
-		                <a class="nav-link waves-effect waves-light" href="project-list.html">Project List</a>
+		                <a class="nav-link waves-effect waves-light" href="add-project.html">Project</a>
 		            </li>
 		            <li class="nav-item">
 		                <a class="nav-link waves-effect waves-light" href="developer-list.html">Developer List</a>
@@ -32,7 +56,7 @@
 		                <a class="nav-link waves-effect waves-light" href="tester-list.html">Tester List</a>
 		            </li>
 		            <li class="nav-item">
-		                <a class="nav-link waves-effect waves-light" href="approval-list.html">Approval List</a>
+		                <a class="nav-link waves-effect waves-light" href="approval-list.html">Assign Project</a>
 		            </li>
 		        </ul>
 	            <div class="nav-item">
@@ -40,9 +64,15 @@
 	            </div>
 		    </div>
 		</nav>
+		
+		<div class="container">
+			
+		</div>
+		
 		<script type="text/javascript" src="ext-js/MDB/js/jquery-3.3.1.min.js"></script>
 		<script type="text/javascript" src="ext-js/MDB/js/popper.min.js"></script>
 		<script type="text/javascript" src="ext-js/MDB/js/bootstrap.min.js"></script>
 		<script type="text/javascript" src="ext-js/MDB/js/mdb.js"></script>
+		<script src="js/manager-assign-project.ctr.js"> </script>	
 	</body>
 </html>
