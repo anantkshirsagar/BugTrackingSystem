@@ -4,6 +4,7 @@ import java.util.Date;
 import java.util.List;
 
 import javax.persistence.Entity;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -24,6 +25,9 @@ public class ProjectEntity extends BaseEntity {
 	private String remark;
 	private boolean isCurrentProject;
 	private List<Bug> bugList;
+
+	@ManyToOne
+	private DeveloperEntity developerEntity;
 
 	public String getProjectName() {
 		return projectName;
@@ -111,5 +115,13 @@ public class ProjectEntity extends BaseEntity {
 
 	public void setCurrentProject(boolean isCurrentProject) {
 		this.isCurrentProject = isCurrentProject;
+	}
+
+	public DeveloperEntity getDeveloperEntity() {
+		return developerEntity;
+	}
+
+	public void setDeveloperEntity(DeveloperEntity developerEntity) {
+		this.developerEntity = developerEntity;
 	}
 }

@@ -1,18 +1,22 @@
 package com.bts.entities;
 
 import javax.persistence.Entity;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 @Entity
 @Table
-public class TesterEntity extends Employee{
+public class TesterEntity extends Employee {
 	private String fullName;
 	private String email;
 	private long phoneNo;
 	private String password;
 	private boolean isApproved;
 	private String department;
-	
+
+	@ManyToOne
+	private ProjectEntity projectEntity;
+
 	public String getFullName() {
 		return fullName;
 	}
@@ -59,6 +63,14 @@ public class TesterEntity extends Employee{
 
 	public void setDepartment(String department) {
 		this.department = department;
+	}
+
+	public ProjectEntity getProjectEntity() {
+		return projectEntity;
+	}
+
+	public void setProjectEntity(ProjectEntity projectEntity) {
+		this.projectEntity = projectEntity;
 	}
 
 }
