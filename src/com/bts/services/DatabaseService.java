@@ -1,10 +1,12 @@
 package com.bts.services;
 
+import java.util.List;
+
+import javax.persistence.Query;
+
 import com.bts.entities.DeveloperEntity;
 import com.bts.entities.Employee;
 import com.bts.entities.ProjectEntity;
-import com.bts.entities.TesterEntity;
-import com.bts.tests.DevnagariEntity;
 
 public class DatabaseService {
 
@@ -21,12 +23,18 @@ public class DatabaseService {
 	public Employee getEmployeeLoginByEmail(Employee employee, String email, String entityType) {
 		ConnectionService connectionService = new ConnectionService();
 		connectionService.beginTransaction();
-		String query = "SELECT t FROM " + entityType + " t WHERE t.email=:email";
+		// String query = "SELECT t FROM " + entityType + " t WHERE t.email=:email";
 		employee.setEmail(email);
-		employee = (Employee) connectionService.getEntityManager().createQuery(query)
-				.setParameter("email", employee.getEmail()).getSingleResult();
+		Query query = connectionService.getEntityManager()
+				.createQuery("SELECT t FROM " + entityType + " t WHERE t.email=:email")
+				.setParameter("email", employee.getEmail());
+		/*
+		 * employee = (Employee) connectionService.getEntityManager().createQuery(query)
+		 * .setParameter("email", employee.getEmail()).getSingleResult();
+		 */
+		List<Employee> list = query.getResultList();
 		connectionService.commitAndCloseTransaction();
-		return employee;
+		return list.size() > 0 ? list.get(0) : null;
 	}
 
 	public void saveProject(ProjectEntity projectEntity) {
@@ -57,6 +65,6 @@ public class DatabaseService {
 		entity.setApproved(developerEntity.isApproved());
 		connectionService.commitAndCloseTransaction();
 		return developerEntity;
-	
+
 	}
 }
