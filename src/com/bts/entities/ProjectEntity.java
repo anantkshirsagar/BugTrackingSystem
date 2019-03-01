@@ -5,17 +5,18 @@ import java.util.List;
 
 import javax.persistence.Entity;
 import javax.persistence.ManyToMany;
-import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+
+import com.bts.utils.DBConstants;
 
 @Entity
 @Table
 public class ProjectEntity extends BaseEntity {
 	private String projectName;
 	private String description;
-	private boolean status;
+	private DBConstants.ProjectStatus status;
 	@Temporal(TemporalType.DATE)
 	private Date startDate;
 	@Temporal(TemporalType.DATE)
@@ -29,6 +30,9 @@ public class ProjectEntity extends BaseEntity {
 
 	@ManyToMany
 	private List<DeveloperEntity> developerList;
+
+	@ManyToMany
+	private List<TesterEntity> testerList;
 
 	public String getProjectName() {
 		return projectName;
@@ -44,14 +48,6 @@ public class ProjectEntity extends BaseEntity {
 
 	public void setDescription(String description) {
 		this.description = description;
-	}
-
-	public boolean isStatus() {
-		return status;
-	}
-
-	public void setStatus(boolean status) {
-		this.status = status;
 	}
 
 	public Date getStartDate() {
@@ -125,4 +121,21 @@ public class ProjectEntity extends BaseEntity {
 	public void setDeveloperList(List<DeveloperEntity> developerList) {
 		this.developerList = developerList;
 	}
+
+	public List<TesterEntity> getTesterList() {
+		return testerList;
+	}
+
+	public void setTesterList(List<TesterEntity> testerList) {
+		this.testerList = testerList;
+	}
+
+	public DBConstants.ProjectStatus getStatus() {
+		return status;
+	}
+
+	public void setStatus(DBConstants.ProjectStatus status) {
+		this.status = status;
+	}
+
 }

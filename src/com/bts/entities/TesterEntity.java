@@ -1,6 +1,9 @@
 package com.bts.entities;
 
+import java.util.List;
+
 import javax.persistence.Entity;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
@@ -14,8 +17,8 @@ public class TesterEntity extends Employee {
 	private boolean isApproved;
 	private String department;
 
-	@ManyToOne
-	private ProjectEntity projectEntity;
+	@ManyToMany
+	private List<ProjectEntity> projectList;
 
 	public String getFullName() {
 		return fullName;
@@ -65,12 +68,12 @@ public class TesterEntity extends Employee {
 		this.department = department;
 	}
 
-	public ProjectEntity getProjectEntity() {
-		return projectEntity;
+	public List<ProjectEntity> getProjectList() {
+		return projectList;
 	}
 
-	public void setProjectEntity(ProjectEntity projectEntity) {
-		this.projectEntity = projectEntity;
+	public void setProjectList(List<ProjectEntity> projectList) {
+		this.projectList = projectList;
 	}
 
 }

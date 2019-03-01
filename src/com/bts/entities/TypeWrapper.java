@@ -1,14 +1,16 @@
 package com.bts.entities;
 
+import java.util.List;
+
 import com.bts.utils.Type;
 
 public class TypeWrapper {
-//	private String type;
 	private Type type;
 	private String email;
 
 	private DeveloperEntity developerEntity;
 	private TesterEntity testerEntity;
+	private EmployeeWrapper employeeWrapper;
 
 	public Type getType() {
 		return type;
@@ -41,4 +43,13 @@ public class TypeWrapper {
 	public void setEmail(String email) {
 		this.email = email;
 	}
+
+	public EmployeeWrapper getEmployeeWrapper() {
+		return employeeWrapper;
+	}
+
+	public void setEmployeeWrapper(EmployeeWrapper employeeWrapper) {
+		this.employeeWrapper = employeeWrapper;
+	}
+
 }

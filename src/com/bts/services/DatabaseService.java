@@ -70,38 +70,36 @@ public class DatabaseService {
 	}
 
 	@SuppressWarnings("unchecked")
-	public List<DeveloperEntity> fetchDeveloperList(){
+	public List<DeveloperEntity> fetchDeveloperList() {
 		List<DeveloperEntity> developerList = null;
 		ConnectionService connectionService = new ConnectionService();
 		connectionService.beginTransaction();
-		String query = "SELECT developerEntity FROM DeveloperEntity developerEntity";
-		developerList = connectionService
-				.fetchData(query, DBConstants.DEVELOPER_ENTITY_CLASS);
-		connectionService.commitAndCloseTransaction();		
+		String query = "SELECT t FROM DeveloperEntity t";
+		developerList = connectionService.getEntityManager().createQuery(query).getResultList();
+		connectionService.commitAndCloseTransaction();
 		return developerList;
 	}
-	
+
 	@SuppressWarnings("unchecked")
-	public List<TesterEntity> fetchTesterList(){
+	public List<TesterEntity> fetchTesterList() {
 		List<TesterEntity> testerList = null;
 		ConnectionService connectionService = new ConnectionService();
 		connectionService.beginTransaction();
-		String query = "SELECT testerEntity FROM TesterEntity testerEntity";
-		testerList = connectionService
-				.fetchData(query, DBConstants.TESTER_ENTITY_CLASS);
-		connectionService.commitAndCloseTransaction();		
+		String query = "SELECT t FROM TesterEntity t";
+		testerList = connectionService.getEntityManager().createQuery(query).getResultList();
+		connectionService.commitAndCloseTransaction();
 		return testerList;
 	}
-	
+
 	@SuppressWarnings("unchecked")
-	public List<ProjectEntity> fetchProjectList(){
+	public List<ProjectEntity> fetchProjectList() {
 		List<ProjectEntity> projectList = null;
 		ConnectionService connectionService = new ConnectionService();
 		connectionService.beginTransaction();
-		String query = "SELECT projectEntity FROM ProjectEntity projectEntity";
-		projectList = connectionService
-				.fetchData(query, DBConstants.PROJECT_ENTITY_CLASS);
-		connectionService.commitAndCloseTransaction();		
+		String query = "SELECT t FROM ProjectEntity t WHERE t.status=:status";
+		projectList = connectionService.getEntityManager().createQuery(query)
+				.setParameter("status", DBConstants.ProjectStatus.NOT_COMPLETED).getResultList();
+		connectionService.commitAndCloseTransaction();
 		return projectList;
 	}
 }

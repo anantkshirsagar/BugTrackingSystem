@@ -2,6 +2,7 @@ package com.bts.servlet;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.List;
 import java.util.stream.Collectors;
 
 import javax.servlet.ServletException;
@@ -10,10 +11,13 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import org.json.JSONArray;
-import org.json.JSONObject;
-
+import com.bts.entities.DeveloperEntity;
+import com.bts.entities.EmployeeWrapper;
+import com.bts.entities.ProjectEntity;
+import com.bts.entities.TesterEntity;
+import com.bts.entities.TypeWrapper;
 import com.bts.services.ConnectionService;
+import com.bts.services.DatabaseService;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
@@ -32,35 +36,25 @@ public class ManagerAssignProjectServlet extends HttpServlet {
 		Gson gson = builder.create();
 		ConnectionService connectionService = new ConnectionService();
 		PrintWriter out = response.getWriter();
+		TypeWrapper typeWrapper = gson.fromJson(jsonObjectStr, TypeWrapper.class);
 		
-		try {
-			JSONObject jsonObject = new JSONObject(jsonObjectStr);
-			String callType = jsonObject.get("callType").toString();
-			System.out.println(callType);
-			
-			/*
-			switch(callType){
-			case "RETRIEVE":
-				connectionService.beginTransaction();
-				//Write code fetch developer, tester and project from database and show in the manager's page
-				//Provide check box to select developer to assign to a particular project
-				//Same for tester. And then 
-				break;
-			case "SAVE":
-				break;
-			default:
-			}
-			*/
-		} catch (Exception e) {
-			System.out.println(" ManagerAssignProjectServlet Exception: " +e);
+		switch (typeWrapper.getType()) {
+		case WRAPPER_LIST:
+			DatabaseService databaseService = new DatabaseService();
+			List<DeveloperEntity> developerList = databaseService.fetchDeveloperList();
+			List<TesterEntity> testerList = databaseService.fetchTesterList();
+			List<ProjectEntity> projectList = databaseService.fetchProjectList();
+			EmployeeWrapper employeeWrapper = new EmployeeWrapper();
+			employeeWrapper.setDeveloperList(developerList);
+			employeeWrapper.setProjectList(projectList);
+			employeeWrapper.setTesterList(testerList);
+			out.println(gson.toJson(employeeWrapper));
+			break;
 		}
-		
-		
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-
 		doGet(request, response);
 	}
 

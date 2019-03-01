@@ -25,6 +25,10 @@ public interface DBConstants {
 		REJECT, DUPLICATE, POSTPONED, NOT_FIXED, FIXED, UNABLE_TO_REPRODUCE
 	}
 	
+	enum ProjectStatus {
+		COMPLETED, NOT_COMPLETED
+	}
+	
 	enum Priority {
 		HIGH, MEDIUM, LOW
 	}
