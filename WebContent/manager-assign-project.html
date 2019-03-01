@@ -82,10 +82,10 @@
 						<tbody>
 							<tr>
 								<td>{{$index+1}}</td>
-								<td>{{assignToProject.projectName}}</td>
-								<td>{{assignToProject.description}}</td>
-								<td>{{assignToProject.startDate}}</td>
-								<td>{{assignToProject.status}}</td>
+								<td>{{projectEntity.projectName}}</td>
+								<td>{{projectEntity.description}}</td>
+								<td>{{projectEntity.startDate}}</td>
+								<td>{{projectEntity.status}}</td>
 							</tr>
 						</tbody>
 					</table>
@@ -109,8 +109,8 @@
 										<td>{{$index+1}}</td>
 										<td>
 											<div class="custom-control custom-checkbox">
-											    <input type="checkbox" class="custom-control-input" id="{{developer.id}}">
-											    <label class="custom-control-label" for="{{developer.id}}">{{developer.fullName}}</label>
+											    <input type="checkbox" class="custom-control-input" id="developer:{{developer.id}}"  ng-model="developer.isSelected" ng-change="selectedDevelopers(developer, developer.isSelected, $index)">
+											    <label class="custom-control-label" for="developer:{{developer.id}}">{{developer.fullName}}</label>
 											</div>
 										</td>
 									</tr>
@@ -135,8 +135,8 @@
 										<td>{{$index+1}}</td>
 										<td>
 											<div class="custom-control custom-checkbox">
-											    <input type="checkbox" class="custom-control-input" id="{{tester.fullName}}">
-											    <label class="custom-control-label" for="{{tester.fullName}}">{{tester.fullName}}</label>
+											    <input type="checkbox" class="custom-control-input" id="tester:{{tester.id}}" ng-model="tester.isSelected" ng-change="selectedTester(tester, tester.isSelected, $index)">
+											    <label class="custom-control-label" for="tester:{{tester.id}}">{{tester.fullName}}</label>
 											</div>
 										</td>
 									</tr>
@@ -148,8 +148,49 @@
 			</div>
 			
 			<br>
-			
+			<div class="card">
+				<h5 class="card-header text-center primary-color red lighten-1" style="color: white;">Actions</h5>
+				<div class="card-body">
+					<div class="row">
+						<div class="col-md-3">
+							<button type="button" class="btn btn-primary btn-block" ng-click="saveDocument()">Save</button>
+						</div>
+						<div class="col-md-3">
+							<button type="button" class="btn btn-primary btn-block" ng-click="">Send To Tester</button>
+						</div>
+						<div class="col-md-3">
+							<button type="button" class="btn btn-primary btn-block" ng-click="">Send To Developer</button>
+						</div>
+						<div class="col-md-3">
+							<button type="button" class="btn btn-primary btn-block" data-toggle="modal" data-target="#finalButtonId" ng-click="">Final Submit</button>
+						</div>
+					</div>
+				</div>
+			</div>
 			<br>
+			
+			<!-- Save message dialog -->
+			<div class="modal fade" id="finalButtonId" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+				aria-hidden="true">
+				<div class="modal-dialog" role="document">
+					<div class="modal-content">
+						<div class="modal-header primary-color">
+        					<h5 class="modal-title text-white" id="exampleModalLabel">Confirm Action</h5>
+       					</div>
+						<div class="modal-body">
+							Do you want to final submit. After submit you cannot change it.
+						</div>
+						<div class="row" align="right">
+							<div class="col-md-6">
+							</div>
+							<div class="col-md-6">
+								<button type="button" class="btn btn-sm btn-secondary" data-dismiss="modal" ng-click="goToHomePage()">Cancel</button>
+								<button type="button" class="btn btn-sm btn-secondary" data-dismiss="modal" ng-click="goToHomePage()">Okay</button>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
 		</div>
 		
 		<script type="text/javascript" src="ext-js/MDB/js/jquery-3.3.1.min.js"></script>

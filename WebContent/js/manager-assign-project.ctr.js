@@ -23,15 +23,38 @@ app.controller('managerAssignProjectCtr', function($scope, $http, $location, $lo
 	// });
 	// }
 	
-	$scope.assignToProject = {};
+	$scope.projectEntity = {};
 	$scope.findProjectById = function(){
 		angular.forEach($scope.projectList, function(project){
 			if(project.id == projectId){
-				$scope.assignToProject = project;
+				$scope.projectEntity = project;
 			}
 		});
 	}
+	
+	$scope.selectedDeveloperList = [];
+	$scope.selectedDevelopers = function(developer, isSelected, index){
+		if(isSelected){
+			$scope.selectedDeveloperList.push(developer);
+		} else {
+			$scope.selectedDeveloperList.splice(index,1);
+		}
+	}
+	
+	$scope.selectedTesterList = [];
+	$scope.selectedTester = function(tester, isSelected, index){
+		if(isSelected){
+			$scope.selectedTesterList.push(tester);
+		} else {
+			$scope.selectedTesterList.splice(index,1);
+		}
+	}
 
+	$scope.saveDocument = function(){
+		$scope.developerList = $scope.selectedDeveloperList;
+		$scope.testerList = $scope.selectedTesterList;
+	}
+	
 	$scope.developerList = [];
 	$scope.projectList = [];
 	$scope.testerList = [];
@@ -60,7 +83,6 @@ app.controller('managerAssignProjectCtr', function($scope, $http, $location, $lo
 
 	$scope.waitForServiceLoad = function() {
 		$scope.fetchEmployeeDetails();
-		
 	}
 
 	$scope.waitForServiceLoad();
