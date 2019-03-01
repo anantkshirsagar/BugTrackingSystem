@@ -27,6 +27,7 @@ public class ProjectEntity extends BaseEntity {
 	private String remark;
 	private boolean isCurrentProject;
 	private List<Bug> bugList;
+	private boolean isSaved;
 
 	@ManyToMany
 	private List<DeveloperEntity> developerList;
@@ -136,6 +137,14 @@ public class ProjectEntity extends BaseEntity {
 
 	public void setStatus(DBConstants.ProjectStatus status) {
 		this.status = status;
+	}
+
+	public boolean isSaved() {
+		return isSaved;
+	}
+
+	public void setSaved(boolean isSaved) {
+		this.isSaved = isSaved;
 	}
 
 }

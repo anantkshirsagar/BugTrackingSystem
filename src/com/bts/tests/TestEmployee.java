@@ -58,15 +58,9 @@ public class TestEmployee {
 		developer2.setFullName("Pranav Joshi");
 		developer2.setProjectList(projectList2);
 		
-		
-		TesterEntity tester1 = new TesterEntity();
-		tester1.setDepartment("Tester-1");
-		tester1.setProjectList(projectList1);		
-		
 		//Save to database
 		connectionService.save(developer1);
 		connectionService.save(developer2);
-		connectionService.save(tester1);
 		connectionService.commitAndCloseTransaction();
 		
 	}
