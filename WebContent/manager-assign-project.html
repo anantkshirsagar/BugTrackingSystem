@@ -36,7 +36,7 @@
 		</style>
 	</head>
 	<body ng-app="btsApp" ng-controller="managerAssignProjectCtr">
-		<nav class="navbar navbar-expand-lg navbar-dark info-color">
+		<nav class="navbar navbar-expand-lg navbar-dark primary-color">
 		    <a class="navbar-brand" href="manager-home.html">Manager</a>
 		    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
 		        <span class="navbar-toggler-icon"></span>
@@ -66,7 +66,90 @@
 		</nav>
 		
 		<div class="container">
+			<br>
+			<div class="card" ng-if="projectList">
+				<h5 class="card-header text-center primary-color headerColor" style="color: white;">Projects List</h5>
+				<div class="card-body">
+					<table id="tablePreview" class="table table-hover table-bordered">
+						<thead style="background:#e3f2fd;">
+							<th>Sr. No.</th>
+							<th>Project Name</th>
+							<th>Description</th>
+							<th>Start Date</th>
+							<th>Status</th>
+						</thead>
+						
+						<tbody>
+							<tr>
+								<td>{{$index+1}}</td>
+								<td>{{assignToProject.projectName}}</td>
+								<td>{{assignToProject.description}}</td>
+								<td>{{assignToProject.startDate}}</td>
+								<td>{{assignToProject.status}}</td>
+							</tr>
+						</tbody>
+					</table>
+				</div>
+			</div>
 			
+			<br>
+			<div class="row">
+				<div class="col-md-6">
+					<div class="card">
+						<h5 class="card-header text-center primary-color headerColor" style="color: white;">Developer List</h5>
+						<div class="card-body">
+							<table id="tablePreview" class="table table-hover table-bordered">
+								<thead style="background:#e3f2fd;">
+									<th>Sr. No.</th>
+									<th>Select Developer</th>
+								</thead>
+								
+								<tbody>
+									<tr ng-repeat="developer in developerList">
+										<td>{{$index+1}}</td>
+										<td>
+											<div class="custom-control custom-checkbox">
+											    <input type="checkbox" class="custom-control-input" id="{{developer.id}}">
+											    <label class="custom-control-label" for="{{developer.id}}">{{developer.fullName}}</label>
+											</div>
+										</td>
+									</tr>
+								</tbody>
+							</table>
+						</div>
+					</div>
+				</div>
+				
+				<div class="col-md-6">
+					<div class="card">
+						<h5 class="card-header text-center primary-color headerColor" style="color: white;">Tester List</h5>
+						<div class="card-body">
+							<table id="tablePreview" class="table table-hover table-bordered">
+								<thead style="background:#e3f2fd;">
+									<th>Sr. No.</th>
+									<th>Select Tester</th>
+								</thead>
+								
+								<tbody>
+									<tr ng-repeat="tester in testerList">
+										<td>{{$index+1}}</td>
+										<td>
+											<div class="custom-control custom-checkbox">
+											    <input type="checkbox" class="custom-control-input" id="{{tester.fullName}}">
+											    <label class="custom-control-label" for="{{tester.fullName}}">{{tester.fullName}}</label>
+											</div>
+										</td>
+									</tr>
+								</tbody>
+							</table>
+						</div>
+					</div>
+				</div>
+			</div>
+			
+			<br>
+			
+			<br>
 		</div>
 		
 		<script type="text/javascript" src="ext-js/MDB/js/jquery-3.3.1.min.js"></script>

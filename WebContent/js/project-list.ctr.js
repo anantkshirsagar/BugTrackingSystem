@@ -1,4 +1,5 @@
 var app = angular.module('btsApp', []);
+
 app.controller('projectListCtr', function($scope, $http) {
 
 	$scope.url = "AdminServlet";
@@ -9,9 +10,14 @@ app.controller('projectListCtr', function($scope, $http) {
 		type : $scope.type
 	};
 
+	$scope.gotoManagerPage = function(projectRecord) {
+		location.href = "manager-assign-project.html?projectId="+projectRecord.id;
+	}
+
 	$http.post($scope.url, $scope.typeWrapper, config).then(function(response) {
 		$scope.list = response.data;
 	}, function(response) {
 
 	});
 });
+;
