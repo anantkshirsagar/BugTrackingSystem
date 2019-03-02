@@ -10,6 +10,7 @@ public class TypeWrapper {
 
 	private DeveloperEntity developerEntity;
 	private TesterEntity testerEntity;
+	private ProjectEntity projectEntity;
 	private EmployeeWrapper employeeWrapper;
 
 	public Type getType() {
@@ -50,6 +51,14 @@ public class TypeWrapper {
 
 	public void setEmployeeWrapper(EmployeeWrapper employeeWrapper) {
 		this.employeeWrapper = employeeWrapper;
+	}
+
+	public ProjectEntity getProjectEntity() {
+		return projectEntity;
+	}
+
+	public void setProjectEntity(ProjectEntity projectEntity) {
+		this.projectEntity = projectEntity;
 	}
 
 }

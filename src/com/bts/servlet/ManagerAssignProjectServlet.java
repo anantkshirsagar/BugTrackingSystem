@@ -34,10 +34,9 @@ public class ManagerAssignProjectServlet extends HttpServlet {
 		String jsonObjectStr = request.getReader().lines().collect(Collectors.joining());
 		GsonBuilder builder = new GsonBuilder();
 		Gson gson = builder.create();
-		ConnectionService connectionService = new ConnectionService();
 		PrintWriter out = response.getWriter();
 		TypeWrapper typeWrapper = gson.fromJson(jsonObjectStr, TypeWrapper.class);
-		
+
 		switch (typeWrapper.getType()) {
 		case WRAPPER_LIST:
 			DatabaseService databaseService = new DatabaseService();
@@ -50,6 +49,15 @@ public class ManagerAssignProjectServlet extends HttpServlet {
 			employeeWrapper.setTesterList(testerList);
 			out.println(gson.toJson(employeeWrapper));
 			break;
+		case SAVE_EMPLOYEE_WRAPPER:
+			EmployeeWrapper wrapper = typeWrapper.getEmployeeWrapper();
+			List<DeveloperEntity> selectedDevelopers = wrapper.getDeveloperList();
+			List<TesterEntity> selectedTesters = wrapper.getTesterList();
+			ProjectEntity projectEntity = typeWrapper.getProjectEntity();
+			projectEntity.getDeveloperList().addAll(selectedDevelopers);
+			projectEntity.getTesterList().addAll(selectedTesters);
+			new DatabaseService().saveProject(projectEntity);
+			break;
 		}
 	}
 
@@ -57,5 +65,4 @@ public class ManagerAssignProjectServlet extends HttpServlet {
 			throws ServletException, IOException {
 		doGet(request, response);
 	}
-
 }
