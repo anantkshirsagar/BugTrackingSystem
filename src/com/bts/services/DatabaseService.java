@@ -1,9 +1,9 @@
 package com.bts.services;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.Query;
-import javax.persistence.criteria.CriteriaBuilder;
 
 import org.apache.commons.collections.CollectionUtils;
 
@@ -65,8 +65,7 @@ public class DatabaseService {
 		ConnectionService connectionService = new ConnectionService();
 		int id = developerEntity.getId();
 		connectionService.beginTransaction();
-		Class DEVELOPER_ENTITY = DeveloperEntity.class;
-		DeveloperEntity entity = (DeveloperEntity) connectionService.find(DEVELOPER_ENTITY, id);
+		DeveloperEntity entity = (DeveloperEntity) connectionService.find(DBConstants.DEVELOPER_ENTITY_CLASS, id);
 		entity.setApproved(developerEntity.isApproved());
 		connectionService.commitAndCloseTransaction();
 		return developerEntity;
@@ -111,18 +110,49 @@ public class DatabaseService {
 		connectionService.beginTransaction();
 		ProjectEntity entity = (ProjectEntity) connectionService.find(DBConstants.PROJECT_ENTITY_CLASS,
 				projectEntity.getId());
+		List<DeveloperEntity> developers = projectEntity.getDeveloperList();
+		List<TesterEntity> testers = projectEntity.getTesterList();
+
+		List<ProjectEntity> projectList = new ArrayList<ProjectEntity>();
+		projectList.add(projectEntity);
+
+		developers.stream().forEach(developer -> {
+			DeveloperEntity existingDeveloper = (DeveloperEntity) connectionService
+					.find(DBConstants.DEVELOPER_ENTITY_CLASS, developer.getId());
+			List<ProjectEntity> assignedProjectsList = existingDeveloper.getProjectList();
+			if (CollectionUtils.isNotEmpty(assignedProjectsList)) {
+				assignedProjectsList.addAll(projectList);
+				existingDeveloper.setProjectList(assignedProjectsList);
+			} else {
+				existingDeveloper.setProjectList(projectList);
+			}
+		});
+
+		testers.stream().forEach(tester -> {
+			TesterEntity existingTester = (TesterEntity) connectionService.find(DBConstants.TESTER_ENTITY_CLASS,
+					tester.getId());
+			List<ProjectEntity> assignedProjectsList = existingTester.getProjectList();
+			if (CollectionUtils.isNotEmpty(assignedProjectsList)) {
+				assignedProjectsList.addAll(projectList);
+				existingTester.setProjectList(assignedProjectsList);
+			} else {
+				existingTester.setProjectList(projectList);
+			}
+		});
+
+		projectEntity.setDeveloperList(developers);
+		projectEntity.setTesterList(testers);
 		entity.setDeveloperList(projectEntity.getDeveloperList());
 		entity.setTesterList(projectEntity.getTesterList());
 		connectionService.commitAndCloseTransaction();
 	}
 
-//	public List<ProjectEntity> fetchProjectListByDeveloperId(DeveloperEntity developerEntity) {
-//		ConnectionService connectionService = new ConnectionService();
-//		connectionService.beginTransaction();
-//		Query query = connectionService.getEntityManager().createQuery(
-//				"SELECT t FROM ProjectEntity t WHERE t.id IN (SELECT pd.id FROM projectentity_developerentity pd WHERE pd.id.)")
-//				.setParameter("id", developerEntity.getId());
-//		List<ProjectEntity> list = query.getResultList();
-//		return list;	
-//	}
+	public List<ProjectEntity> fetchProjectListByDeveloperId(int developerId) {
+		ConnectionService connectionService = new ConnectionService();
+		connectionService.beginTransaction();
+		DeveloperEntity developerEntity = (DeveloperEntity) connectionService.find(DBConstants.DEVELOPER_ENTITY_CLASS,
+				developerId);
+		List<ProjectEntity> projectList = developerEntity.getProjectList();
+		return projectList;
+	}
 }

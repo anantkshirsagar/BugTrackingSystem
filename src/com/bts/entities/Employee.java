@@ -1,5 +1,7 @@
 package com.bts.entities;
 
+import java.util.List;
+
 import javax.persistence.MappedSuperclass;
 
 @MappedSuperclass
@@ -27,5 +29,9 @@ public abstract class Employee extends BaseEntity {
 	public abstract void setDepartment(String type);
 	
 	public abstract String getDepartment();
+	
+	public abstract void setProjectList(List<ProjectEntity> projectList);
+	
+	public abstract List<ProjectEntity> getProjectList();
 	
 }

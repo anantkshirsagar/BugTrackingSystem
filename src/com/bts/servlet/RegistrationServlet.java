@@ -59,6 +59,11 @@ public class RegistrationServlet extends HttpServlet {
 			Employee developerLogin = new DeveloperEntity();
 			developerLogin = new DatabaseService().getEmployeeLoginByEmail(developerLogin, typeWrapper.getEmail(),
 					DBConstants.DEVELOPER_ENTITY);
+			
+			//Following line is important because while converting object into json,
+			//It goes into recursive state. Because we have store ProjectEntity list in DeveloperEntity
+			//And DeveloperEntity list in ProjectEntity. So I have set projectList to null to avoid recursive looping.
+			developerLogin.setProjectList(null);
 			out.write(gson.toJson(developerLogin));
 			break;
 		}
