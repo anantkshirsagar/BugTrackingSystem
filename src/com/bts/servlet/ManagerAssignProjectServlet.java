@@ -11,6 +11,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.apache.commons.collections.CollectionUtils;
+
 import com.bts.entities.DeveloperEntity;
 import com.bts.entities.EmployeeWrapper;
 import com.bts.entities.ProjectEntity;
@@ -54,9 +56,18 @@ public class ManagerAssignProjectServlet extends HttpServlet {
 			List<DeveloperEntity> selectedDevelopers = wrapper.getDeveloperList();
 			List<TesterEntity> selectedTesters = wrapper.getTesterList();
 			ProjectEntity projectEntity = typeWrapper.getProjectEntity();
-			projectEntity.getDeveloperList().addAll(selectedDevelopers);
-			projectEntity.getTesterList().addAll(selectedTesters);
-			new DatabaseService().saveProject(projectEntity);
+			if (CollectionUtils.isNotEmpty(projectEntity.getDeveloperList())) {
+				projectEntity.getDeveloperList().addAll(selectedDevelopers);
+			} else {
+				projectEntity.setDeveloperList(selectedDevelopers);
+			}
+			if (CollectionUtils.isNotEmpty(projectEntity.getTesterList())) {
+				projectEntity.getTesterList().addAll(selectedTesters);
+			} else {
+				projectEntity.setTesterList(selectedTesters);
+			}
+
+			new DatabaseService().updateProjectEntity(projectEntity);
 			break;
 		}
 	}

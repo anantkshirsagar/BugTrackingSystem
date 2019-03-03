@@ -39,24 +39,24 @@ public class TestEmployee {
 		connectionService.save(project3);
 		
 		
-		List<ProjectEntity> projectList1 = new ArrayList<>();
-		projectList1.add(project1);
-		projectList1.add(project2);
+//		List<ProjectEntity> projectList1 = new ArrayList<>();
+//		projectList1.add(project1);
+//		projectList1.add(project2);
 		
-		List<ProjectEntity> projectList2 = new ArrayList<>();
-		projectList2.add(project2);
-		projectList2.add(project3);
+//		List<ProjectEntity> projectList2 = new ArrayList<>();
+//		projectList2.add(project2);
+//		projectList2.add(project3);
 		
 		
 		DeveloperEntity developer1 = new DeveloperEntity();
 		developer1.setDepartment("Developer");
 		developer1.setFullName("Anant Kshirsagar");
-		developer1.setProjectList(projectList1);
+//		developer1.setProjectList(projectList1);
 		
 		DeveloperEntity developer2 = new DeveloperEntity();
 		developer2.setDepartment("Developer");
 		developer2.setFullName("Pranav Joshi");
-		developer2.setProjectList(projectList2);
+//		developer2.setProjectList(projectList2);
 		
 		//Save to database
 		connectionService.save(developer1);

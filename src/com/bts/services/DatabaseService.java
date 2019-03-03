@@ -3,6 +3,9 @@ package com.bts.services;
 import java.util.List;
 
 import javax.persistence.Query;
+import javax.persistence.criteria.CriteriaBuilder;
+
+import org.apache.commons.collections.CollectionUtils;
 
 import com.bts.entities.DeveloperEntity;
 import com.bts.entities.Employee;
@@ -102,4 +105,24 @@ public class DatabaseService {
 		connectionService.commitAndCloseTransaction();
 		return projectList;
 	}
+
+	public void updateProjectEntity(ProjectEntity projectEntity) {
+		ConnectionService connectionService = new ConnectionService();
+		connectionService.beginTransaction();
+		ProjectEntity entity = (ProjectEntity) connectionService.find(DBConstants.PROJECT_ENTITY_CLASS,
+				projectEntity.getId());
+		entity.setDeveloperList(projectEntity.getDeveloperList());
+		entity.setTesterList(projectEntity.getTesterList());
+		connectionService.commitAndCloseTransaction();
+	}
+
+//	public List<ProjectEntity> fetchProjectListByDeveloperId(DeveloperEntity developerEntity) {
+//		ConnectionService connectionService = new ConnectionService();
+//		connectionService.beginTransaction();
+//		Query query = connectionService.getEntityManager().createQuery(
+//				"SELECT t FROM ProjectEntity t WHERE t.id IN (SELECT pd.id FROM projectentity_developerentity pd WHERE pd.id.)")
+//				.setParameter("id", developerEntity.getId());
+//		List<ProjectEntity> list = query.getResultList();
+//		return list;	
+//	}
 }
