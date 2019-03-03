@@ -11,7 +11,7 @@
 		<link href="ext-js/MDB/css/style.css" rel="stylesheet">			
 		<script src="angular-js-lib/angular.min.js"> </script>	
 	</head>
-	<body>
+	<body ng-app="btsApp" ng-controller="developerHomeCtr">
 		<nav class="navbar navbar-expand-lg navbar-dark info-color">
 		    <a class="navbar-brand" href="admin-home.html">Admin</a>
 		    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -23,7 +23,7 @@
 		               <a class="nav-link waves-effect waves-light" href="admin-home.html">Home </a>
 		            </li>
 		            <li class="nav-item">
-		                <a class="nav-link waves-effect waves-light" href="project-list.html">Project List</a>
+		                <a class="nav-link waves-effect waves-light" href="project-list.html">Application</a>
 		            </li>
 		            <li class="nav-item">
 		                <a class="nav-link waves-effect waves-light" href="developer-list.html">Developer List</a>
@@ -40,9 +40,36 @@
 	            </div>
 		    </div>
 		</nav>
+		
+		<div class="container">
+			
+			<br><h2><b><center>Assigned Projects</center></b></h2><br>
+			<table id="tablePreview" class="table table-hover table-bordered">
+				<thead>
+					<tr class="card-header blue lighten-3">
+						<th>ID</th>
+						<th>Project Name</th>
+						<th>Start Date</th>
+						<th>End Date</th>
+						<th>Status</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+						<td>1</td>
+						<td>XYZ</td>
+						<td>20 feb</td>
+						<td>25 feb</td>
+						<th>Pending</th>
+					</tr>
+				</tbody>
+			</table>
+		</div>		
 		<script type="text/javascript" src="ext-js/MDB/js/jquery-3.3.1.min.js"></script>
 		<script type="text/javascript" src="ext-js/MDB/js/popper.min.js"></script>
 		<script type="text/javascript" src="ext-js/MDB/js/bootstrap.min.js"></script>
 		<script type="text/javascript" src="ext-js/MDB/js/mdb.js"></script>
+		<script type="text/javascript" src="angular-js-lib\angular-ui-router.min.js"></script>
+		<script src="js/developer-home.ctr.js"> </script>	
 	</body>
 </html>

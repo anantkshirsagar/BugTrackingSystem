@@ -19,7 +19,7 @@ app
 											if (response.data) {
 												$scope.response = response.data;
 												if ($scope.response.password == $scope.documentEntity.password) {
-													location.href = 'developer-home.html';
+													location.href = 'tester-home.html';
 												} else {
 													$scope.errorMsgFlag = true;
 													$scope.errorMsg = "Username or Password Invalid";

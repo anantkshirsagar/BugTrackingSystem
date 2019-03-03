@@ -153,23 +153,23 @@
 				<div class="card-body">
 					<div class="row">
 						<div class="col-md-3">
-							<button type="button" class="btn btn-primary btn-block" ng-click="saveDocument()">Save</button>
+							<button type="button" class="btn btn-primary btn-block" ng-disabled="saveButton" data-toggle="modal" data-target="#saveButtonId">Save</button>
 						</div>
 						<div class="col-md-3">
-							<button type="button" class="btn btn-primary btn-block" ng-click="">Send To Tester</button>
+							<button type="button" class="btn btn-primary btn-block" ng-disabled="sendToTesterButton" ng-click="">Send To Tester</button>
 						</div>
 						<div class="col-md-3">
-							<button type="button" class="btn btn-primary btn-block" ng-click="">Send To Developer</button>
+							<button type="button" class="btn btn-primary btn-block" ng-disabled="sendToDeveloperButton" ng-click="">Send To Developer</button>
 						</div>
 						<div class="col-md-3">
-							<button type="button" class="btn btn-primary btn-block" data-toggle="modal" data-target="#finalButtonId" ng-click="">Final Submit</button>
+							<button type="button" class="btn btn-primary btn-block" ng-disabled="finalSubmitButton" data-toggle="modal" data-target="#finalButtonId" ng-click="">Final Submit</button>
 						</div>
 					</div>
 				</div>
 			</div>
 			<br>
 			
-			<!-- Save message dialog -->
+			<!-- Final submit button dialog -->
 			<div class="modal fade" id="finalButtonId" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
 				aria-hidden="true">
 				<div class="modal-dialog" role="document">
@@ -178,7 +178,7 @@
         					<h5 class="modal-title text-white" id="exampleModalLabel">Confirm Action</h5>
        					</div>
 						<div class="modal-body">
-							Do you want to final submit. After submit you cannot change it.
+							Do you want to final submit. After submit you cannot change it. Project is finalized.
 						</div>
 						<div class="row" align="right">
 							<div class="col-md-6">
@@ -191,7 +191,31 @@
 					</div>
 				</div>
 			</div>
+			
+			<!-- Save button dialog -->
+			<div class="modal fade" id="saveButtonId" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+				aria-hidden="true">
+				<div class="modal-dialog" role="document">
+					<div class="modal-content">
+						<div class="modal-header primary-color">
+        					<h5 class="modal-title text-white" id="exampleModalLabel">Confirm Action</h5>
+       					</div>
+						<div class="modal-body">
+							Are you sure, do you want to save? After save you cannot change developers and tester.
+						</div>
+						<div class="row" align="right">
+							<div class="col-md-6">
+							</div>
+							<div class="col-md-6">
+								<button type="button" class="btn btn-sm btn-secondary" data-dismiss="modal" ng-click="">Cancel</button>
+								<button type="button" class="btn btn-sm btn-secondary" data-dismiss="modal" ng-click="saveDocument()">Save</button>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
 		</div>
+
 		
 		<script type="text/javascript" src="ext-js/MDB/js/jquery-3.3.1.min.js"></script>
 		<script type="text/javascript" src="ext-js/MDB/js/popper.min.js"></script>
