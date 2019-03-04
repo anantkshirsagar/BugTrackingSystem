@@ -38,7 +38,7 @@ public class DeveloperServlet extends HttpServlet {
 
 		DeveloperEntity developerEntity = typeWrapper.getDeveloperEntity();
 		List<ProjectEntity> projectList = new DatabaseService().fetchProjectListByDeveloperId(developerEntity.getId());
-		projectList.stream().forEach(project -> project.setDeveloperList(null));
+		//projectList.stream().forEach(project -> project.setDeveloperList(null));
 		if (CollectionUtils.isNotEmpty(projectList)) {
 			out.write(gson.toJson(projectList));
 		}

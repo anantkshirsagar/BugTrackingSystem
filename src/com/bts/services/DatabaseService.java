@@ -25,6 +25,7 @@ public class DatabaseService {
 		connectionService.commitAndCloseTransaction();
 	}
 
+	@SuppressWarnings("unchecked")
 	public Employee getEmployeeLoginByEmail(Employee employee, String email, String entityType) {
 		ConnectionService connectionService = new ConnectionService();
 		connectionService.beginTransaction();
@@ -61,7 +62,7 @@ public class DatabaseService {
 		return projectEntity;
 	}
 
-	public DeveloperEntity editEmployee(DeveloperEntity developerEntity) {
+	public DeveloperEntity editDeveloper(DeveloperEntity developerEntity) {
 		ConnectionService connectionService = new ConnectionService();
 		int id = developerEntity.getId();
 		connectionService.beginTransaction();
@@ -69,6 +70,16 @@ public class DatabaseService {
 		entity.setApproved(developerEntity.isApproved());
 		connectionService.commitAndCloseTransaction();
 		return developerEntity;
+	}
+	
+	public TesterEntity editTester(TesterEntity testerEntity) {
+		ConnectionService connectionService = new ConnectionService();
+		int id = testerEntity.getId();
+		connectionService.beginTransaction();
+		TesterEntity entity = (TesterEntity) connectionService.find(DBConstants.TESTER_ENTITY_CLASS, id);
+		entity.setApproved(testerEntity.isApproved());
+		connectionService.commitAndCloseTransaction();
+		return testerEntity;
 	}
 
 	@SuppressWarnings("unchecked")

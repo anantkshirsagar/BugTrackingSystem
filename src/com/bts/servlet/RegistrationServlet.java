@@ -39,14 +39,17 @@ public class RegistrationServlet extends HttpServlet {
 		case DEVELOPER_REGISTRATION:
 			DeveloperEntity developerEntity = typeWrapper.getDeveloperEntity();
 			if (developerEntity.getId() > 0)
-				new DatabaseService().editEmployee(developerEntity);
+				new DatabaseService().editDeveloper(developerEntity);
 			else
 				new DatabaseService().registerEmployee(developerEntity);
 			out.write(gson.toJson(developerEntity));
 			break;
 		case TESTER_REGISTRATION:
 			TesterEntity testerEntity = typeWrapper.getTesterEntity();
-			new DatabaseService().registerEmployee(testerEntity);
+			if (testerEntity.getId() > 0)
+				new DatabaseService().editTester(testerEntity);
+			else
+				new DatabaseService().registerEmployee(testerEntity);
 			out.write(gson.toJson(testerEntity));
 			break;
 		case TESTER_LOGIN:
@@ -59,10 +62,12 @@ public class RegistrationServlet extends HttpServlet {
 			Employee developerLogin = new DeveloperEntity();
 			developerLogin = new DatabaseService().getEmployeeLoginByEmail(developerLogin, typeWrapper.getEmail(),
 					DBConstants.DEVELOPER_ENTITY);
-			
-			//Following line is important because while converting object into json,
-			//It goes into recursive state. Because we have store ProjectEntity list in DeveloperEntity
-			//And DeveloperEntity list in ProjectEntity. So I have set projectList to null to avoid recursive looping.
+
+			// Following line is important because while converting object into json,
+			// It goes into recursive state. Because we have store ProjectEntity list in
+			// DeveloperEntity
+			// And DeveloperEntity list in ProjectEntity. So I have set projectList to null
+			// to avoid recursive looping.
 			developerLogin.setProjectList(null);
 			out.write(gson.toJson(developerLogin));
 			break;

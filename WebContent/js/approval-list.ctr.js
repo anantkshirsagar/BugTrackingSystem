@@ -23,8 +23,12 @@ app.controller('approvalListCtr', function($scope, $http) {
 	$scope.saveChanges = function() {
 		$scope.url = "RegistrationServlet";
 		var config = 'contenttype';
-		$scope.type = 'DEVELOPER_REGISTRATION';
+		if ($scope.employeeEntity.department == 'Tester')
+			$scope.type = 'TESTER_REGISTRATION';
+		else
+			$scope.type = 'DEVELOPER_REGISTRATION';
 		$scope.typeWrapper = {
+			testerEntity : $scope.employeeEntity,
 			developerEntity : $scope.employeeEntity,
 			type : $scope.type
 		};
