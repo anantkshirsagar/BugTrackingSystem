@@ -2,6 +2,7 @@ package com.bts.servlet;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.List;
 import java.util.stream.Collectors;
 
 import javax.servlet.ServletException;
@@ -12,6 +13,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.bts.entities.DeveloperEntity;
 import com.bts.entities.Employee;
+import com.bts.entities.ProjectEntity;
 import com.bts.entities.TesterEntity;
 import com.bts.entities.TypeWrapper;
 import com.bts.services.DatabaseService;
@@ -63,13 +65,14 @@ public class RegistrationServlet extends HttpServlet {
 			developerLogin = new DatabaseService().getEmployeeLoginByEmail(developerLogin, typeWrapper.getEmail(),
 					DBConstants.DEVELOPER_ENTITY);
 
-			// Following line is important because while converting object into json,
-			// It goes into recursive state. Because we have store ProjectEntity list in
-			// DeveloperEntity
-			// And DeveloperEntity list in ProjectEntity. So I have set projectList to null
-			// to avoid recursive looping.
-			developerLogin.setProjectList(null);
-			out.write(gson.toJson(developerLogin));
+			// out.write(gson.toJson(developerLogin));
+			List<ProjectEntity> projectList = developerLogin.getProjectList();
+//			out.write(gson.toJson(projectList));
+
+			// Simplest logic is the please write a class which contains developer details
+			// and simply set those values
+			// and make that to gson object and write it. So recursive json problem is
+			// overcome.
 			break;
 		}
 	}

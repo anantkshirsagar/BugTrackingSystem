@@ -30,10 +30,10 @@ public class ProjectEntity extends BaseEntity {
 	private boolean isSaved;
 
 	@ManyToMany
-	private transient List<DeveloperEntity> developerList;
+	private List<DeveloperEntity> developerList;
 
 	@ManyToMany
-	private transient List<TesterEntity> testerList;
+	private List<TesterEntity> testerList;
 
 	public String getProjectName() {
 		return projectName;

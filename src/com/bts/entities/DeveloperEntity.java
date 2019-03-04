@@ -17,7 +17,7 @@ public class DeveloperEntity extends Employee {
 	private String department;
 
 	@ManyToMany
-	private transient List<ProjectEntity> projectList;
+	private List<ProjectEntity> projectList;
 
 	public String getFullName() {
 		return fullName;
