@@ -2,10 +2,13 @@ package com.bts.entities;
 
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+
+import com.google.gson.annotations.Expose;
 
 @Entity
 @Table
@@ -17,7 +20,7 @@ public class TesterEntity extends Employee {
 	private boolean isApproved;
 	private String department;
 
-	@ManyToMany
+	@ManyToMany(cascade = CascadeType.ALL)
 	private List<ProjectEntity> projectList;
 
 	public String getFullName() {

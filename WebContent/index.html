@@ -64,81 +64,42 @@
 										<hr class="hr-light">
 									</div>
 								</div>
-								<button type="submit" onclick="goToLoginPage()" class="btn btn-light custom">Manager Login</button>
-								<button type="submit" onclick="goToSignUpPage()" class="btn btn-light custom">Admin Login</button>
-								<button type="submit" onclick="goToResultPage()" class="btn btn-light custom">Developer Login</button>
-								<button type="submit" onclick="goToResultPage()" class="btn btn-light custom">Tester Login</button>
-								<button type="button" onclick="userAction1()" class="btn btn-light custom">fetch result</button>
-								<button type="button" onclick="userAction2()" class="btn btn-light custom">Add</button>
+								<button type="submit" onclick="goToManagerLoginPage()" class="btn btn-light custom">Manager Login</button>
+								<button type="submit" onclick="goToAdminLoginPage()" class="btn btn-light custom">Admin Login</button>
+								<button type="submit" onclick="goToDeveloperLoginPage()" class="btn btn-light custom">Developer Login</button>
+								<button type="submit" onclick="goToTesterLoginPage()" class="btn btn-light custom">Tester Login</button>
 							</center>
 						</div>
 					</div>
 				</div>
 			</div>
 		</div>
-		<script type="text/javascript">
-			function userAction1() {
-			    var xhttp = new XMLHttpRequest();
-			    xhttp.onreadystatechange = function() {
-			         if (this.readyState == 4 && this.status == 200) {
-			        	 var response = JSON.parse(xhttp.responseText);
-			         }
-			    }
-			    xhttp.open("GET", "rest/testJersey/fetch", true);
-	            xhttp.send();
+		<script type="text/javascript" src="ext-js/MDB/js/jquery-3.3.1.min.js"></script>
+		<script type="text/javascript" src="ext-js/MDB/js/popper.min.js"></script>
+		<script type="text/javascript" src="ext-js/MDB/js/bootstrap.min.js"></script>
+		<script type="text/javascript" src="ext-js/MDB/js/mdb.js"></script>
+		
+		<script>
+			function goToManagerLoginPage(){
+				location.href = "manager-login-page.html";
 			}
 			
-			function userAction2() {
-				var jsonObj={"devnagariText":"MYTEXT"};
-				/* var xmlhttp = new XMLHttpRequest();   // new HttpRequest instance 
-				xmlhttp.open("GET", "rest/testJersey/add");
-				xmlhttp.setRequestHeader('Content-Type', 'application/json; charset=utf8');
-				xmlhttp.setRequestHeader('Accept', 'application/json');
-				xmlhttp.onreadystatechange = function () {
-				    if (xmlhttp.readyState === 4 && xmlhttp.status === 200) {
-				        var json = JSON.parse(xmlhttp.responseText);
-				    }
-				} 
-				var data = JSON.stringify(jsonObj);
-				xmlhttp.send(data); */
-				$.ajax({
-					headers: {
-						 'Accept': 'application/json',
-						 'Content-Type': 'application/json'
-						 },
-				    url : 'rest/testJersey/add',
-				    datatype:'json',
-				    type: "post", 
-				    data: JSON.stringify(jsonObj),
-				    dataType: 'json',
-				    success:function(data){
-				    }
-				})  
-
-			    /* var xhttp = new XMLHttpRequest();
-			    xhttp.onreadystatechange = function() {
-			         if (this.readyState == 4 && this.status == 200) {
-			        	 var response = JSON.parse(xhttp.responseText);
-			         }
-			    }
-			    xhttp.open("POST", "rest/testJersey/add/"+jsonObj, true);
-	            xhttp.send(); */
+			function goToAdminLoginPage(){
+				location.href = "admin-login.html";
+			}
+			
+			function goToDeveloperLoginPage(){
+				location.href = "developer-login.html";
+			}
+			
+			function goToTesterLoginPage(){
+				location.href = "tester-login.html";
 			}
 		</script>
-		<!-- External JS Path  -->
-		<script type="text/javascript" src="ext-js/MDB/js/jquery-3.3.1.min.js"></script>
-		<!-- Bootstrap tooltips -->
-		<script type="text/javascript" src="ext-js/MDB/js/popper.min.js"></script>
-		<!-- Bootstrap core JavaScript -->
-		<script type="text/javascript" src="ext-js/MDB/js/bootstrap.min.js"></script>
-		<!-- MDB core JavaScript -->
-		<script type="text/javascript" src="ext-js/MDB/js/mdb.js"></script>
-
-		<!-- Initializations -->
+		
 		<script type="text/javascript">
 			// Animations initialization
 			new WOW().init();
 		</script>
-        <!-- <script src="scripts/jump-page-scripts.js"></script> -->
 	</body>
 </html>

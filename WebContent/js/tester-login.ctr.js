@@ -18,8 +18,13 @@ app
 										function(response) {
 											if (response.data) {
 												$scope.response = response.data;
+												if (!$scope.response.isApproved) {
+													alert("You are not approved tester! When admin is approved then you can login.");
+													return;
+												}
 												if ($scope.response.password == $scope.documentEntity.password) {
-													location.href = 'tester-home.html';
+													location.href = 'tester-home.html?testerId='
+															+ $scope.response.id;
 												} else {
 													$scope.errorMsgFlag = true;
 													$scope.errorMsg = "Username or Password Invalid";
@@ -28,5 +33,9 @@ app
 										}, function(response) {
 
 										});
+					}
+					
+					$scope.newRegistration = function(){
+						location.href = "tester-registration.html";
 					}
 				});

@@ -2,12 +2,21 @@ package com.bts.entities;
 
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
+import com.google.gson.annotations.Expose;
+
 @Entity
 @Table
+
 public class DeveloperEntity extends Employee {
 	private String fullName;
 	private String email;
@@ -16,7 +25,7 @@ public class DeveloperEntity extends Employee {
 	private boolean isApproved;
 	private String department;
 
-	@ManyToMany
+	@ManyToMany(cascade = CascadeType.ALL)
 	private List<ProjectEntity> projectList;
 
 	public String getFullName() {

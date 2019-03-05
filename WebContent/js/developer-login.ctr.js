@@ -11,6 +11,7 @@ app
 						email : '',
 						type : $scope.type
 					};
+					
 					$scope.login = function() {
 						$http
 								.post($scope.url, $scope.documentEntity, config)
@@ -18,6 +19,10 @@ app
 										function(response) {
 											if (response.data) {
 												$scope.response = response.data;
+												if(!$scope.response.isApproved){
+													alert("You are not approved developer! When admin is approved then you can login.");
+													return;
+												}
 												if ($scope.response.password == $scope.documentEntity.password) {
 													location.href = 'developer-home.html?developerId='+$scope.response.id;
 												} else {
@@ -28,5 +33,9 @@ app
 										}, function(response) {
 
 										});
+					}
+					
+					$scope.newRegistration = function(){
+						location.href = "developer-registration.html";
 					}
 				});

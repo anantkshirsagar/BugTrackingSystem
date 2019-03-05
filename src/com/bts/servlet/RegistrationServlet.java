@@ -17,6 +17,7 @@ import com.bts.entities.ProjectEntity;
 import com.bts.entities.TesterEntity;
 import com.bts.entities.TypeWrapper;
 import com.bts.services.DatabaseService;
+import com.bts.services.EndpointServiceFactory;
 import com.bts.utils.DBConstants;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
@@ -64,15 +65,7 @@ public class RegistrationServlet extends HttpServlet {
 			Employee developerLogin = new DeveloperEntity();
 			developerLogin = new DatabaseService().getEmployeeLoginByEmail(developerLogin, typeWrapper.getEmail(),
 					DBConstants.DEVELOPER_ENTITY);
-
-			// out.write(gson.toJson(developerLogin));
-			List<ProjectEntity> projectList = developerLogin.getProjectList();
-//			out.write(gson.toJson(projectList));
-
-			// Simplest logic is the please write a class which contains developer details
-			// and simply set those values
-			// and make that to gson object and write it. So recursive json problem is
-			// overcome.
+			out.write(gson.toJson(developerLogin));
 			break;
 		}
 	}

@@ -115,6 +115,18 @@ public class DatabaseService {
 		connectionService.commitAndCloseTransaction();
 		return projectList;
 	}
+	
+	@SuppressWarnings("unchecked")
+	public List<ProjectEntity> fetchCompletedProjectList() {
+		List<ProjectEntity> projectList = null;
+		ConnectionService connectionService = new ConnectionService();
+		connectionService.beginTransaction();
+		String query = "SELECT t FROM ProjectEntity t WHERE t.status=:status";
+		projectList = connectionService.getEntityManager().createQuery(query)
+				.setParameter("status", DBConstants.ProjectStatus.COMPLETED).getResultList();
+		connectionService.commitAndCloseTransaction();
+		return projectList;
+	}
 
 	public void updateProjectEntity(ProjectEntity projectEntity) {
 		ConnectionService connectionService = new ConnectionService();
@@ -164,6 +176,15 @@ public class DatabaseService {
 		DeveloperEntity developerEntity = (DeveloperEntity) connectionService.find(DBConstants.DEVELOPER_ENTITY_CLASS,
 				developerId);
 		List<ProjectEntity> projectList = developerEntity.getProjectList();
+		return projectList;
+	}
+	
+	public List<ProjectEntity> fetchProjectListByTesterId(int testerId) {
+		ConnectionService connectionService = new ConnectionService();
+		connectionService.beginTransaction();
+		TesterEntity testerEntity = (TesterEntity) connectionService.find(DBConstants.TESTER_ENTITY_CLASS,
+				testerId);
+		List<ProjectEntity> projectList = testerEntity.getProjectList();
 		return projectList;
 	}
 }

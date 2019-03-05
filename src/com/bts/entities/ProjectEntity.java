@@ -3,6 +3,7 @@ package com.bts.entities;
 import java.util.Date;
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.ManyToMany;
 import javax.persistence.Table;
@@ -10,6 +11,11 @@ import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
 import com.bts.utils.DBConstants;
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.google.gson.annotations.Expose;
 
 @Entity
 @Table
@@ -29,10 +35,10 @@ public class ProjectEntity extends BaseEntity {
 	private List<Bug> bugList;
 	private boolean isSaved;
 
-	@ManyToMany
+	@ManyToMany(cascade = CascadeType.ALL)
 	private List<DeveloperEntity> developerList;
 
-	@ManyToMany
+	@ManyToMany(cascade = CascadeType.ALL)
 	private List<TesterEntity> testerList;
 
 	public String getProjectName() {

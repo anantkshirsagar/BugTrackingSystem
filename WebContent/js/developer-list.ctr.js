@@ -14,4 +14,9 @@ app.controller('developerListCtr', function($scope, $http) {
 	}, function(response) {
 
 	});
+	
+	$scope.developerWiseProjectList = [];
+	$scope.setProjectList = function(developerObj){
+		$scope.developerWiseProjectList = developerObj.projectList;
+	}
 });

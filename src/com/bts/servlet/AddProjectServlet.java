@@ -2,6 +2,7 @@ package com.bts.servlet;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.Date;
 import java.util.stream.Collectors;
 
 import javax.servlet.ServletException;
@@ -11,7 +12,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.bts.entities.ProjectEntity;
-import com.bts.entities.TypeWrapper;
 import com.bts.services.DatabaseService;
 import com.bts.utils.DBConstants;
 import com.google.gson.Gson;
@@ -34,6 +34,7 @@ public class AddProjectServlet extends HttpServlet {
 		
 		DatabaseService databaseService = new DatabaseService();
 		projectEntity.setStatus(DBConstants.ProjectStatus.NOT_COMPLETED);
+		projectEntity.setStartDate(new Date());
 		databaseService.saveProject(projectEntity);
 		out.println(gson.toJson(jsonObj));
 	}

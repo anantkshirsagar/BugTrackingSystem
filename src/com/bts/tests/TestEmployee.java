@@ -51,11 +51,15 @@ public class TestEmployee {
 		DeveloperEntity developer1 = new DeveloperEntity();
 		developer1.setDepartment("Developer");
 		developer1.setFullName("Anant Kshirsagar");
+		developer1.setEmail("anant@gmail.com");
+		developer1.setPassword("123");
 //		developer1.setProjectList(projectList1);
 		
 		DeveloperEntity developer2 = new DeveloperEntity();
 		developer2.setDepartment("Developer");
 		developer2.setFullName("Pranav Joshi");
+		developer2.setEmail("pranav@gmail.com");
+		developer2.setPassword("123");
 //		developer2.setProjectList(projectList2);
 		
 		//Save to database

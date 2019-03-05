@@ -18,8 +18,10 @@ import com.bts.entities.ProjectEntity;
 import com.bts.entities.TesterEntity;
 import com.bts.entities.TypeWrapper;
 import com.bts.services.ConnectionService;
+import com.bts.services.DatabaseService;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+import com.mysql.fabric.xmlrpc.base.Data;
 
 @WebServlet("/AdminServlet")
 public class AdminServlet extends HttpServlet {
@@ -64,6 +66,14 @@ public class AdminServlet extends HttpServlet {
 			approvalList.addAll(developers);
 			approvalList.addAll(testers);
 			out.write(gson.toJson(approvalList));
+			break;
+		case ADMIN_HOME_FETCH_LIVE_PROJECTS:
+			List<ProjectEntity> liveProjectList = new DatabaseService().fetchProjectList();
+			out.write(gson.toJson(liveProjectList));
+			break;
+		case ADMIN_HOME_FETCH_COMPLETED_PROJECTS:
+			List<ProjectEntity> completedProjects = new DatabaseService().fetchCompletedProjectList();
+			out.write(gson.toJson(completedProjects));
 			break;
 		}
 	}
