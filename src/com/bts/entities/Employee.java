@@ -30,8 +30,8 @@ public abstract class Employee extends BaseEntity {
 	
 	public abstract String getDepartment();
 	
-	public abstract void setProjectList(List<ProjectEntity> projectList);
+	public abstract void setProjectIdList(List<Integer> projectList);
 	
-	public abstract List<ProjectEntity> getProjectList();
+	public abstract List<Integer> getProjectIdList();
 	
 }

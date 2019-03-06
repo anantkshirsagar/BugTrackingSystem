@@ -1,9 +1,12 @@
 package com.bts.entities;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 
@@ -16,7 +19,6 @@ import com.google.gson.annotations.Expose;
 
 @Entity
 @Table
-
 public class DeveloperEntity extends Employee {
 	private String fullName;
 	private String email;
@@ -25,8 +27,15 @@ public class DeveloperEntity extends Employee {
 	private boolean isApproved;
 	private String department;
 
-	@ManyToMany(cascade = CascadeType.ALL)
-	private List<ProjectEntity> projectList;
+	private List<Integer> projectIdList = new ArrayList<>();
+
+	public List<Integer> getProjectIdList() {
+		return projectIdList;
+	}
+
+	public void setProjectIdList(List<Integer> projectIdList) {
+		this.projectIdList = projectIdList;
+	}
 
 	public String getFullName() {
 		return fullName;
@@ -74,13 +83,5 @@ public class DeveloperEntity extends Employee {
 
 	public void setDepartment(String department) {
 		this.department = department;
-	}
-
-	public List<ProjectEntity> getProjectList() {
-		return projectList;
-	}
-
-	public void setProjectList(List<ProjectEntity> projectList) {
-		this.projectList = projectList;
 	}
 }

@@ -27,41 +27,31 @@
 	</head>
 	<body ng-app="btsApp" ng-controller="addBugsCtr">
 		<nav class="navbar navbar-expand-lg navbar-dark primary-color">
-			<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#basicExampleNav"
-				aria-controls="basicExampleNav" aria-expanded="false" aria-label="Toggle navigation">
-			<span class="navbar-toggler-icon"></span>
-			</button>
-			<div class="collapse navbar-collapse" id="basicExampleNav">
-				<ul class="navbar-nav mr-auto">
-					<li class="nav-item">
-						<a class="nav-link" href="tester-home.html">Home</a>
-					</li>
-					<li class="nav-item">
-						<a class="nav-link" href="add-bugs.html">Add Bug</a>
-					</li>
-					<li class="nav-item">
-						<a class="nav-link" href="#">Page 2</a>
-					</li>
-					<li class="nav-item">
-						<a class="nav-link" href="#">Page 3</a>
-					</li>	
-					<li class="nav-item">
-						<a class="nav-link" href="#">Page 4</a>
-					</li>						
-				</ul>
-				<ul class="nav navbar-nav nav-flex-icons ml-auto">
-					<li class="nav-item">
-						<a class="nav-link" href="#">
-							<span class="clearfix d-none d-sm-inline-block">Logout</span>
-						</a>
-					</li>
-				</ul>
-			</div>
+		    <a class="navbar-brand" href="admin-home.html">{{tester.fullName}}</a>
+		    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+		        <span class="navbar-toggler-icon"></span>
+		    </button>
+		    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+		        <ul class="navbar-nav mr-auto">
+		            <li class="nav-item">
+		               <a class="nav-link waves-effect waves-light" ng-click="gotoTesterHomePage()">Home </a>
+		            </li>
+		            <li class="nav-item">
+		                <a class="nav-link waves-effect waves-light" href="application.html">Application</a>
+		            </li>
+		            <li class="nav-item active">
+		                <a class="nav-link waves-effect waves-light" ng-click="gotoAddBugsPage()">Bugs</a>
+		            </li>
+		        </ul>
+	            <div class="nav-item">
+	                <a class="nav-link waves-effect waves-light" href="index.html"><font color="white">Logout</font></a>
+	            </div>
+		    </div>
 		</nav>
 		<br>
 		<br>
 		<div class="container">
-			<div class="card">
+			<!-- <div class="card">
 				<h5 class="card-header text-center headerColor" style="color: white;">Current Project Details</h5>
 				<div class="card-body">
 					<table id="tablePreview" class="table table-hover table-bordered">
@@ -80,7 +70,7 @@
 						</tbody>
 					</table>
 				</div>
-			</div>
+			</div> -->
 			
 			<br> 
 			<div class="card">
@@ -92,21 +82,29 @@
 						</thead>
 					</table>
 					
-					<table id="tablePreview" class="table table-hover table-bordered">
-						<thead style="background:#e3f2fd;">
-							<th>Bug Id</th>
-							<th>Bug Description</th>
-							<th>Type of Testing</th>
-							<th>Status</th>
-						</thead>
-						
-						<tbody>
-							<td>Bug Id</td>
-							<td>Bug Description</td>
-							<td>Type of Testing</td>
-							<td>Status</td>
-						</tbody>
-					</table>
+					<div ng-if="bugList">
+						<table id="tablePreview" class="table table-hover table-bordered">
+							<thead style="background:#e3f2fd;">
+								<th>Bug Id</th>
+								<th>Bug Description</th>
+								<th>Type of Testing</th>
+								<th>Severity</th>
+								<th>Priority</th>
+								<!-- <th>Status</th> -->
+							</thead>
+							
+							<tbody>
+								<tr ng-repeat="bugObject in bugList">
+									<td>BUG-{{$index + 1}}</td>
+									<td>{{bugObject.bugDescription}}</td>
+									<td>{{bugObject.typeOfTestingScrenario}}</td>
+									<td>{{bugObject.severity}}</td>
+									<td>{{bugObject.priority}}</td>
+									<!-- <td>{{bugObject.status}}</td> -->
+								</tr>
+							</tbody>
+						</table>
+					</div>
 				</div>
 			</div>
 			
@@ -159,7 +157,7 @@
 						</div>
 						<div class="modal-footer">
 							<button type="button" class="btn btn-sm btn-primary" data-dismiss="modal">Close</button>
-							<button type="button" class="btn btn-sm btn-primary">Save & Submit</button>
+							<button type="button" class="btn btn-sm btn-primary"  data-dismiss="modal" ng-click="saveAndSubmit(bug)">Save & Submit</button>
 						</div>
 					</div>
 				</div>

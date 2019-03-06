@@ -71,7 +71,7 @@ public class DatabaseService {
 		connectionService.commitAndCloseTransaction();
 		return developerEntity;
 	}
-	
+
 	public TesterEntity editTester(TesterEntity testerEntity) {
 		ConnectionService connectionService = new ConnectionService();
 		int id = testerEntity.getId();
@@ -115,7 +115,7 @@ public class DatabaseService {
 		connectionService.commitAndCloseTransaction();
 		return projectList;
 	}
-	
+
 	@SuppressWarnings("unchecked")
 	public List<ProjectEntity> fetchCompletedProjectList() {
 		List<ProjectEntity> projectList = null;
@@ -128,45 +128,29 @@ public class DatabaseService {
 		return projectList;
 	}
 
-	public void updateProjectEntity(ProjectEntity projectEntity) {
+	public void updateProject(ProjectEntity projectEntity) {
 		ConnectionService connectionService = new ConnectionService();
 		connectionService.beginTransaction();
 		ProjectEntity entity = (ProjectEntity) connectionService.find(DBConstants.PROJECT_ENTITY_CLASS,
 				projectEntity.getId());
-		List<DeveloperEntity> developers = projectEntity.getDeveloperList();
-		List<TesterEntity> testers = projectEntity.getTesterList();
 
-		List<ProjectEntity> projectList = new ArrayList<ProjectEntity>();
-		projectList.add(projectEntity);
+		List<Integer> developerIds = projectEntity.getDeveloperIdList();
+		List<Integer> testerIds = projectEntity.getTesterIdList();
 
-		developers.stream().forEach(developer -> {
+		developerIds.stream().forEach(developerId -> {
 			DeveloperEntity existingDeveloper = (DeveloperEntity) connectionService
-					.find(DBConstants.DEVELOPER_ENTITY_CLASS, developer.getId());
-			List<ProjectEntity> assignedProjectsList = existingDeveloper.getProjectList();
-			if (CollectionUtils.isNotEmpty(assignedProjectsList)) {
-				assignedProjectsList.addAll(projectList);
-				existingDeveloper.setProjectList(assignedProjectsList);
-			} else {
-				existingDeveloper.setProjectList(projectList);
-			}
+					.find(DBConstants.DEVELOPER_ENTITY_CLASS, developerId);
+			existingDeveloper.getProjectIdList().add(projectEntity.getId());
 		});
 
-		testers.stream().forEach(tester -> {
+		testerIds.stream().forEach(testerId -> {
 			TesterEntity existingTester = (TesterEntity) connectionService.find(DBConstants.TESTER_ENTITY_CLASS,
-					tester.getId());
-			List<ProjectEntity> assignedProjectsList = existingTester.getProjectList();
-			if (CollectionUtils.isNotEmpty(assignedProjectsList)) {
-				assignedProjectsList.addAll(projectList);
-				existingTester.setProjectList(assignedProjectsList);
-			} else {
-				existingTester.setProjectList(projectList);
-			}
+					testerId);
+			existingTester.getProjectIdList().add(projectEntity.getId());
 		});
 
-		projectEntity.setDeveloperList(developers);
-		projectEntity.setTesterList(testers);
-		entity.setDeveloperList(projectEntity.getDeveloperList());
-		entity.setTesterList(projectEntity.getTesterList());
+		entity.getDeveloperIdList().addAll(developerIds);
+		entity.getTesterIdList().addAll(testerIds);
 		connectionService.commitAndCloseTransaction();
 	}
 
@@ -175,16 +159,42 @@ public class DatabaseService {
 		connectionService.beginTransaction();
 		DeveloperEntity developerEntity = (DeveloperEntity) connectionService.find(DBConstants.DEVELOPER_ENTITY_CLASS,
 				developerId);
-		List<ProjectEntity> projectList = developerEntity.getProjectList();
+		List<ProjectEntity> projectList = new ArrayList<>();
+		developerEntity.getProjectIdList().stream().forEach(projectId -> {
+			ProjectEntity projectEntity = (ProjectEntity) connectionService.find(DBConstants.PROJECT_ENTITY_CLASS,
+					projectId);
+			projectList.add(projectEntity);
+		});
 		return projectList;
 	}
-	
+
 	public List<ProjectEntity> fetchProjectListByTesterId(int testerId) {
+		ConnectionService connectionService = new ConnectionService();
+		connectionService.beginTransaction();
+		TesterEntity testerEntity = (TesterEntity) connectionService.find(DBConstants.TESTER_ENTITY_CLASS, testerId);
+		List<ProjectEntity> projectList = new ArrayList<>();
+
+		testerEntity.getProjectIdList().stream().forEach(projectId -> {
+			ProjectEntity projectEntity = (ProjectEntity) connectionService.find(DBConstants.PROJECT_ENTITY_CLASS,
+					projectId);
+			projectList.add(projectEntity);
+		});
+		return projectList;
+	}
+
+	public DeveloperEntity fetchDeveloperById(int developerId) {
+		ConnectionService connectionService = new ConnectionService();
+		connectionService.beginTransaction();
+		DeveloperEntity developerEntity = (DeveloperEntity) connectionService.find(DBConstants.DEVELOPER_ENTITY_CLASS,
+				developerId);
+		return developerEntity;
+	}
+	
+	public TesterEntity fetchTesterById(int testerId) {
 		ConnectionService connectionService = new ConnectionService();
 		connectionService.beginTransaction();
 		TesterEntity testerEntity = (TesterEntity) connectionService.find(DBConstants.TESTER_ENTITY_CLASS,
 				testerId);
-		List<ProjectEntity> projectList = testerEntity.getProjectList();
-		return projectList;
+		return testerEntity;
 	}
 }

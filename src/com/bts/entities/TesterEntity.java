@@ -1,14 +1,10 @@
 package com.bts.entities;
 
+import java.util.ArrayList;
 import java.util.List;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Entity;
-import javax.persistence.ManyToMany;
-import javax.persistence.ManyToOne;
 import javax.persistence.Table;
-
-import com.google.gson.annotations.Expose;
 
 @Entity
 @Table
@@ -20,8 +16,7 @@ public class TesterEntity extends Employee {
 	private boolean isApproved;
 	private String department;
 
-	@ManyToMany(cascade = CascadeType.ALL)
-	private List<ProjectEntity> projectList;
+	private List<Integer> projectIdList = new ArrayList<>();
 
 	public String getFullName() {
 		return fullName;
@@ -71,12 +66,12 @@ public class TesterEntity extends Employee {
 		this.department = department;
 	}
 
-	public List<ProjectEntity> getProjectList() {
-		return projectList;
+	public List<Integer> getProjectIdList() {
+		return projectIdList;
 	}
 
-	public void setProjectList(List<ProjectEntity> projectList) {
-		this.projectList = projectList;
+	public void setProjectIdList(List<Integer> projectIdList) {
+		this.projectIdList = projectIdList;
 	}
 
 }

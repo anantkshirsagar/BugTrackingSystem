@@ -37,22 +37,34 @@ public class EmployeeServlet extends HttpServlet {
 		TypeWrapper typeWrapper = gson.fromJson(jsonObjectStr, TypeWrapper.class);
 		PrintWriter out = response.getWriter();
 
-		switch(typeWrapper.getType()) {
+		switch (typeWrapper.getType()) {
 		case DEVELOPER_HOME:
 			DeveloperEntity developerEntity = typeWrapper.getDeveloperEntity();
-			List<ProjectEntity> developerProjectList = new DatabaseService().fetchProjectListByDeveloperId(developerEntity.getId());
-			
+			List<ProjectEntity> developerProjectList = new DatabaseService()
+					.fetchProjectListByDeveloperId(developerEntity.getId());
+
 			if (CollectionUtils.isNotEmpty(developerProjectList)) {
 				out.write(gson.toJson(developerProjectList));
 			}
 			break;
 		case TESTER_HOME:
 			TesterEntity testerEntity = typeWrapper.getTesterEntity();
-			List<ProjectEntity> testerProjectList = new DatabaseService().fetchProjectListByDeveloperId(testerEntity.getId());
-			
+			List<ProjectEntity> testerProjectList = new DatabaseService()
+					.fetchProjectListByTesterId(testerEntity.getId());
+
 			if (CollectionUtils.isNotEmpty(testerProjectList)) {
 				out.write(gson.toJson(testerProjectList));
 			}
+			break;
+		case DEV_HOME_FETCH_DEVELOPER:
+			DeveloperEntity fetchedDeveloper = typeWrapper.getDeveloperEntity();
+			fetchedDeveloper = new DatabaseService().fetchDeveloperById(fetchedDeveloper.getId());
+			out.write(gson.toJson(fetchedDeveloper));
+			break;
+		case TEST_HOME_FETCH_TESTER:
+			TesterEntity fetchedTester = typeWrapper.getTesterEntity();
+			fetchedTester = new DatabaseService().fetchTesterById(fetchedTester.getId());
+			out.write(gson.toJson(fetchedTester));
 			break;
 		}
 	}

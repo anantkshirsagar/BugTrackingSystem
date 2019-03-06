@@ -21,23 +21,22 @@ public class TestEmployee {
 		project1.setStatus(DBConstants.ProjectStatus.NOT_COMPLETED);
 		project1.setDescription("Project-1 is related to AI");
 		
-		ProjectEntity project2 = new ProjectEntity();
-		project2.setProjectName("Project-2");
-		project2.setStartDate(new Date());
-		project2.setStatus(DBConstants.ProjectStatus.NOT_COMPLETED);
-		project2.setDescription("Project-2 is related to ERP");
+//		ProjectEntity project2 = new ProjectEntity();
+//		project2.setProjectName("Project-2");
+//		project2.setStartDate(new Date());
+//		project2.setStatus(DBConstants.ProjectStatus.NOT_COMPLETED);
+//		project2.setDescription("Project-2 is related to ERP");
 
-		ProjectEntity project3 = new ProjectEntity();
-		project3.setProjectName("Project-3");
-		project3.setStartDate(new Date());
-		project3.setStatus(DBConstants.ProjectStatus.NOT_COMPLETED);
-		project3.setDescription("Project-3 is related to Machine Learning");
+//		ProjectEntity project3 = new ProjectEntity();
+//		project3.setProjectName("Project-3");
+//		project3.setStartDate(new Date());
+//		project3.setStatus(DBConstants.ProjectStatus.NOT_COMPLETED);
+//		project3.setDescription("Project-3 is related to Machine Learning");
 		
 		//Save to database
 		connectionService.save(project1);
-		connectionService.save(project2);
-		connectionService.save(project3);
-		
+//		connectionService.save(project2);
+//		connectionService.save(project3);
 		
 //		List<ProjectEntity> projectList1 = new ArrayList<>();
 //		projectList1.add(project1);
@@ -50,21 +49,31 @@ public class TestEmployee {
 		
 		DeveloperEntity developer1 = new DeveloperEntity();
 		developer1.setDepartment("Developer");
+		developer1.setApproved(true);
 		developer1.setFullName("Anant Kshirsagar");
 		developer1.setEmail("anant@gmail.com");
 		developer1.setPassword("123");
 //		developer1.setProjectList(projectList1);
 		
-		DeveloperEntity developer2 = new DeveloperEntity();
-		developer2.setDepartment("Developer");
-		developer2.setFullName("Pranav Joshi");
-		developer2.setEmail("pranav@gmail.com");
-		developer2.setPassword("123");
+//		DeveloperEntity developer2 = new DeveloperEntity();
+//		developer2.setDepartment("Developer");
+//		developer2.setFullName("Pranav Joshi");
+//		developer2.setEmail("pranav@gmail.com");
+//		developer2.setPassword("123");
 //		developer2.setProjectList(projectList2);
+		
+		TesterEntity tester1 = new TesterEntity();
+		tester1.setDepartment("Tester");
+		tester1.setApproved(true);
+		tester1.setEmail("sonale@gmail.com");
+		tester1.setPassword("123");
+		tester1.setFullName("Sonalee Aher");
+			
 		
 		//Save to database
 		connectionService.save(developer1);
-		connectionService.save(developer2);
+//		connectionService.save(developer2);
+		connectionService.save(tester1);
 		connectionService.commitAndCloseTransaction();
 		
 	}

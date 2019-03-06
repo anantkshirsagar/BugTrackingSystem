@@ -2,6 +2,7 @@ package com.bts.servlet;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -18,7 +19,6 @@ import com.bts.entities.EmployeeWrapper;
 import com.bts.entities.ProjectEntity;
 import com.bts.entities.TesterEntity;
 import com.bts.entities.TypeWrapper;
-import com.bts.services.ConnectionService;
 import com.bts.services.DatabaseService;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
@@ -56,18 +56,29 @@ public class ManagerAssignProjectServlet extends HttpServlet {
 			List<DeveloperEntity> selectedDevelopers = wrapper.getDeveloperList();
 			List<TesterEntity> selectedTesters = wrapper.getTesterList();
 			ProjectEntity projectEntity = typeWrapper.getProjectEntity();
-			if (CollectionUtils.isNotEmpty(projectEntity.getDeveloperList())) {
-				projectEntity.getDeveloperList().addAll(selectedDevelopers);
+
+			List<Integer> developerIdList = new ArrayList<>();
+			selectedDevelopers.stream().forEach(developer -> {
+				developerIdList.add(developer.getId());
+			});
+
+			List<Integer> testerIdList = new ArrayList<>();
+			selectedTesters.stream().forEach(tester -> {
+				testerIdList.add(tester.getId());
+			});
+
+			if (CollectionUtils.isNotEmpty(projectEntity.getDeveloperIdList())) {
+				projectEntity.getDeveloperIdList().addAll(developerIdList);
 			} else {
-				projectEntity.setDeveloperList(selectedDevelopers);
+				projectEntity.setDeveloperIdList(developerIdList);
 			}
-			if (CollectionUtils.isNotEmpty(projectEntity.getTesterList())) {
-				projectEntity.getTesterList().addAll(selectedTesters);
+			if (CollectionUtils.isNotEmpty(projectEntity.getTesterIdList())) {
+				projectEntity.getTesterIdList().addAll(testerIdList);
 			} else {
-				projectEntity.setTesterList(selectedTesters);
+				projectEntity.setTesterIdList(testerIdList);
 			}
 
-			new DatabaseService().updateProjectEntity(projectEntity);
+			new DatabaseService().updateProject(projectEntity);
 			break;
 		}
 	}

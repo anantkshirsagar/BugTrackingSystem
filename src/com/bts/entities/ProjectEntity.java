@@ -1,21 +1,15 @@
 package com.bts.entities;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Entity;
-import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
 import com.bts.utils.DBConstants;
-import com.fasterxml.jackson.annotation.JsonBackReference;
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
-import com.google.gson.annotations.Expose;
 
 @Entity
 @Table
@@ -35,11 +29,8 @@ public class ProjectEntity extends BaseEntity {
 	private List<Bug> bugList;
 	private boolean isSaved;
 
-	@ManyToMany(cascade = CascadeType.ALL)
-	private List<DeveloperEntity> developerList;
-
-	@ManyToMany(cascade = CascadeType.ALL)
-	private List<TesterEntity> testerList;
+	private List<Integer> developerIdList = new ArrayList<>();
+	private List<Integer> testerIdList = new ArrayList<>();
 
 	public String getProjectName() {
 		return projectName;
@@ -121,20 +112,20 @@ public class ProjectEntity extends BaseEntity {
 		this.isCurrentProject = isCurrentProject;
 	}
 
-	public List<DeveloperEntity> getDeveloperList() {
-		return developerList;
+	public List<Integer> getDeveloperIdList() {
+		return developerIdList;
 	}
 
-	public void setDeveloperList(List<DeveloperEntity> developerList) {
-		this.developerList = developerList;
+	public void setDeveloperIdList(List<Integer> developerIdList) {
+		this.developerIdList = developerIdList;
 	}
 
-	public List<TesterEntity> getTesterList() {
-		return testerList;
+	public List<Integer> getTesterIdList() {
+		return testerIdList;
 	}
 
-	public void setTesterList(List<TesterEntity> testerList) {
-		this.testerList = testerList;
+	public void setTesterIdList(List<Integer> testerIdList) {
+		this.testerIdList = testerIdList;
 	}
 
 	public DBConstants.ProjectStatus getStatus() {
