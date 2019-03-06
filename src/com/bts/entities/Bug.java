@@ -14,6 +14,8 @@ public class Bug {
 	private DBConstants.Severity severity;
 	private DBConstants.Priority priority;
 	private DBConstants.Status bugStatus;
+	private String testerName;
+	private int testerId;
 
 	public long getId() {
 		return id;
@@ -101,5 +103,21 @@ public class Bug {
 
 	public void setBugStatus(DBConstants.Status bugStatus) {
 		this.bugStatus = bugStatus;
+	}
+
+	public String getTesterName() {
+		return testerName;
+	}
+
+	public void setTesterName(String testerName) {
+		this.testerName = testerName;
+	}
+
+	public int getTesterId() {
+		return testerId;
+	}
+
+	public void setTesterId(int testerId) {
+		this.testerId = testerId;
 	}
 }

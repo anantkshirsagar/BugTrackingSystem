@@ -119,6 +119,10 @@
 							</button>
 						</div>
 						<div class="modal-body">
+							<label for="">Project</label>
+							<select class="browser-default custom-select" ng-model="bug.projectId" >
+								<option ng-repeat="project in projectList" ng-value="project.id">{{project.projectName}}</option>
+							</select>
 							<label for="typeOfTesting">Type of testing</label>
 							<input type="text" id="typeOfTesting" ng-model="bug.typeOfTesting" class="form-control">
 							<br>

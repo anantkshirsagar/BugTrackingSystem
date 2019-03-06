@@ -5,8 +5,9 @@ import java.util.List;
 
 import javax.persistence.Query;
 
-import org.apache.commons.collections.CollectionUtils;
+import org.apache.commons.lang3.StringUtils;
 
+import com.bts.entities.Bug;
 import com.bts.entities.DeveloperEntity;
 import com.bts.entities.Employee;
 import com.bts.entities.ProjectEntity;
@@ -189,12 +190,27 @@ public class DatabaseService {
 				developerId);
 		return developerEntity;
 	}
-	
+
 	public TesterEntity fetchTesterById(int testerId) {
 		ConnectionService connectionService = new ConnectionService();
 		connectionService.beginTransaction();
-		TesterEntity testerEntity = (TesterEntity) connectionService.find(DBConstants.TESTER_ENTITY_CLASS,
-				testerId);
+		TesterEntity testerEntity = (TesterEntity) connectionService.find(DBConstants.TESTER_ENTITY_CLASS, testerId);
 		return testerEntity;
+	}
+
+	public ProjectEntity updateBugList(int projectId, int testerId, String testerName, Bug bug) {
+		ConnectionService connectionService = new ConnectionService();
+		ProjectEntity entity = (ProjectEntity) connectionService.find(DBConstants.PROJECT_ENTITY_CLASS, projectId);
+		bug.setTesterId(testerId);
+		bug.setTesterName(testerName);
+		List<Bug> bugList = new ArrayList<>();
+		if (entity.getBugList() != null) {
+			entity.getBugList().add(bug);
+		} else {
+			bugList.add(bug);
+			entity.getBugList().addAll(bugList);
+		}
+		connectionService.commitAndCloseTransaction();
+		return entity;
 	}
 }

@@ -12,6 +12,8 @@ public class TypeWrapper {
 	private TesterEntity testerEntity;
 	private ProjectEntity projectEntity;
 	private EmployeeWrapper employeeWrapper;
+	private Bug bug;
+	private int projectId;
 
 	public Type getType() {
 		return type;
@@ -61,4 +63,19 @@ public class TypeWrapper {
 		this.projectEntity = projectEntity;
 	}
 
+	public Bug getBug() {
+		return bug;
+	}
+
+	public void setBug(Bug bug) {
+		this.bug = bug;
+	}
+
+	public int getProjectId() {
+		return projectId;
+	}
+
+	public void setProjectId(int projectId) {
+		this.projectId = projectId;
+	}
 }
