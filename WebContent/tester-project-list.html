@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport"
+	content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta http-equiv="x-ua-compatible" content="ie=edge">
+<title>Bug Tracking System</title>
+<link rel="stylesheet"
+	href="https://use.fontawesome.com/releases/v5.7.0/css/all.css">
+<link href="ext-js/MDB/css/bootstrap.min.css" rel="stylesheet">
+<link href="ext-js/MDB/css/mdb.min.css" rel="stylesheet">
+<link href="ext-js/MDB/css/style.css" rel="stylesheet">
+<script src="angular-js-lib/angular.min.js"></script>
+<!-- <script src="angular-js-lib/angular-ui-router.min.js"></script> -->
+<!-- <script src="angular-js-lib/angular-route.min.js"></script> -->
+
+<style>
+.buttonCircle {
+	border-radius: 100%;
+}
+</style>
+</head>
+<body ng-app="btsApp" ng-controller="testerProjectListCtr">
+	<nav class="navbar navbar-expand-lg navbar-dark primary-color">
+		<a class="navbar-brand" href="admin-home.html">Mananger</a>
+		<button class="navbar-toggler" type="button" data-toggle="collapse"
+			data-target="#navbarSupportedContent"
+			aria-controls="navbarSupportedContent" aria-expanded="false"
+			aria-label="Toggle navigation">
+			<span class="navbar-toggler-icon"></span>
+		</button>
+		<div class="collapse navbar-collapse" id="navbarSupportedContent">
+			<ul class="navbar-nav mr-auto">
+				<li class="nav-item"><a
+					class="nav-link waves-effect waves-light" href="admin-home.html">Home
+				</a></li>
+				<li class="nav-item"><a
+					class="nav-link waves-effect waves-light" href="project-list.html">Project
+						List</a></li>
+				<li class="nav-item"><a
+					class="nav-link waves-effect waves-light"
+					href="developer-list.html">Developer List</a></li>
+				<li class="nav-item"><a
+					class="nav-link waves-effect waves-light" href="tester-list.html">Tester
+						List</a></li>
+				<li class="nav-item"><a
+					class="nav-link waves-effect waves-light" href="approval-list.html">Approval
+						List</a></li>
+			</ul>
+			<div class="nav-item">
+				<a class="nav-link waves-effect waves-light" href="#"><font
+					color="white">Logout</font></a>
+			</div>
+		</div>
+	</nav>
+	<div class="container">
+
+		<br>
+		<div class="card">
+			<h5 class="card-header text-center primary-color headerColor"
+				style="color: white;">Projects List</h5>
+			<div class="card-body table-responsive">
+				<table id="tablePreview" class="table table-hover table-bordered">
+					<thead style="background: #e3f2fd;">
+						<th>Sr. No.</th>
+						<th>Project Name</th>
+						<th>Description</th>
+						<th>Start Date</th>
+						<th>Status</th>
+						<th>Edit</th>
+					</thead>
+					<tbody>
+						<tr ng-repeat="record in projectList"
+							ng-if="record.status == 'NOT_COMPLETED'">
+							<td>{{$index+1}}</td>
+							<td>{{record.projectName}}</td>
+							<td>{{record.description}}</td>
+							<td>{{record.startDate}}</td>
+							<td>{{record.status}}</td>
+							<td><center><i class="fas fa-pen fa-lg" ng-click="selectProject(record)"></i></center></td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+		</div>
+	</div>
+	<script type="text/javascript" src="ext-js/MDB/js/jquery-3.3.1.min.js"></script>
+	<script type="text/javascript" src="ext-js/MDB/js/popper.min.js"></script>
+	<script type="text/javascript" src="ext-js/MDB/js/bootstrap.min.js"></script>
+	<script type="text/javascript" src="ext-js/MDB/js/mdb.js"></script>
+	<script src="js/tester-project-list.ctr.js">
+		
+	</script>
+
+	<script type="text/javascript">
+		
+	</script>
+</body>
+</html>

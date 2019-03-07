@@ -5,7 +5,7 @@ import java.util.List;
 
 import javax.persistence.Query;
 
-import org.apache.commons.lang3.StringUtils;
+import org.apache.commons.collections.CollectionUtils;
 
 import com.bts.entities.Bug;
 import com.bts.entities.DeveloperEntity;
@@ -59,6 +59,16 @@ public class DatabaseService {
 		projectEntity.setProjectName(projectName);
 		projectEntity = (ProjectEntity) connectionService.getEntityManager().createQuery(query)
 				.setParameter("email", projectEntity.getProjectName()).getSingleResult();
+		connectionService.commitAndCloseTransaction();
+		return projectEntity;
+	}
+
+	public ProjectEntity getProjectEntityByProjectId(int projectId) {
+		ProjectEntity projectEntity = new ProjectEntity();
+		ConnectionService connectionService = new ConnectionService();
+		connectionService.beginTransaction();
+		projectEntity = (ProjectEntity) connectionService.find(DBConstants.PROJECT_ENTITY_CLASS,
+				projectId);
 		connectionService.commitAndCloseTransaction();
 		return projectEntity;
 	}
@@ -200,15 +210,16 @@ public class DatabaseService {
 
 	public ProjectEntity updateBugList(int projectId, int testerId, String testerName, Bug bug) {
 		ConnectionService connectionService = new ConnectionService();
+		connectionService.beginTransaction();
 		ProjectEntity entity = (ProjectEntity) connectionService.find(DBConstants.PROJECT_ENTITY_CLASS, projectId);
 		bug.setTesterId(testerId);
 		bug.setTesterName(testerName);
 		List<Bug> bugList = new ArrayList<>();
-		if (entity.getBugList() != null) {
+		if (CollectionUtils.isNotEmpty(entity.getBugList())) {
 			entity.getBugList().add(bug);
 		} else {
 			bugList.add(bug);
-			entity.getBugList().addAll(bugList);
+			entity.setBugList(bugList);
 		}
 		connectionService.commitAndCloseTransaction();
 		return entity;

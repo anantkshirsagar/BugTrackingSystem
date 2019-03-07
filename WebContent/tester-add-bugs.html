@@ -51,26 +51,23 @@
 		<br>
 		<br>
 		<div class="container">
-			<!-- <div class="card">
+			<div class="card">
 				<h5 class="card-header text-center headerColor" style="color: white;">Current Project Details</h5>
 				<div class="card-body">
 					<table id="tablePreview" class="table table-hover table-bordered">
 						<thead style="background:#e3f2fd;">
+							<th>Id</th>
 							<th>Project Name</th>
 							<th>Description</th>
-							<th>Start Date</th>
-							<th>Status</th>
 						</thead>
-						
 						<tbody>
-							<td>Project Name</td>
-							<td>Description</td>
-							<td>29 March 2019</td>
-							<td>Status</td>
+							<td>{{projectDetail.id}}</td>
+							<td>{{projectDetail.projectName}}</td>
+							<td>{{projectDetail.description}}</td>
 						</tbody>
 					</table>
 				</div>
-			</div> -->
+			</div>
 			
 			<br> 
 			<div class="card">
@@ -90,7 +87,7 @@
 								<th>Type of Testing</th>
 								<th>Severity</th>
 								<th>Priority</th>
-								<!-- <th>Status</th> -->
+								<th>View</th>
 							</thead>
 							
 							<tbody>
@@ -100,7 +97,7 @@
 									<td>{{bugObject.typeOfTestingScrenario}}</td>
 									<td>{{bugObject.severity}}</td>
 									<td>{{bugObject.priority}}</td>
-									<!-- <td>{{bugObject.status}}</td> -->
+									<td><center><i class="fas fa-eye fa-lg" data-toggle="modal" data-target="#bugDialog" ng-click="viewBug(bugObject)"></i></center></td>
 								</tr>
 							</tbody>
 						</table>
@@ -119,10 +116,10 @@
 							</button>
 						</div>
 						<div class="modal-body">
-							<label for="">Project</label>
+							<!-- <label for="">Project</label>
 							<select class="browser-default custom-select" ng-model="bug.projectId" >
 								<option ng-repeat="project in projectList" ng-value="project.id">{{project.projectName}}</option>
-							</select>
+							</select> -->
 							<label for="typeOfTesting">Type of testing</label>
 							<input type="text" id="typeOfTesting" ng-model="bug.typeOfTesting" class="form-control">
 							<br>
@@ -159,7 +156,7 @@
 							</select>
 							<br><br>
 						</div>
-						<div class="modal-footer">
+						<div class="modal-footer" ng-if="viewFlag">
 							<button type="button" class="btn btn-sm btn-primary" data-dismiss="modal">Close</button>
 							<button type="button" class="btn btn-sm btn-primary"  data-dismiss="modal" ng-click="saveAndSubmit(bug)">Save & Submit</button>
 						</div>

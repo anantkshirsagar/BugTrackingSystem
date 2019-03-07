@@ -62,7 +62,7 @@ app.controller('developerHomeCtr', function($scope, $http, $location) {
 	}
 
 	$scope.gotoViewBugPage = function(){
-		location.href = "developer-view-bugs.html?developerId="+developerId;
+		location.href = "developer-project-list.html?developerId="+developerId;
 	}
 	
 });

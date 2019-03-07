@@ -1,8 +1,10 @@
 package com.bts.entities;
 
+import java.io.Serializable;
+
 import com.bts.utils.DBConstants;
 
-public class Bug {
+public class Bug implements Serializable{
 	private long id;
 	private String bugDescription;
 	private String typeOfTesting;

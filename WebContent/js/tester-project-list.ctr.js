@@ -1,33 +1,11 @@
 var app = angular.module('btsApp', []);
-app.controller('testerHomeCtr', function($scope, $http, $location) {
-	var config = 'contenttype';
-	$scope.type = 'TESTER_HOME';
+
+app.controller('testerProjectListCtr', function($scope, $http, $location) {
 
 	var urlData = $location.absUrl();
 	var testerId = urlData.split("=")[1];
+	var config = 'contenttype';
 
-	$scope.assignedProjectList = [];
-	$scope.fetchAssignedProject = function() {
-		$scope.url = "EmployeeServlet";
-
-		$scope.testerEntity = {
-			id : testerId
-		};
-
-		$scope.typeWrapper = {
-			testerEntity : $scope.testerEntity,
-			type : $scope.type
-		};
-
-		$http.post($scope.url, $scope.typeWrapper, config).then(
-				function(response) {
-					$scope.assignedProjectList = response.data;
-				}, function(response) {
-
-				});
-	}
-
-	$scope.tester = {};
 	$scope.fetchTesterById = function() {
 		$scope.url = "EmployeeServlet";
 		$scope.type = 'TEST_HOME_FETCH_TESTER';
@@ -49,12 +27,28 @@ app.controller('testerHomeCtr', function($scope, $http, $location) {
 				});
 	}
 
-	$scope.waitForServiceLoad = function() {
-		$scope.fetchAssignedProject();
-		$scope.fetchTesterById();
+	$scope.fetchProjectList = function() {
+		$scope.url = "EmployeeServlet";
+		$scope.type = 'TESTER_HOME';
+		$scope.typeWrapper = {
+			type : $scope.type,
+			testerEntity : $scope.tester
+		};
+		$http.post($scope.url, $scope.typeWrapper, config).then(
+				function(response) {
+					$scope.projectList = response.data;
+				}, function(response) {
+				});
 	}
 
-	$scope.waitForServiceLoad();
+	$scope.selectProject = function(project) {
+		$scope.projectId = project.id;
+		location.href = "tester-add-bugs.html?testerId=" + testerId
+		+ "&projectId=" + $scope.projectId;
+	}
+
+	$scope.fetchTesterById();
+	$scope.fetchProjectList();
 
 	$scope.gotoAddBugsPage = function() {
 		location.href = "tester-project-list.html?testerId=" + testerId;
@@ -63,5 +57,5 @@ app.controller('testerHomeCtr', function($scope, $http, $location) {
 	$scope.gotoTesterHomePage = function() {
 		location.href = "tester-home.html?testerId=" + testerId;
 	}
-
 });
+;

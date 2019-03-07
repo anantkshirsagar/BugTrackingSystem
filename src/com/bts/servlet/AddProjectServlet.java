@@ -52,8 +52,12 @@ public class AddProjectServlet extends HttpServlet {
 					typeWrapper.getBug());
 			out.println(gson.toJson(prEntity));
 			break;
+		case GET_PROJ_BY_ID:
+			ProjectEntity projectEntity2 = databaseService.getProjectEntityByProjectId(typeWrapper.getProjectEntity().getId());
+			out.println(gson.toJson(projectEntity2));
+			break;
 		}
-	}
+	}	
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {

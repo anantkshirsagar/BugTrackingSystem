@@ -9,23 +9,11 @@ app.controller('viewBugsCtr', function($scope, $http, $location) {
 	var config = 'contenttype';
 	
 	var urlData = $location.absUrl();
-	var developerId = urlData.split("=")[1];
+	var developerId = urlData.split("=")[1].split("&")[0];
+	var projectId = urlData.split("=")[2];
 	
 	$scope.bug = {};
 	
-	$scope.clearDetails = function(){
-		$scope.bug = {};
-	}
-	
-	$scope.addProject = function() {
-		$http.post($scope.url, $scope.documentEntity, config).then(
-				function(response) {
-					console.log(response.data);
-					
-				}, function(response) {
-
-				});
-	}
 	
 	$scope.developer = {};
 	$scope.fetchDeveloperById = function() {
@@ -49,14 +37,46 @@ app.controller('viewBugsCtr', function($scope, $http, $location) {
 				});
 	}
 	
-	$scope.fetchDeveloperById();
+	$scope.fetchProjectById = function() {
+		$scope.url = "AddProjectServlet";
+		$scope.type = 'GET_PROJ_BY_ID';
+
+		$scope.project = {
+			id : projectId
+		};
+
+		$scope.typeWrapper = {
+			projectEntity : $scope.project,
+			type : $scope.type
+		};
+
+		$http.post($scope.url, $scope.typeWrapper, config).then(
+				function(response) {
+					$scope.projectDetail = response.data;
+					$scope.bugList = response.data.bugList;
+				}, function(response) {
+
+				});
+	}
 	
+	$scope.viewBug = function(bug) {
+		$scope.viewFlag = false;
+		$scope.bug = bug;
+	}
+
+	$scope.clearDetails = function() {
+		$scope.viewFlag = true;
+		$scope.bug = {};
+	}
+	
+	$scope.fetchDeveloperById();
+	$scope.fetchProjectById();
 
 	$scope.gotoHomePage = function(){
 		location.href = "developer-home.html?developerId="+developerId;
 	}
 
 	$scope.gotoViewBugPage = function(){
-		location.href = "developer-view-bugs.html?developerId="+developerId;
+		location.href = "developer-project-list.html?developerId="+developerId;
 	}
 });

@@ -1,5 +1,5 @@
 var app = angular.module('btsApp', []);
-app.controller('addBugsCtr', function($scope, $http, $location) {
+app.controller('addBugsCtr', function($scope, $http, $location, $log) {
 
 	$scope.severityList = [ 'BLOCKER', 'CRITICAL', 'MAJOR', 'MINOR',
 			'IMPROVEMENT' ];
@@ -8,7 +8,8 @@ app.controller('addBugsCtr', function($scope, $http, $location) {
 	$scope.priority = [ 'HIGH', 'MEDIUM', 'LOW' ];
 
 	var urlData = $location.absUrl();
-	var testerId = urlData.split("=")[1];
+	var testerId = urlData.split("=")[1].split("&")[0];
+	var projectId = urlData.split("=")[2];
 
 	var config = 'contenttype';
 	$scope.bug = {};
@@ -21,14 +22,15 @@ app.controller('addBugsCtr', function($scope, $http, $location) {
 			fullName : $scope.tester.fullName
 		};
 		$scope.typeWrapper = {
-			projectId : $scope.bug.projectId,
+			projectId : projectId,
 			bug : $scope.bug,
 			testerEntity : $scope.testerEntity,
 			type : "UPDATE_PROJECT"
 		}
 		$http.post($scope.url, $scope.typeWrapper, config).then(
 				function(response) {
-					$scope.response = response
+					$scope.response = response;
+					$scope.bugList = response.data.bugList;
 				}, function(response) {
 
 				});
@@ -55,23 +57,55 @@ app.controller('addBugsCtr', function($scope, $http, $location) {
 
 				});
 	}
+	$scope.fetchProjectById = function() {
+		$scope.url = "AddProjectServlet";
+		$scope.type = 'GET_PROJ_BY_ID';
 
-	$scope.fetchProjectList = function() {
-		$scope.url = "AdminServlet";
-		var config = 'contenttype';
-		$scope.type = 'PROJECT_LIST';
+		$scope.project = {
+			id : projectId
+		};
+
 		$scope.typeWrapper = {
+			projectEntity : $scope.project,
 			type : $scope.type
 		};
+
 		$http.post($scope.url, $scope.typeWrapper, config).then(
 				function(response) {
-					$scope.projectList = response.data;
+					$scope.projectDetail = response.data;
+					$scope.bugList = response.data.bugList;
 				}, function(response) {
+
 				});
 	}
 
-	// $scope.fetchTesterById();
-	$scope.fetchProjectList();
+	$scope.viewBug = function(bug) {
+		$scope.viewFlag = false;
+		$scope.bug = bug;
+	}
+
+	$scope.clearDetails = function() {
+		$scope.viewFlag = true;
+		$scope.bug = {};
+	}
+	// $scope.fetchProjectList = function() {
+	// $scope.url = "EmployeeServlet";
+	// var config = 'contenttype';
+	// $scope.type = 'TESTER_HOME';
+	// $scope.typeWrapper = {
+	// type : $scope.type,
+	// testerEntity : $scope.tester
+	// };
+	// $http.post($scope.url, $scope.typeWrapper, config).then(
+	// function(response) {
+	// $scope.projectList = response.data;
+	// }, function(response) {
+	// });
+	// }
+
+	$scope.fetchTesterById();
+	$scope.fetchProjectById();
+	// $scope.fetchProjectList();
 
 	$scope.gotoAddBugsPage = function() {
 		location.href = "tester-add-bugs.html?testerId=" + testerId;
