@@ -14,4 +14,9 @@ app.controller('testerListCtr', function($scope, $http) {
 	}, function(response) {
 
 	});
+	
+	$scope.testerWiseProjectList = [];
+	$scope.setProjectList = function(testerObj){
+		$scope.testerWiseProjectList = testerObj.projectList;
+	}
 });

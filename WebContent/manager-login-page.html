@@ -103,9 +103,13 @@
 			.slider.round:before {
 			  border-radius: 50%;
 			}
+			
+			.btnBackground {
+				background: linear-gradient(to left, #6600ff 0%, #ff99cc 100%);
+			}
 		</style>
     </head>
-    <body>
+    <body ng-app="btsApp" ng-controller="managerLoginCtr">
 		<div class="view full-page-intro" style="background-image: url('images/bg-images/manager-bg.jpg'); background-repeat: no-repeat; background-size: cover;">
 			<div class="jumbotron jumbotron1">
 				<br><br>
@@ -115,24 +119,37 @@
 					<div class="col-md-4">
 						<div class="card card1">
 							<h4 class="card-header text-center"><b>Manager Login</b></h4>
-                            <form action="">
+                               	<form>
                                 <div class="card-body" id="admin-body">
                                     <div class="md-form mb-5">
-                                        <input type="email" id="orangeForm-email" name="adminEmailId" class="form-control validate" required>
+                                        <input type="email" id="orangeForm-email" name="manangerEmailId" ng-model="documentEntity.email" class="form-control validate" required>
                                         <label data-error="wrong" data-success="right" for="orangeForm-email">
                                             <font color="black"><b>  Email </b></font>
                                         </label>
                                     </div>
                                     <div class="md-form mb-5">
-                                        <input type="password" id="orangeForm-email" name="adminPassword" class="form-control validate" required>
+                                        <input type="password" id="orangeForm-email" name="managerPassword" ng-model="documentEntity.password" class="form-control validate" required>
                                         <label data-error="wrong" data-success="right" for="orangeForm-email">
                                             <font color="black"><b>  Password </b></font>
                                         </label>
                                     </div>
+                                    
+                                    <div ng-if="errorMsgFlag">
+										<center> <font color="red">{{errorMsg}}</center>
+									</div>
+                                    
+                                    <div class="row">
+                                    	<div class="col-md-6">
+		                                    <button type="submit" ng-click="login()" class="btn custom btn-block btn-primary btnBackground">Sign In</button>
+                                    	</div>
+                                    	<div class="col-md-6">
+		                                    <button type="reset" class="btn custom btn-block btn-primary btnBackground">Clear</button>
+                                    	</div>
+                                    </div>
                                     <br>
-                                    <button type="submit" style="background: linear-gradient(to left, #6600ff 0%, #ff99cc 100%);" class="btn custom btn-block btn-primary">Sign In</button>
-                                </div>
-                            </form>
+    	                           <button type="submit" ng-click="gotoHomePage()" class="btn custom btn-block btn-primary btnBackground" >Home</button>
+								</div>
+							</form>
 						</div>
 					</div>
 				</div>
@@ -143,5 +160,6 @@
 		<script type="text/javascript" src="ext-js/MDB/js/popper.min.js"></script>
 		<script type="text/javascript" src="ext-js/MDB/js/bootstrap.min.js"></script>
 		<script type="text/javascript" src="ext-js/MDB/js/mdb.js"></script>
+		<script src="js/manager-login-page.ctr.js"> </script>
     </body>
 <html>

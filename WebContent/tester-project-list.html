@@ -32,22 +32,16 @@
 		</button>
 		<div class="collapse navbar-collapse" id="navbarSupportedContent">
 			<ul class="navbar-nav mr-auto">
-				<li class="nav-item"><a
-					class="nav-link waves-effect waves-light" href="admin-home.html">Home
-				</a></li>
-				<li class="nav-item"><a
-					class="nav-link waves-effect waves-light" href="project-list.html">Project
-						List</a></li>
-				<li class="nav-item"><a
-					class="nav-link waves-effect waves-light"
-					href="developer-list.html">Developer List</a></li>
-				<li class="nav-item"><a
-					class="nav-link waves-effect waves-light" href="tester-list.html">Tester
-						List</a></li>
-				<li class="nav-item"><a
-					class="nav-link waves-effect waves-light" href="approval-list.html">Approval
-						List</a></li>
-			</ul>
+		            <li class="nav-item">
+		               <a class="nav-link waves-effect waves-light" ng-click="gotoTesterHomePage()">Home </a>
+		            </li>
+		            <li class="nav-item">
+		                <a class="nav-link waves-effect waves-light" href="application.html">Application</a>
+		            </li>
+		            <li class="nav-item active">
+		                <a class="nav-link waves-effect waves-light" ng-click="gotoAddBugsPage()">Bugs</a>
+		            </li>
+		        </ul>
 			<div class="nav-item">
 				<a class="nav-link waves-effect waves-light" href="#"><font
 					color="white">Logout</font></a>
@@ -89,12 +83,6 @@
 	<script type="text/javascript" src="ext-js/MDB/js/popper.min.js"></script>
 	<script type="text/javascript" src="ext-js/MDB/js/bootstrap.min.js"></script>
 	<script type="text/javascript" src="ext-js/MDB/js/mdb.js"></script>
-	<script src="js/tester-project-list.ctr.js">
-		
-	</script>
-
-	<script type="text/javascript">
-		
-	</script>
+	<script src="js/tester-project-list.ctr.js"></script>
 </body>
 </html>

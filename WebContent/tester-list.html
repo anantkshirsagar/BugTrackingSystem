@@ -12,59 +12,90 @@
 		<script src="angular-js-lib/angular.min.js"> </script>	
 	</head>
 	<body ng-app="btsApp" ng-controller="testerListCtr">
-		<nav class="navbar navbar-expand-lg navbar-dark info-color">
-		    <a class="navbar-brand" href="admin-home.html">Admin</a>
+		<nav class="navbar navbar-expand-lg navbar-dark primary-color">
+		    <a class="navbar-brand" href="#">Manager</a>
 		    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
 		        <span class="navbar-toggler-icon"></span>
 		    </button>
 		    <div class="collapse navbar-collapse" id="navbarSupportedContent">
 		        <ul class="navbar-nav mr-auto">
+		            <!-- <li class="nav-item">
+		               <a class="nav-link waves-effect waves-light" onclick="gotoManagerHomePage()">Home</a>
+		            </li> -->
 		            <li class="nav-item">
-		               <a class="nav-link waves-effect waves-light" href="admin-home.html">Home </a>
+		                <a class="nav-link waves-effect waves-light" onclick="gotoProjectListPage()">Project List</a>
 		            </li>
 		            <li class="nav-item">
-		                <a class="nav-link waves-effect waves-light" href="project-list.html">Project List</a>
+		                <a class="nav-link waves-effect waves-light" onclick="gotoDeveloperListPage()">Developer List</a>
 		            </li>
-		            <li class="nav-item">
-		                <a class="nav-link waves-effect waves-light" href="developer-list.html">Developer List</a>
-		            </li>
-		            <li class="nav-item">
-		                <a class="nav-link waves-effect waves-light" href="tester-list.html">Tester List</a>
-		            </li>
-		            <li class="nav-item">
-		                <a class="nav-link waves-effect waves-light" href="approval-list.html">Approval List</a>
+		            <li class="nav-item active">
+		                <a class="nav-link waves-effect waves-light" onclick="gotoTesterListPage()">Tester List</a>
 		            </li>
 		        </ul>
-	            <div class="nav-item">
-	                <a class="nav-link waves-effect waves-light" href="#"><font color="white">Logout</font></a>
-	            </div>
+				<div class="nav-item">
+					<a class="nav-link waves-effect waves-light" onclick="logout()"><font
+						color="white">Logout</font></a>
+				</div>
 		    </div>
 		</nav>
 		<div class="container">
 			<br><h2><b><center>Tester List</center></b></h2><br>
 			<table id="tablePreview" class="table table-hover table-bordered">
 				<thead>
-					<tr class="card-header blue lighten-3">
-						<th>ID</th>
-						<th>Name</th>
-						<th>Assigned Project</th>
-						<th>Edit</th>
+					<tr class="card-header primary-color text-white">
+						<th><center>ID</center></th>
+						<th><center>Name</center></th>
+						<th align="center">Action</th>
 					</tr>
 				</thead>
 				<tbody>
 					<tr ng-repeat="record in list">
 						<td>{{record.id}}</td>
 						<td>{{record.fullName}}</td>
-						<td>NCR</td>
-						<td>icon</td>
+						<td><center><i class="fas fa-pen fa-lg" data-toggle="modal" data-target="#displayProjectList" ng-click="setProjectList(record)"></i></center></td>
 					</tr>
 				</tbody>
 			</table>
+			
+			<div class="modal fade" id="displayProjectList" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+			    <div class="modal-dialog" role="document">
+			        <div class="modal-content">
+			            <div class="modal-header text-center">
+			                <h4 class="modal-title w-100 font-weight-bold">Assigned Projects</h4>
+			                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+			                    <span aria-hidden="true">&times;</span>
+			                </button>
+			            </div>
+			            <div class="model-body">
+			            	<div class="container">
+		            			<table id="tablePreview" class="table table-hover table-bordered">
+									<thead>
+										<tr class="card-header primary-color text-white">
+											<th align="center">ID</th>
+											<th align="center">Project Name</th>
+										</tr>
+									</thead>
+									<tbody>
+										<tr ng-repeat="project in developerWiseProjectList">
+											<td>{{$index + 1}}</td>
+											<td>{{project.projectName}}</td>
+										</tr>
+									</tbody>
+								</table>
+							</div>
+			            </div>
+		            	<div class="modal-footer d-flex justify-content-center">
+			                <button class="btn btn-sm btn-default" data-dismiss="modal">Cancel</button>
+			            </div>
+			        </div>
+			    </div>
+			</div>
 		</div>
 		<script type="text/javascript" src="ext-js/MDB/js/jquery-3.3.1.min.js"></script>
 		<script type="text/javascript" src="ext-js/MDB/js/popper.min.js"></script>
 		<script type="text/javascript" src="ext-js/MDB/js/bootstrap.min.js"></script>
 		<script type="text/javascript" src="ext-js/MDB/js/mdb.js"></script>
 		<script src="js/tester-list.ctr.js"> </script>	
+		<script src="js/common-page-jumping.js"> </script>
 	</body>
 </html>

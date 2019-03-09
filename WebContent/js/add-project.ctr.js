@@ -29,5 +29,9 @@ app.controller('addProjectCtr', function($scope, $http) {
 
 				});
 	}
+	
+	$scope.addNewProject = function(){
+		location.href = "add-project.html";
+	}
 
 });

@@ -23,7 +23,7 @@
 </head>
 <body ng-app="btsApp" ng-controller="projectListCtr">
 	<nav class="navbar navbar-expand-lg navbar-dark primary-color">
-		<a class="navbar-brand" href="admin-home.html">Mananger</a>
+		<a class="navbar-brand" href="#">Manager</a>
 		<button class="navbar-toggler" type="button" data-toggle="collapse"
 			data-target="#navbarSupportedContent"
 			aria-controls="navbarSupportedContent" aria-expanded="false"
@@ -31,38 +31,37 @@
 			<span class="navbar-toggler-icon"></span>
 		</button>
 		<div class="collapse navbar-collapse" id="navbarSupportedContent">
-			<ul class="navbar-nav mr-auto">
-				<li class="nav-item"><a
-					class="nav-link waves-effect waves-light" href="admin-home.html">Home
-				</a></li>
-				<li class="nav-item"><a
-					class="nav-link waves-effect waves-light" href="project-list.html">Project
-						List</a></li>
-				<li class="nav-item"><a
-					class="nav-link waves-effect waves-light"
-					href="developer-list.html">Developer List</a></li>
-				<li class="nav-item"><a
-					class="nav-link waves-effect waves-light" href="tester-list.html">Tester
-						List</a></li>
-				<li class="nav-item"><a
-					class="nav-link waves-effect waves-light" href="approval-list.html">Approval
-						List</a></li>
-			</ul>
+	        <ul class="navbar-nav mr-auto">
+	            <!-- <li class="nav-item">
+	               <a class="nav-link waves-effect waves-light" onclick="gotoManagerPage()">Home</a>
+	            </li> -->
+	            <li class="nav-item active">
+	                <a class="nav-link waves-effect waves-light" onclick="gotoProjectListPage()">Project List</a>
+	            </li>
+	            <li class="nav-item">
+	                <a class="nav-link waves-effect waves-light" onclick="gotoDeveloperListPage()">Developer List</a>
+	            </li>
+	            <li class="nav-item">
+	                <a class="nav-link waves-effect waves-light" onclick="gotoTesterListPage()">Tester List</a>
+	            </li>
+	        </ul>
 			<div class="nav-item">
-				<a class="nav-link waves-effect waves-light" href="#"><font
+				<a class="nav-link waves-effect waves-light" onclick="logout()"><font
 					color="white">Logout</font></a>
 			</div>
 		</div>
 	</nav>
 	<div class="container">
-
 		<br>
 		<div class="card">
 			<h5 class="card-header text-center primary-color headerColor"
 				style="color: white;">Projects List</h5>
 			<div class="card-body table-responsive">
-				<button type="button" class="btn btn-primary btn-sm">Add
+				<button type="button" ng-click="addNewProject()" class="btn btn-primary btn-sm">Add
 					New Project</button>
+				<hr>
+				<h5 align="center">Live Projects</h5>
+				<hr>
 				<table id="tablePreview" class="table table-hover table-bordered">
 					<thead style="background: #e3f2fd;">
 						<th>Sr. No.</th>
@@ -87,6 +86,9 @@
 					</tbody>
 				</table>
 
+				<hr>
+				<h5 align="center">Completed Projects</h5>
+				<hr>
 				<table id="tablePreview" class="table table-hover table-bordered">
 					<thead style="background: #e3f2fd;">
 						<th>Sr. No.</th>
@@ -115,11 +117,8 @@
 	<script type="text/javascript" src="ext-js/MDB/js/popper.min.js"></script>
 	<script type="text/javascript" src="ext-js/MDB/js/bootstrap.min.js"></script>
 	<script type="text/javascript" src="ext-js/MDB/js/mdb.js"></script>
-	<script src="js/project-list.ctr.js">
-		
-	</script>
-
-	<script type="text/javascript">
+	<script src="js/project-list.ctr.js"></script>
+	<script src="js/common-page-jumping.js">
 		
 	</script>
 </body>
