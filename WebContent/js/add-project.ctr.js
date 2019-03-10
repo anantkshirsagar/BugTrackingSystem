@@ -1,9 +1,9 @@
 var app = angular.module('btsApp', []);
 app.controller('addProjectCtr', function($scope, $http) {
-
 	$scope.url = "AddProjectServlet";
 	$scope.type = "ADD_PROJECT";
 	var config = 'contenttype';
+
 	$scope.documentEntity = {
 		projectName : '',
 		description : '',
@@ -29,9 +29,8 @@ app.controller('addProjectCtr', function($scope, $http) {
 
 				});
 	}
-	
-	$scope.addNewProject = function(){
+
+	$scope.addNewProject = function() {
 		location.href = "add-project.html";
 	}
-
 });

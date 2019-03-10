@@ -80,6 +80,7 @@
 							<th>Type of Testing</th>
 							<th>Severity</th>
 							<th>Priority</th>
+							<th>Status</th>
 							<th>View</th>
 						</thead>
 						<tbody>
@@ -89,6 +90,7 @@
 								<td>{{bugObject.typeOfTestingScrenario}}</td>
 								<td>{{bugObject.severity}}</td>
 								<td>{{bugObject.priority}}</td>
+								<td style="background: #ffcdd2">{{bugObject.bugStatus}}</td>
 								<td><center><i class="fas fa-eye fa-lg" data-toggle="modal" data-target="#modalViewForm" ng-click="viewBug(bugObject)"></i></center></td>
 							</tr>
 						</tbody>
@@ -150,7 +152,7 @@
 						</div>
 						<div class="modal-footer">
 							<button type="button" class="btn btn-sm btn-primary" data-dismiss="modal">Close</button>
-							<button type="button" class="btn btn-sm btn-primary">Submit</button>
+							<button type="button" class="btn btn-sm btn-primary" ng-click="submit(bug)">Submit</button>
 						</div>
 					</div>
 				</div>

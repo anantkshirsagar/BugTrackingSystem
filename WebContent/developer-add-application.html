@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport"
+	content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta http-equiv="x-ua-compatible" content="ie=edge">
+<title>Bug Tracking System</title>
+<link rel="stylesheet"
+	href="https://use.fontawesome.com/releases/v5.7.0/css/all.css">
+<link href="ext-js/MDB/css/bootstrap.min.css" rel="stylesheet">
+<link href="ext-js/MDB/css/mdb.min.css" rel="stylesheet">
+<link href="ext-js/MDB/css/style.css" rel="stylesheet">
+<script src="angular-js-lib/angular.min.js">
+	
+</script>
+<style>
+.headerColor {
+	background: #4285F4;
+}
+</style>
+</head>
+
+<body ng-app="btsApp" ng-controller="developerAddApplicationCtr">
+	<nav class="navbar navbar-expand-lg navbar-dark primary-color">
+		<a class="navbar-brand" href="admin-home.html">{{developer.fullName}}</a>
+		<button class="navbar-toggler" type="button" data-toggle="collapse"
+			data-target="#navbarSupportedContent"
+			aria-controls="navbarSupportedContent" aria-expanded="false"
+			aria-label="Toggle navigation">
+			<span class="navbar-toggler-icon"></span>
+		</button>
+		<div class="collapse navbar-collapse" id="navbarSupportedContent">
+			<ul class="navbar-nav mr-auto">
+				<li class="nav-item"><a
+					class="nav-link waves-effect waves-light" ng-click="gotoHomePage()">Home
+				</a></li>
+				<li class="nav-item active"><a
+					class="nav-link waves-effect waves-light"
+					ng-click="gotoApplicationPage()">Application</a></li>
+				<li class="nav-item"><a
+					class="nav-link waves-effect waves-light"
+					ng-click="gotoViewBugPage()">View Bugs</a></li>
+			</ul>
+			<div class="nav-item">
+				<a class="nav-link waves-effect waves-light" href="index.html"><font
+					color="white">Logout</font></a>
+			</div>
+		</div>
+	</nav>
+
+	<br>
+	<div class="container">
+		<div class="card">
+			<h4 class="card-header text-center primary-color headerColor"
+				style="color: white;">Projects List</h4>
+			<div class="card-body table-responsive">
+				<table id="tablePreview" class="table table-hover table-bordered">
+					<thead style="background: #e3f2fd;">
+						<th>Sr. No.</th>
+						<th>Project Name</th>
+						<th>Description</th>
+						<th>Start Date</th>
+						<th>Status</th>
+						<th>Add Link</th>
+					</thead>
+					<tbody>
+						<tr ng-repeat="record in assignedProjectList"
+							ng-if="record.status == 'NOT_COMPLETED'">
+							<td>{{$index+1}}</td>
+							<td>{{record.projectName}}</td>
+							<td>{{record.description}}</td>
+							<td>{{record.startDate}}</td>
+							<td>{{record.status}}</td>
+							<td><center>
+									<i class="fas fa-pen fa-lg" data-toggle="collapse"
+										href="#collapseAddLinkCard" aria-expanded="false"
+										aria-controls="collapseExample"
+										ng-click="selectProject(record)"></i>
+								</center></td>
+						</tr>
+					</tbody>
+				</table>
+
+				<!-- Collapse: Start -->
+				<div class="collapse" id="collapseAddLinkCard">
+					<form name="developerApplicationForm">
+						<div class="card">
+							<h5 class="card-header text-center primary-color text-white">Add
+								Project Links</h5>
+							<div class="card-body table-responsive">
+								<button data-toggle="modal" data-target="#modalViewForm"
+									type="button" ng-click="clearDetails()"
+									class="btn btn-primary btn-sm">Add New Project Link</button>
+								<hr>
+								<table id="tablePreview"
+									class="table table-hover table-bordered">
+									<thead style="background: #e3f2fd;">
+										<th style="width: 15%;">Sr. No.</th>
+										<th>Link</th>
+										<th>View</th>
+									</thead>
+									<tbody>
+										<tr ng-repeat="linkDetail in links">
+											<td>{{$index+1}}</td>
+											<td>{{linkDetail.link}}</td>
+											<th><a style="color: blue;" href="{{linkDetail.link}}" target="_blank">Click here to view</a></th>
+										</tr>
+									</tbody>
+								</table>
+							</div>
+						</div>
+					</form>
+				</div>
+				<!-- Collapse: End -->
+			</div>
+		</div>
+
+		<!-- Add New Link Dialog -->
+		<div class="modal fade" id="modalViewForm" tabindex="-1" role="dialog"
+			aria-labelledby="exampleModalLabel" aria-hidden="true">
+			<div class="modal-dialog modal-lg" role="document">
+				<div class="modal-content">
+					<div class="modal-header headerColor">
+						<h5 class="modal-title text-white" id="exampleModalLabel">Add
+							Link Dialog</h5>
+						<button type="button" class="close" data-dismiss="modal"
+							aria-label="Close">
+							<span aria-hidden="true">&times;</span>
+						</button>
+					</div>
+					<div class="modal-body">
+						<label for="typeOfTesting">Link</label> <input type="text"
+							id="typeOfTesting" ng-model="link"
+							class="form-control"> <br>
+					</div>
+					<div class="modal-footer">
+						<button type="button" class="btn btn-sm btn-primary"
+							data-dismiss="modal">Close</button>
+						<button type="button" class="btn btn-sm btn-primary"
+							ng-click="addNewLink(link)">Add</button>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<script type="text/javascript" src="ext-js/MDB/js/jquery-3.3.1.min.js"></script>
+	<script type="text/javascript" src="ext-js/MDB/js/popper.min.js"></script>
+	<script type="text/javascript" src="ext-js/MDB/js/bootstrap.min.js"></script>
+	<script type="text/javascript" src="ext-js/MDB/js/mdb.js"></script>
+	<script src="js/developer-add-application.ctr.js">
+		
+	</script>
+</body>
+</html>

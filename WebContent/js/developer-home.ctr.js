@@ -65,4 +65,7 @@ app.controller('developerHomeCtr', function($scope, $http, $location) {
 		location.href = "developer-project-list.html?developerId="+developerId;
 	}
 	
+	$scope.gotoApplicationPage = function(){
+		location.href = "developer-add-application.html?developerId="+developerId;
+	}
 });

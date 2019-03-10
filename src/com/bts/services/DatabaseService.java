@@ -7,6 +7,7 @@ import javax.persistence.Query;
 
 import org.apache.commons.collections.CollectionUtils;
 
+import com.bts.entities.Application;
 import com.bts.entities.Bug;
 import com.bts.entities.DeveloperEntity;
 import com.bts.entities.Employee;
@@ -67,8 +68,7 @@ public class DatabaseService {
 		ProjectEntity projectEntity = new ProjectEntity();
 		ConnectionService connectionService = new ConnectionService();
 		connectionService.beginTransaction();
-		projectEntity = (ProjectEntity) connectionService.find(DBConstants.PROJECT_ENTITY_CLASS,
-				projectId);
+		projectEntity = (ProjectEntity) connectionService.find(DBConstants.PROJECT_ENTITY_CLASS, projectId);
 		connectionService.commitAndCloseTransaction();
 		return projectEntity;
 	}
@@ -224,4 +224,31 @@ public class DatabaseService {
 		connectionService.commitAndCloseTransaction();
 		return entity;
 	}
+
+	public ProjectEntity updateBugStatus(int projectId, List<Bug> bugList) {
+		ConnectionService connectionService = new ConnectionService();
+		connectionService.beginTransaction();
+		ProjectEntity entity = (ProjectEntity) connectionService.find(DBConstants.PROJECT_ENTITY_CLASS,
+				projectId);
+		entity.setBugList(bugList);
+		connectionService.commitAndCloseTransaction();
+		return entity;
+	}
+	
+	public ProjectEntity updateApplicationList(int projectId, Application application) {
+		ConnectionService connectionService = new ConnectionService();
+		connectionService.beginTransaction();
+		ProjectEntity entity = (ProjectEntity) connectionService.find(DBConstants.PROJECT_ENTITY_CLASS, projectId);
+		
+		if(CollectionUtils.isNotEmpty(entity.getApplicationList())) {
+			entity.getApplicationList().add(application);
+		} else {
+			List<Application> applicationList = new ArrayList<Application>();
+			applicationList.add(application);
+			entity.setApplicationList(applicationList);
+		}
+		connectionService.commitAndCloseTransaction();
+		return entity;
+	}
+
 }

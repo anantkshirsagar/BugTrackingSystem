@@ -27,6 +27,7 @@ public class ProjectEntity extends BaseEntity {
 	private String remark;
 	private boolean isCurrentProject;
 	private List<Bug> bugList;
+	private List<Application> applicationList;
 	private boolean isSaved;
 
 	private List<Integer> developerIdList = new ArrayList<>();
@@ -144,4 +145,11 @@ public class ProjectEntity extends BaseEntity {
 		this.isSaved = isSaved;
 	}
 
+	public List<Application> getApplicationList() {
+		return applicationList;
+	}
+
+	public void setApplicationList(List<Application> applicationList) {
+		this.applicationList = applicationList;
+	}
 }

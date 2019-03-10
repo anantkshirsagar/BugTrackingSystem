@@ -56,6 +56,10 @@ public class AddProjectServlet extends HttpServlet {
 			ProjectEntity projectEntity2 = databaseService.getProjectEntityByProjectId(typeWrapper.getProjectEntity().getId());
 			out.println(gson.toJson(projectEntity2));
 			break;
+		case UPDATE_BUG_LIST:
+			ProjectEntity project = databaseService.updateBugStatus(typeWrapper.getProjectId(), typeWrapper.getBugList());
+			out.println(gson.toJson(project));
+			break;
 		}
 	}	
 

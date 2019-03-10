@@ -13,6 +13,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.apache.commons.collections.CollectionUtils;
 
+import com.bts.entities.Application;
 import com.bts.entities.DeveloperEntity;
 import com.bts.entities.ProjectEntity;
 import com.bts.entities.TesterEntity;
@@ -65,6 +66,13 @@ public class EmployeeServlet extends HttpServlet {
 			TesterEntity fetchedTester = typeWrapper.getTesterEntity();
 			fetchedTester = new DatabaseService().fetchTesterById(fetchedTester.getId());
 			out.write(gson.toJson(fetchedTester));
+			break;
+
+		case ADD_LINK:
+			int projectId = typeWrapper.getProjectId();
+			Application application = typeWrapper.getApplication();
+			ProjectEntity projectEntity = new DatabaseService().updateApplicationList(projectId, application);
+			out.write(gson.toJson(projectEntity));
 			break;
 		}
 	}

@@ -13,7 +13,9 @@ public class TypeWrapper {
 	private ProjectEntity projectEntity;
 	private EmployeeWrapper employeeWrapper;
 	private Bug bug;
+	private List<Bug> bugList;
 	private int projectId;
+	private Application application;
 
 	public Type getType() {
 		return type;
@@ -77,5 +79,21 @@ public class TypeWrapper {
 
 	public void setProjectId(int projectId) {
 		this.projectId = projectId;
+	}
+
+	public List<Bug> getBugList() {
+		return bugList;
+	}
+
+	public void setBugList(List<Bug> bugList) {
+		this.bugList = bugList;
+	}
+
+	public Application getApplication() {
+		return application;
+	}
+
+	public void setApplication(Application application) {
+		this.application = application;
 	}
 }
