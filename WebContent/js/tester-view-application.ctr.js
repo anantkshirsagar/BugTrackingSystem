@@ -1,12 +1,13 @@
 var app = angular.module('btsApp', []);
-app.controller('testerHomeCtr', function($scope, $http, $location) {
+app.controller('testerViewApplicationCtr', function($scope, $http, $location) {
+
 	var config = 'contenttype';
 	$scope.type = 'TESTER_HOME';
 
+	$scope.assignedProjectList = [];
 	var urlData = $location.absUrl();
 	var testerId = urlData.split("=")[1];
 
-	$scope.assignedProjectList = [];
 	$scope.fetchAssignedProject = function() {
 		$scope.url = "EmployeeServlet";
 
@@ -56,16 +57,25 @@ app.controller('testerHomeCtr', function($scope, $http, $location) {
 
 	$scope.waitForServiceLoad();
 
-	$scope.gotoAddBugsPage = function() {
-		location.href = "tester-project-list.html?testerId=" + testerId;
+	$scope.selectedProjectRecord = {};
+	$scope.selectProject = function(projectRecord) {
+		$scope.selectedProjectRecord = projectRecord;
+		$scope.links = $scope.selectedProjectRecord.applicationList;
 	}
 
-	$scope.gotoTesterHomePage = function() {
+	$scope.clearDetails = function() {
+		$scope.links = [];
+	}
+
+	$scope.gotoHomePage = function() {
 		location.href = "tester-home.html?testerId=" + testerId;
 	}
 
-	
-	$scope.gotoTesterViewApplicationPage = function(){
+	$scope.gotoViewBugPage = function() {
+		location.href = "tester-project-list.html?testerId=" + testerId;
+	}
+
+	$scope.gotoTesterViewApplicationPage = function() {
 		location.href = "tester-view-application.html?testerId=" + testerId;
 	}
 });

@@ -148,27 +148,12 @@
 			</div>
 			
 			<br>
-			<div class="card">
-				<h5 class="card-header text-center primary-color red lighten-1" style="color: white;">Actions</h5>
-				<div class="card-body">
-					<div class="row">
-						<div class="col-md-3">
-							<button type="button" class="btn btn-primary btn-block" ng-disabled="saveButton" data-toggle="modal" data-target="#saveButtonId">Save</button>
-						</div>
-						<div class="col-md-3">
-							<button type="button" class="btn btn-primary btn-block" ng-disabled="sendToTesterButton" ng-click="">Send To Tester</button>
-						</div>
-						<div class="col-md-3">
-							<button type="button" class="btn btn-primary btn-block" ng-disabled="sendToDeveloperButton" ng-click="">Send To Developer</button>
-						</div>
-						<div class="col-md-3">
-							<button type="button" class="btn btn-primary btn-block" ng-disabled="finalSubmitButton" data-toggle="modal" data-target="#finalButtonId" ng-click="">Final Submit</button>
-						</div>
-					</div>
-				</div>
-			</div>
-			<br>
 			
+			<div style="align:center;">
+				<button type="button" class="btn btn-primary" ng-disabled="saveButton" data-toggle="modal" data-target="#saveButtonId">Save</button>
+				<button type="button" class="btn btn-primary" ng-disabled="finalSubmitButton" data-toggle="modal" data-target="#finalButtonId" ng-click="">Final Submit</button>
+			</div>
+		
 			<!-- Final submit button dialog -->
 			<div class="modal fade" id="finalButtonId" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
 				aria-hidden="true">
