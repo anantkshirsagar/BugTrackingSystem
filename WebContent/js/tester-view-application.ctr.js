@@ -67,7 +67,7 @@ app.controller('testerViewApplicationCtr', function($scope, $http, $location) {
 		$scope.links = [];
 	}
 
-	$scope.gotoHomePage = function() {
+	$scope.gotoTesterHomePage = function() {
 		location.href = "tester-home.html?testerId=" + testerId;
 	}
 

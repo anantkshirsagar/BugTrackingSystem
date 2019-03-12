@@ -1,6 +1,7 @@
 package com.bts.services;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import javax.persistence.Query;
@@ -31,15 +32,10 @@ public class DatabaseService {
 	public Employee getEmployeeLoginByEmail(Employee employee, String email, String entityType) {
 		ConnectionService connectionService = new ConnectionService();
 		connectionService.beginTransaction();
-		// String query = "SELECT t FROM " + entityType + " t WHERE t.email=:email";
 		employee.setEmail(email);
 		Query query = connectionService.getEntityManager()
 				.createQuery("SELECT t FROM " + entityType + " t WHERE t.email=:email")
 				.setParameter("email", employee.getEmail());
-		/*
-		 * employee = (Employee) connectionService.getEntityManager().createQuery(query)
-		 * .setParameter("email", employee.getEmail()).getSingleResult();
-		 */
 		List<Employee> list = query.getResultList();
 		connectionService.commitAndCloseTransaction();
 		return list.size() > 0 ? list.get(0) : null;
@@ -228,19 +224,18 @@ public class DatabaseService {
 	public ProjectEntity updateBugStatus(int projectId, List<Bug> bugList) {
 		ConnectionService connectionService = new ConnectionService();
 		connectionService.beginTransaction();
-		ProjectEntity entity = (ProjectEntity) connectionService.find(DBConstants.PROJECT_ENTITY_CLASS,
-				projectId);
+		ProjectEntity entity = (ProjectEntity) connectionService.find(DBConstants.PROJECT_ENTITY_CLASS, projectId);
 		entity.setBugList(bugList);
 		connectionService.commitAndCloseTransaction();
 		return entity;
 	}
-	
+
 	public ProjectEntity updateApplicationList(int projectId, Application application) {
 		ConnectionService connectionService = new ConnectionService();
 		connectionService.beginTransaction();
 		ProjectEntity entity = (ProjectEntity) connectionService.find(DBConstants.PROJECT_ENTITY_CLASS, projectId);
-		
-		if(CollectionUtils.isNotEmpty(entity.getApplicationList())) {
+
+		if (CollectionUtils.isNotEmpty(entity.getApplicationList())) {
 			entity.getApplicationList().add(application);
 		} else {
 			List<Application> applicationList = new ArrayList<Application>();
@@ -251,4 +246,16 @@ public class DatabaseService {
 		return entity;
 	}
 
+	public void markProjectToComplete(int projectId) {
+		ConnectionService connectionService = new ConnectionService();
+		connectionService.beginTransaction();
+		if (projectId >= 0) {
+			ProjectEntity projectEntity = (ProjectEntity) connectionService.find(DBConstants.PROJECT_ENTITY_CLASS,
+					projectId);
+			
+			projectEntity.setEndDate(new Date());
+			projectEntity.setStatus(DBConstants.ProjectStatus.COMPLETED);
+		}
+		connectionService.commitAndCloseTransaction();
+	}
 }

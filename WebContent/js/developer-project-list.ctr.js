@@ -3,7 +3,7 @@ var app = angular.module('btsApp', []);
 app.controller('developerProjectListCtr', function($scope, $http, $location) {
 
 	var urlData = $location.absUrl();
-	var developrId = urlData.split("=")[1];
+	var developerId = urlData.split("=")[1];
 	var config = 'contenttype';
 
 	$scope.fetchDeveloperById = function() {
@@ -11,7 +11,7 @@ app.controller('developerProjectListCtr', function($scope, $http, $location) {
 		$scope.type = 'DEV_HOME_FETCH_DEVELOPER';
 
 		$scope.developer = {
-			id : developrId
+			id : developerId
 		};
 
 		$scope.typeWrapper = {
@@ -21,7 +21,7 @@ app.controller('developerProjectListCtr', function($scope, $http, $location) {
 
 		$http.post($scope.url, $scope.typeWrapper, config).then(
 				function(response) {
-					$scope.tester = response.data;
+					$scope.developer = response.data;
 				}, function(response) {
 
 				});
@@ -43,7 +43,7 @@ app.controller('developerProjectListCtr', function($scope, $http, $location) {
 
 	$scope.selectProject = function(project) {
 		$scope.projectId = project.id;
-		location.href = "developer-view-bugs.html?developerId=" + developrId
+		location.href = "developer-view-bugs.html?developerId=" + developerId
 				+ "&projectId=" + $scope.projectId;
 	}
 
@@ -56,6 +56,10 @@ app.controller('developerProjectListCtr', function($scope, $http, $location) {
 
 	$scope.gotoTesterHomePage = function() {
 		location.href = "developer-home.html?developerId=" + developerId;
+	}
+	
+	$scope.gotoApplicationPage = function(){
+		location.href = "developer-add-application.html?developerId="+developerId;
 	}
 });
 ;

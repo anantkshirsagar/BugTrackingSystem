@@ -80,6 +80,11 @@ public class ManagerAssignProjectServlet extends HttpServlet {
 
 			new DatabaseService().updateProject(projectEntity);
 			break;
+		case SET_PROJECT_STATUS_TO_COMPLETE:
+			int projectId = typeWrapper.getProjectId();
+			System.out.println(" PROJET ID : ----------> " +projectId);
+			new DatabaseService().markProjectToComplete(projectId);
+			break;
 		}
 	}
 

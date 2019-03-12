@@ -14,9 +14,22 @@ app.controller('testerListCtr', function($scope, $http) {
 	}, function(response) {
 
 	});
+
 	
-	$scope.testerWiseProjectList = [];
-	$scope.setProjectList = function(testerObj){
-		$scope.testerWiseProjectList = testerObj.projectList;
+	$scope.setProjectList = function(testerObj) {
+		$scope.testerWiseProjectList = [];
+		$scope.testerWiseProjectIds = testerObj.projectIdList;
+		$scope.type = 'FETCH_PROJECT_BY_ID';
+		angular.forEach($scope.testerWiseProjectIds, function(projectId) {
+			$scope.typeWrapper = {
+				projectId : projectId,
+				type : $scope.type
+			};
+			$http.post($scope.url, $scope.typeWrapper, config).then(
+					function(response) {
+						$scope.testerWiseProjectList.push(response.data);
+					}, function(response) {
+					});
+		});
 	}
 });

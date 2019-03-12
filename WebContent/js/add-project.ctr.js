@@ -24,10 +24,13 @@ app.controller('addProjectCtr', function($scope, $http) {
 		$http.post($scope.url, $scope.typeWrapper, config).then(
 				function(response) {
 					console.log(response.data);
-
 				}, function(response) {
 
 				});
+	}
+	
+	$scope.gotoProjectListPage = function(){
+		location.href = "project-list.html";
 	}
 
 	$scope.addNewProject = function() {

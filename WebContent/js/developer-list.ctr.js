@@ -14,9 +14,22 @@ app.controller('developerListCtr', function($scope, $http) {
 	}, function(response) {
 
 	});
-	
-	$scope.developerWiseProjectList = [];
-	$scope.setProjectList = function(developerObj){
-		$scope.developerWiseProjectList = developerObj.projectList;
+
+	$scope.setProjectList = function(developerObj) {
+		$scope.developerWiseProjectList = [];
+		$scope.developerWiseProjectIds = developerObj.projectIdList;
+		$scope.type = 'FETCH_PROJECT_BY_ID';
+		angular.forEach($scope.developerWiseProjectIds, function(projectId) {
+			
+			$scope.typeWrapper = {
+				projectId : projectId,
+				type : $scope.type
+			};
+			$http.post($scope.url, $scope.typeWrapper, config).then(
+					function(response) {
+						$scope.developerWiseProjectList.push(response.data);
+					}, function(response) {
+					});
+		});
 	}
 });

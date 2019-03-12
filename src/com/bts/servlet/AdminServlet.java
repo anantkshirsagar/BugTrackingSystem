@@ -75,6 +75,11 @@ public class AdminServlet extends HttpServlet {
 			List<ProjectEntity> completedProjects = new DatabaseService().fetchCompletedProjectList();
 			out.write(gson.toJson(completedProjects));
 			break;
+		case FETCH_PROJECT_BY_ID:
+			int projectId = typeWrapper.getProjectId();
+			ProjectEntity projectById = new DatabaseService().getProjectEntityByProjectId(projectId);
+			out.write(gson.toJson(projectById));
+			break;
 		}
 	}
 

@@ -114,5 +114,8 @@ app.controller('addBugsCtr', function($scope, $http, $location, $log) {
 	$scope.gotoTesterHomePage = function() {
 		location.href = "tester-home.html?testerId=" + testerId;
 	}
-
+	
+	$scope.gotoTesterViewApplicationPage = function(){
+		location.href = "tester-view-application.html?testerId=" + testerId;
+	}
 });

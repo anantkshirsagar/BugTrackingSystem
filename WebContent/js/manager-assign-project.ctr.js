@@ -18,8 +18,7 @@ app
 					$scope.sendToTesterButton = false;
 					$scope.sendToDeveloperButton = false;
 					$scope.finalSubmitButton = false;
-					
-					
+
 					$scope.projectEntity = {};
 					$scope.findProjectById = function() {
 						angular.forEach($scope.projectList, function(project) {
@@ -117,4 +116,21 @@ app
 					}
 
 					$scope.waitForServiceLoad();
+
+					$scope.saveAndSubmit = function() {
+						$scope.url = "ManagerAssignProjectServlet";
+						$scope.type = 'SET_PROJECT_STATUS_TO_COMPLETE';
+						$scope.typeWrapper = {
+							projectId : projectId,
+							type : $scope.type
+						};
+						$http.post($scope.url, $scope.typeWrapper,
+								$scope.config).then(function(response) {
+							$log.info("Project mark as final. You cannot change it again!");
+							location.href = "project-list.html?projectId="+projectId;
+						}, function(response) {
+
+						});
+
+					}
 				});

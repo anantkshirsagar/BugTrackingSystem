@@ -112,4 +112,9 @@ app.controller('viewBugsCtr', function($scope, $http, $location, $log) {
 		location.href = "developer-project-list.html?developerId="
 				+ developerId;
 	}
+	
+	$scope.gotoDeveloperAddApplicationPage = function(){
+		location.href = "developer-add-application.html?developerId="
+			+ developerId;
+	}
 });
