@@ -1,28 +1,31 @@
-
-function gotoIndexPage(){
+function gotoIndexPage() {
 	location.href = "index.html";
 }
 
-function gotoManagerHomePage(){
+function gotoManagerHomePage() {
 	location.href = "manager-home.html";
 }
 
-function gotoTesterListPage(){
+function gotoTesterListPage() {
 	location.href = "tester-list.html";
 }
 
-function gotoDeveloperListPage(){
+function gotoDeveloperListPage() {
 	location.href = "developer-list.html";
 }
 
-function gotoProjectListPage(){
+function gotoProjectListPage() {
 	location.href = "project-list.html";
 }
 
-function gotoApprovalListPage(){
+function gotoApprovalListPage() {
 	location.href = "approval-list.html";
 }
 
-function logout(){
+function gotoAdminProjectListPage() {
+	location.href = "admin-project-list.html";
+}
+
+function logout() {
 	location.href = "index.html";
 }

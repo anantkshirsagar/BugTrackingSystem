@@ -94,7 +94,7 @@ public class DatabaseService {
 		List<DeveloperEntity> developerList = null;
 		ConnectionService connectionService = new ConnectionService();
 		connectionService.beginTransaction();
-		String query = "SELECT t FROM DeveloperEntity t";
+		String query = "SELECT t FROM DeveloperEntity t WHERE t.isApproved=1";
 		developerList = connectionService.getEntityManager().createQuery(query).getResultList();
 		connectionService.commitAndCloseTransaction();
 		return developerList;
@@ -105,7 +105,7 @@ public class DatabaseService {
 		List<TesterEntity> testerList = null;
 		ConnectionService connectionService = new ConnectionService();
 		connectionService.beginTransaction();
-		String query = "SELECT t FROM TesterEntity t";
+		String query = "SELECT t FROM TesterEntity t WHERE t.isApproved=1";
 		testerList = connectionService.getEntityManager().createQuery(query).getResultList();
 		connectionService.commitAndCloseTransaction();
 		return testerList;

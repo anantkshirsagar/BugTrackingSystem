@@ -44,7 +44,7 @@ app.controller('testerProjectListCtr', function($scope, $http, $location) {
 	$scope.selectProject = function(project) {
 		$scope.projectId = project.id;
 		location.href = "tester-add-bugs.html?testerId=" + testerId
-		+ "&projectId=" + $scope.projectId;
+				+ "&projectId=" + $scope.projectId;
 	}
 
 	$scope.fetchTesterById();
@@ -56,6 +56,10 @@ app.controller('testerProjectListCtr', function($scope, $http, $location) {
 
 	$scope.gotoTesterHomePage = function() {
 		location.href = "tester-home.html?testerId=" + testerId;
+	}
+	
+	$scope.gotoTesterViewApplicationPage = function() {
+		location.href = "tester-view-application.html?testerId=" + testerId;
 	}
 });
 ;
